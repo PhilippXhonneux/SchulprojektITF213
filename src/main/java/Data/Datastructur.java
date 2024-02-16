@@ -6,14 +6,9 @@ import java.lang.reflect.Field;
  * Basis Class for all Datastructur-objects
  *
  * @author Philipp Xhonneux
- * @version 2.0.0
+ * @version 2.0.1
  */
 public abstract class Datastructur {
-
-	private int intValue;
-	private String stringValue;
-	private double doubleValue;
-
 
 	/**
 	 * Gives back a String in CSV-format.
