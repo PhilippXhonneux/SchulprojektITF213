@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
  * Basis Class for all Datastructur-objects
  *
  * @author Philipp Xhonneux
- * @version 2.0.1
+ * @version 2.0.2
  */
 public abstract class Datastructur {
 
@@ -16,7 +16,7 @@ public abstract class Datastructur {
 	 * @param delimeter the saparator used for the CSV-Format
 	 * @return the string
 	 */
-	public String ToCSVString(String delimeter) {
+	public final String ToCSVString(String delimeter) {
 		StringBuilder result = new StringBuilder();
 		Class<?> clazz = getClass();
 
@@ -43,7 +43,7 @@ public abstract class Datastructur {
 	 * @param csvString that contains the values
 	 * @param delimeter for the CSV-Format
 	 */
-	public void FromCSVStringToObject(String csvString, String delimeter) {
+	public final void FromCSVStringToObject(String csvString, String delimeter) {
 		String[] values = csvString.split(delimeter);
 		Class<?> clazz = getClass();
 
