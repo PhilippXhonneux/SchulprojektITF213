@@ -1,5 +1,10 @@
 package de.bwv_ac.util;
-
+/**
+ * Observer Interface
+ *
+ * @author Robin Goerissen
+ * @version 1.0.0
+ */
 public interface Observer {
-    public void update(Object obj);
+    void update(Object obj);
 }

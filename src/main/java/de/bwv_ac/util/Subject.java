@@ -1,7 +1,12 @@
 package de.bwv_ac.util;
 
 import java.util.Collection;
-
+/**
+ * Observer Subject
+ *
+ * @author Robin Goerissen
+ * @version 1.0.0
+ */
 public abstract class Subject {
     //	choosen collection
     private Collection<Observer> observers;
