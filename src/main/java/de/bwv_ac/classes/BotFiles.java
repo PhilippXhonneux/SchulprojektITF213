@@ -1,9 +1,8 @@
 package de.bwv_ac.classes;
 
-import Data.Datastructur;
+import de.bwv_ac.data.Datastructur;
 import jdk.jshell.spi.ExecutionControl;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;

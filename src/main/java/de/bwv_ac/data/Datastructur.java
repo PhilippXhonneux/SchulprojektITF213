@@ -1,4 +1,4 @@
-package Data;
+package de.bwv_ac.data;
 
 import java.lang.reflect.Field;
 

@@ -1,4 +1,4 @@
-package Data;
+package de.bwv_ac.data;
 
 /**
  * Datastructur for companies
