@@ -23,5 +23,11 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://search.maven.org/artifact/com.formdev/flatlaf/3.3/jar?eh=  For GUI LookAndFeel-->
+    <dependency>
+      <groupId>com.formdev</groupId>
+      <artifactId>flatlaf</artifactId>
+      <version>3.3</version>
+    </dependency>
   </dependencies>
 </project>
