@@ -39,7 +39,7 @@ public abstract class Datastructure {
 	}
 
 	/**
-	 * Sets the all variables of the Object based on a CSV-Formated String
+	 * Sets the all variables of the Object based on a CSV-Formatted String
 	 *
 	 * @param csvString that contains the values
 	 * @param delimeter for the CSV-Format
@@ -47,6 +47,8 @@ public abstract class Datastructure {
 	public final void FromCSVStringToObject(String csvString, String delimeter) {
 		String[] values = csvString.split(delimeter);
 		Class<?> clazz = getClass();
+
+		//TODO add if for TimeTable an process of the timetable csv
 
 		try {
 			Field[] fields = clazz.getDeclaredFields();
@@ -60,7 +62,6 @@ public abstract class Datastructure {
 					field.setDouble(this, Double.parseDouble(value));
 				} else if (field.getType() == String.class) {
 					field.set(this, value);
-					//TODO TimeTable
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException e) {

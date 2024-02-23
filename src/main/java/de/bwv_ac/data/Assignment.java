@@ -1,5 +1,6 @@
 package de.bwv_ac.data;
 
+//ToDo Add JavaDocs
 public class Assignment {
     private String className;
     private String surname;

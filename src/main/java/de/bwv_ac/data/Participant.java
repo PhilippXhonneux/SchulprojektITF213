@@ -6,6 +6,7 @@ package de.bwv_ac.data;
  * @author Philipp Goebel
  * @version 1.0.0
  */
+//ToDO add JavDocs
 public class Participant extends Datastructure {
     private Integer ID;
     private String organizer;
