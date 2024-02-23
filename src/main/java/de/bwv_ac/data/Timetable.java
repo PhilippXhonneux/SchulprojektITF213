@@ -1,6 +1,5 @@
 package de.bwv_ac.data;
 
-import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 
 /**
