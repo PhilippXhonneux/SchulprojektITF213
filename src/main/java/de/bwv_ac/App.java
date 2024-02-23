@@ -29,7 +29,7 @@ public class App
 
 
         JFrame window = new JFrame("SchoolBot - o - Mat");
-        window.setDefaultCloseOperation(3);
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         window.setLocationRelativeTo(null);
 
