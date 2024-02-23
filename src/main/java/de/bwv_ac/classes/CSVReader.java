@@ -19,12 +19,17 @@ public class CSVReader {
     public static void setDelimiter(String delimiter){
         delimiter = delimiter;
     }
-    public static List<String[]> read(String filePath, Class clazz) {
+    public static List<String[]> read(String filePath, boolean skipFirstLine, Class clazz) {
         List<String[]> content = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            boolean skipped = false;
             String line;
             while ((line = br.readLine()) != null) {
+                if(!skipped && skipFirstLine){
+                    skipped = true;
+                    continue;
+                }
                 content.add(line.split(delimiter));
             }
         } catch (IOException e) {
