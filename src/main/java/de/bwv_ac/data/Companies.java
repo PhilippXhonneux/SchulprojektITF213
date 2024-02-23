@@ -76,7 +76,14 @@ public class Companies extends Subject implements DataCollection<Company> {
 
     public void change(int index, Company c) {
         companies.set(index, c);
-        System.out.println(index);
         notifyObservers();
+    }
+
+    public Company getCompany(int index) {
+        return companies.get(index);
+    }
+
+    public void removeCompany(Company c) {
+        companies.remove(c);
     }
 }
