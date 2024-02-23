@@ -23,11 +23,11 @@ public class Company extends Datastructure {
 	/**
 	 * Max number of students that can visit one event
 	 */
-	private int max;
+	private int maxParticipants;
 	/**
-	 * Min number of students that can visit one event
+	 * Max number of events that can handle from the company.
 	 */
-	private int min;
+	private int maxEvents;
 
 	/**
 	 * The earliest time for an event
@@ -96,42 +96,42 @@ public class Company extends Datastructure {
 	 *
 	 * @return the max
 	 */
-	public int getMax() {
-		return max;
+	public int getMaxParticipants() {
+		return maxParticipants;
 	}
 
 	/**
 	 * Sets the max number of students that can visit one event.
 	 *
-	 * @param max the max
+	 * @param maxParticipants the max
 	 * @throws IllegalArgumentException the illegal argument exception
 	 */
-	public void setMax(int max) throws IllegalArgumentException {
-		if(max < 1)
+	public void setMaxParticipants(int maxParticipants) throws IllegalArgumentException {
+		if(maxParticipants < 1)
 			throw new IllegalArgumentException("The max number of studens must be atleast 1.");
 
-		this.max = max;
+		this.maxParticipants = maxParticipants;
 	}
 
 	/**
-	 * Gets the min number of students that can visit one event.
+	 * Gets the min number of max event that can handle from the company.
 	 *
-	 * @return the min
+	 * @return the max
 	 */
-	public int getMin() {
-		return min;
+	public int getMaxEvents() {
+		return maxEvents;
 	}
 
 	/**
-	 * Sets the min number of students that can visit one event.
+	 * Sets the max number of events that can handle from the company.
 	 *
-	 * @param min the min
+	 * @param maxEvents the max
 	 * @throws IllegalArgumentException the illegal argument exception
 	 */
-	public void setMin(int min) throws IllegalArgumentException{
-		if(min < 0 )
+	public void setMaxEvents(int maxEvents) throws IllegalArgumentException{
+		if(maxEvents < 0 )
 			throw new IllegalArgumentException("The min number of students can't be negative.");
-		this.min = min;
+		this.maxEvents = maxEvents;
 	}
 
 	/**

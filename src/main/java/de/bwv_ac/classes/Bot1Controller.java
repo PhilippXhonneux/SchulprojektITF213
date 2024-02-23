@@ -2,7 +2,6 @@ package de.bwv_ac.classes;
 
 import de.bwv_ac.data.Companies;
 import de.bwv_ac.data.Company;
-import de.bwv_ac.util.Subject;
 import de.bwv_ac.view.bot_1.AddDialog;
 import de.bwv_ac.view.bot_1.Events;
 
@@ -13,9 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  * Handle bot 1 views and notify the observers about changes
@@ -93,7 +90,7 @@ public class Bot1Controller {
             String eventName = addDialog.getEventName();
             int maxParticipants = addDialog.getMaxParticipants();
             int maxEvents = addDialog.getMaxEvent();
-            String startAt = addDialog.gerStartTime();
+            String startAt = addDialog.getStartTime();
 
             String csv = id + delimiter + companyName + delimiter + eventName + delimiter;
             csv += maxParticipants + delimiter + maxEvents + delimiter + startAt;
@@ -109,7 +106,31 @@ public class Bot1Controller {
     private ActionListener onChangeAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            int col = eventPanel.getSelectedItem();
+            if(col == -1){
+                JOptionPane.showMessageDialog(eventPanel, "Bitte wähle eine Zeile zum bearbeiten aus");
+                return;
+            }
 
+            int id = changeDialog.getID(); // TODO Proof
+            String companyName = changeDialog.getCompanyName();
+            String eventName = changeDialog.getEventName();
+            int maxParticipants = changeDialog.getMaxParticipants();
+            int maxEvents = changeDialog.getMaxEvent();
+            String startAt = changeDialog.getStartTime();
+
+            String csv = id + delimiter + companyName + delimiter + eventName + delimiter;
+            csv += maxParticipants + delimiter + maxEvents + delimiter + startAt;
+
+            Company c = new Company();
+            c.FromCSVStringToObject(csv, delimiter);
+
+            companies.changeCompany(changeDialog.getIndex(), c);
+
+            JOptionPane.showMessageDialog(changeDialog, "Erfolgreich gespeichert");
+            changeDialog.dispose();
+
+            eventPanel.setSelectedItem(col);
         }
     };
 
@@ -131,16 +152,22 @@ public class Bot1Controller {
                 return;
             }
             // TODO Get Data from Companies data model and load the company dataset in the change dialog
-            Vector row = eventPanel.getSelectedItemRow();
+            //Vector row = eventPanel.getSelectedItemRow();
+            Company c = companies.getCompany(col);
 
-            changeDialog.setId(Integer.parseInt((String) row.get(0)));
+            changeDialog.setIndex(col);
+
+            changeDialog.setCompany(c);
+
+            /*changeDialog.setId(Integer.parseInt((String) row.get(0)));
             changeDialog.setCompanyName(String.valueOf(row.get(1)));
             changeDialog.setEventName(String.valueOf(row.get(2)));
             changeDialog.setMaxParticipant(Integer.parseInt((String) row.get(3)));
             changeDialog.setMaxEvents(Integer.parseInt((String) row.get(4)));
-            changeDialog.setStartAt(String.valueOf(row.get(5)));
+            changeDialog.setStartAt(String.valueOf(row.get(5)));*/
             changeDialog.pack();
             changeDialog.setVisible(true);
+
         }
     };
 

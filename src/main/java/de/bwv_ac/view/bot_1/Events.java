@@ -6,6 +6,7 @@ import de.bwv_ac.util.Observer;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
@@ -23,6 +24,7 @@ public class Events extends JPanel implements Observer {
     private JTable eventTable;
     private JButton changeButton;
     private JButton addButton;
+    private JButton removeButton;
 
     private DefaultTableModel tableModel;
 
@@ -70,16 +72,31 @@ public class Events extends JPanel implements Observer {
         changeButton.addActionListener(l);
     }
 
-    public int getSelectedItem() {
-        return eventTable.getSelectedColumn();
+    public void setRemoveAction(ActionListener l){
+        removeButton.addActionListener(l);
     }
 
-    public Vector getSelectedItemRow(){
-        Vector<Vector> rows = tableModel.getDataVector();
-        return rows.get(eventTable.getSelectedRow());
+    public int getSelectedItem() {
+        return eventTable.getSelectedRow();
+    }
+
+    @Deprecated
+    /**
+     * @deprecated Use Company model and selected column index
+     * Get the data of the selected row from table
+     * @return the row data
+     * @throws IndexOutOfBoundsException if no row was selected
+     */
+    public Vector getSelectedItemRow() throws IndexOutOfBoundsException{
+        Vector<Vector> rows = tableModel.getDataVector(); // Get all rows
+        return rows.get(eventTable.getSelectedRow()); // Get selected row of rows data set
     }
 
     public void setOpenImportAction(ActionListener l){
         csvImportButton.addActionListener(l);
+    }
+
+    public void setSelectedItem(int col) {
+        eventTable.changeSelection(col, 0, false, false);
     }
 }
