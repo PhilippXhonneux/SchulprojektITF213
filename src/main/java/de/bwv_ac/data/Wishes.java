@@ -11,7 +11,7 @@ import java.util.Collection;
  * Wish Handler
  *
  * @author Philipp Xhonneux
- * @version 0.2.0
+ * @version 0.5.0
  */
 public class Wishes extends Subject {
 
