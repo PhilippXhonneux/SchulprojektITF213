@@ -9,7 +9,7 @@ import java.util.Collection;
 public class Companies extends Subject {
 
     private ArrayList<Company> companies;
-    private String[] columns;
+    private String[] columns = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Fühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
 
     /**
      * Create an observable object
@@ -69,7 +69,9 @@ public class Companies extends Subject {
     }
 
 
-
-
-
+    public void changeCompany(int index, Company c) {
+        companies.set(index, c);
+        System.out.println(index);
+        notifyObservers();
+    }
 }

@@ -25,6 +25,8 @@ import java.util.Vector;
  */
 public class Bot1Controller {
 
+    private static String delimiter = ";";
+
     private Companies companies;
     private AddDialog addDialog;
 
@@ -55,7 +57,6 @@ public class Bot1Controller {
         eventPanel.setOpenChangeDialogAction(onOpenChangeDialog);
         eventPanel.setOpenImportAction(onOpenImport);
 
-        // TODO: Get
         //String[] cols = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Fühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
         String[] cols = companies.getColumns();
         String[][] rows = companies.getCompaniesArray();
@@ -87,7 +88,21 @@ public class Bot1Controller {
     private ActionListener onAddAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            int id = addDialog.getID(); // TODO Proof
+            String companyName = addDialog.getCompanyName();
+            String eventName = addDialog.getEventName();
+            int maxParticipants = addDialog.getMaxParticipants();
+            int maxEvents = addDialog.getMaxEvent();
+            String startAt = addDialog.gerStartTime();
 
+            String csv = id + delimiter + companyName + delimiter + eventName + delimiter;
+            csv += maxParticipants + delimiter + maxEvents + delimiter + startAt;
+
+            Company c = new Company();
+            c.FromCSVStringToObject(csv, delimiter);
+            companies.addCompany(c);
+            JOptionPane.showMessageDialog(addDialog, "Erfolgreich gespeichert");
+            addDialog.dispose();
         }
     };
 
@@ -163,8 +178,10 @@ public class Bot1Controller {
             File f = chooser.getSelectedFile();
 
             try {
-                ArrayList<Company> companiesA = BotFiles.CSVReader(f.getAbsolutePath(), true, Company.class);
-                String[] columns = BotFiles.getFirstLine(f.getAbsolutePath(), ";"); // TODO: Get Delimiter, get columns from Companies class
+                //ArrayList<Company> companiesA = BotFiles.CSVReader(f.getAbsolutePath(), true, Company.class);
+                //String[] columns = BotFiles.getFirstLine(f.getAbsolutePath(), ";"); // TODO: Get Delimiter, get columns from Companies class
+                ArrayList<Company> companiesA = CSVReader.read(f.getAbsolutePath(),true, Company.class);
+                String[] columns = CSVReader.getFirstLine(f.getAbsolutePath());
                 companies.addCompanies(companiesA, columns);
             } catch (FileNotFoundException ex) {
                 throw new RuntimeException(ex);
