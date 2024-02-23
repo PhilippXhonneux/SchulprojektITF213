@@ -275,13 +275,13 @@ public class Bot1Controller {
                 return;
             }
 
-            Company c = companies.getCompany(row);
+            Company c = companies.get(row);
 
             int retVal = JOptionPane.showConfirmDialog(eventPanel, "Sind Sie sich sicher das Event mit der ID: " + c.getID() + " zu entfernen?");
 
             String message;
             if(retVal == JOptionPane.OK_OPTION){
-                companies.removeCompany(c);
+                companies.remove(c);
                 message = "Erfoglreich entfernt";
             }else
                 message = "Vorgang Abbgebrochen";
