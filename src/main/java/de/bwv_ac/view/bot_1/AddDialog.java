@@ -1,8 +1,9 @@
 package de.bwv_ac.view.bot_1;
 
+import de.bwv_ac.data.Company;
+
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.Scanner;
 
 public class AddDialog extends JDialog {
     private JPanel contentPane;
@@ -15,6 +16,7 @@ public class AddDialog extends JDialog {
     private JSpinner maxEventsSpinner;
     private JSlider maxParticipantSlider;
     private JComboBox startAtComboBox;
+    private int index;
 
     public AddDialog() {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -104,8 +106,25 @@ public class AddDialog extends JDialog {
         return Integer.parseInt(maxEventsSpinner.getValue() + "");
     }
 
-    public String gerStartTime(){
+    public String getStartTime(){
         return startAtComboBox.getSelectedItem() + "";
     }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getIndex(){
+        return index;
+    }
+
+    public void setCompany(Company c) {
+        setId(c.getID());
+        setCompanyName(c.getName());
+        setEventName(c.getSpecialty());
+        setMaxParticipant(c.getMaxParticipants());
+        setMaxEvents(c.getMaxEvents());
+        setStartAt(c.getTime());
+
+    }
 }
