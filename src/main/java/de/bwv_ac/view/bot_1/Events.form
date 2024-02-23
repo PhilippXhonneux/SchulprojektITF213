@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="de.bwv_ac.view.bot_1.Events">
+  <grid id="27dc6" binding="contentPane" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="e3601" binding="controlPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="South"/>
+        <properties>
+          <preferredSize width="0" height="35"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="acea" class="javax.swing.JButton" binding="csvExportButton">
+            <constraints/>
+            <properties>
+              <alignmentY value="0.5"/>
+              <text value="CSV-Export"/>
+            </properties>
+          </component>
+          <component id="10fa3" class="javax.swing.JButton" binding="csvImportButton">
+            <constraints/>
+            <properties>
+              <text value="CSV-Import"/>
+            </properties>
+          </component>
+          <component id="2bd88" class="javax.swing.JButton" binding="changeButton">
+            <constraints/>
+            <properties>
+              <text value="Bearbeiten"/>
+            </properties>
+          </component>
+          <component id="1ea21" class="javax.swing.JButton" binding="addButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Hinzufügen"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <scrollpane id="36314">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="89f25" class="javax.swing.JTable" binding="eventTable">
+            <constraints/>
+            <properties>
+              <autoResizeMode value="4"/>
+              <enabled value="true"/>
+              <fillsViewportHeight value="false"/>
+            </properties>
+            <clientProperties>
+              <JTable.autoStartsEdit class="java.lang.Boolean" value="false"/>
+              <Table.isFileList class="java.lang.Boolean" value="false"/>
+              <html.disable class="java.lang.Boolean" value="true"/>
+              <terminateEditOnFocusLost class="java.lang.Boolean" value="true"/>
+            </clientProperties>
+          </component>
+        </children>
+      </scrollpane>
+    </children>
+  </grid>
+</form>
