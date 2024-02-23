@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
  * @author Philipp Xhonneux
  * @version 2.0.2
  */
-public abstract class Datastructur {
+public abstract class Datastructure {
 
 	/**
 	 * Gives back a String in CSV-format.
