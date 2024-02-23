@@ -22,7 +22,7 @@ public class CSVReader {
     public CSVReader(String path) {
         this.path = path;
     }
-    public List<String[]> read() {
+    public List<String[]> read(Class clazz) {
         List<String[]> content = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -37,11 +37,14 @@ public class CSVReader {
         return content;
     }
 
-    private static String getFirstLine(String filePath, String delimiter) throws FileNotFoundException
+    public static String[] getFirstLine(String filePath, String delimiter) throws FileNotFoundException
     {
         File file = new File(filePath);
+        if(!file.exists())
+            throw new FileNotFoundException("File not found: " + filePath);
         Scanner sc = new Scanner(file);
-        sc.useDelimiter(delimiter);
-        return sc.nextLine();
+        if(!sc.hasNext())
+            throw new NullPointerException("File is empty: " + filePath);
+        return sc.nextLine().split(delimiter);
     }
 }
