@@ -11,7 +11,7 @@ import java.util.Collection;
  * Wish Handler
  *
  * @author Philipp Xhonneux
- * @version 0.5.0
+ * @version 1.0.0
  */
 public class Wishes extends Subject {
 
@@ -60,24 +60,49 @@ public class Wishes extends Subject {
 		this.notifyObservers();
 	}
 
-	public Wish getWish(int index) throws ExecutionControl.NotImplementedException
+	/**
+	 * Gets the wish on the given index
+	 * @param index
+	 * @return
+	 *
+	 */
+	public Wish getWish(int index)
 	{
-		throw new ExecutionControl.NotImplementedException("");
+		return this.wishes.get(index);
 	}
 
-	public String[] getWishArray(int index) throws ExecutionControl.NotImplementedException
+	/**
+	 * Gets the wish on the given index and returns the values of the wish as a {@link String}[]
+	 * @param index
+	 * @return
+	 */
+	public String[] getWishArray(int index)
 	{
-		throw new ExecutionControl.NotImplementedException("");
+		Wish wish = this.wishes.get(index);
+		return wish.ToCSVString(";").split(";");
 	}
 
-	public String[][] getWishesArray() throws ExecutionControl.NotImplementedException
+	/**
+	 * Gets all wishes and returns the values of each as a {@link String}[]
+	 * @return String[][]
+	 */
+	public String[][] getWishesArray()
 	{
-		throw  new ExecutionControl.NotImplementedException("");
+		String[][] wishes = new String[this.wishes.size()][];
+
+		for (int i = 0; i< wishes.length; i++){
+			wishes[i] = getWishesArray(i);
+		}
+		return wishes;
 	}
 
-	public String[] getColumns() throws ExecutionControl.NotImplementedException
+	/**
+	 * Gets the columns
+	 * @return
+	 */
+	public String[] getColumns()
 	{
-		throw new ExecutionControl.NotImplementedException("");
+		return this.columns;
 	}
 
 
