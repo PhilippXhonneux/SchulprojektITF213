@@ -4,7 +4,7 @@ import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 
 /**
- * Datastructur for Stundenplan BOT3
+ * Datastructures for Stundenplan BOT3
  *
  * @author Philipp Goebel, Philipp Xhonneux
  * @version 3.0.0
@@ -22,6 +22,7 @@ public class Timetable {
     /**
      * {@link ArrayList} of {@link Event}'s the {@link Company} is holding
      */
+    @SuppressWarnings("FieldMayBeFinal")
     private ArrayList<Event> events = new ArrayList<>();
 
     /**
