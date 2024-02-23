@@ -51,11 +51,25 @@ public class Timetable extends Datastructur {
         return time;
     }
 
-    public void setTime(LocalTime[] time) {
-        if (!Arrays.equals(time, TIME_A) && !Arrays.equals(time, TIME_B) && !Arrays.equals(time, TIME_C)
-                && !Arrays.equals(time, TIME_D) && !Arrays.equals(time, TIME_E)) {
-            throw new IllegalArgumentException("Invalid time slot. Time must be one of the predefined time slots A to E.");
+    public void setTime(Enum time) {
+        switch (time.toString()) {
+            case "A":
+                this.time = TIME_A;
+                break;
+            case "B":
+                this.time = TIME_B;
+                break;
+            case "C":
+                this.time = TIME_C;
+                break;
+            case "D":
+                this.time = TIME_D;
+                break;
+            case "E":
+                this.time = TIME_E;
+                break;
+            default:
+                this.time = null;
         }
-        this.time = time;
     }
 }
