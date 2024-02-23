@@ -15,13 +15,14 @@ import java.util.Collection;
 public class Wishes extends Subject {
 
 	private ArrayList<Wish> wishes;
+	//ToDO Standard Werte hinzufügen
 	private String[] columns;
 
 
 	/**
 	 * Create an observable object
 	 *
-	 * @param c A collection that you want like an ArrayList
+	 * @param c A {@link Collection} that you want like an {@link ArrayList}
 	 */
 	public Wishes(Collection<Observer> c) {
 		super(c);
