@@ -10,11 +10,12 @@ import java.util.Collection;
 /**
  * @author Philipp Xhonneux
  *
- * @version 0.1.0
+ * @version 0.2.0
  */
 public class Wishes extends Subject {
 
 	private ArrayList<Wish> wishes = new ArrayList<>();
+	private String[] columns;
 
 
 	/**
@@ -31,12 +32,32 @@ public class Wishes extends Subject {
 		throw new ExecutionControl.NotImplementedException("");
 	}
 
-	public void addWishes(Collection<Wishes> wishes) throws ExecutionControl.NotImplementedException
+	public void addWishes(Collection<Wishes> wishes, String[] columns) throws ExecutionControl.NotImplementedException
 	{
 		throw new ExecutionControl.NotImplementedException("");
 	}
 
 	public void removeWish(Wish wish) throws ExecutionControl.NotImplementedException
+	{
+		throw new ExecutionControl.NotImplementedException("");
+	}
+
+	public Wish getWish(int index) throws ExecutionControl.NotImplementedException
+	{
+		throw new ExecutionControl.NotImplementedException("");
+	}
+
+	public String[] getWishArray(int index) throws ExecutionControl.NotImplementedException
+	{
+		throw new ExecutionControl.NotImplementedException("");
+	}
+
+	public String[][] getWishesArray() throws ExecutionControl.NotImplementedException
+	{
+		throw  new ExecutionControl.NotImplementedException("");
+	}
+
+	public String[] getColumns() throws ExecutionControl.NotImplementedException
 	{
 		throw new ExecutionControl.NotImplementedException("");
 	}

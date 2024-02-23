@@ -17,7 +17,7 @@ public class Companies extends Subject {
      * @param c A collection that you want like an ArrayList
      */
     public Companies(Collection<Observer> c) {
-        super(new ArrayList<>());
+        super(c);
         companies = new ArrayList<>();
     }
 
