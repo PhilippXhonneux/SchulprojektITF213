@@ -7,10 +7,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 /**
- * Panel for the companies and event list
+ * Panel for the companies and event list.<br>
+ * This class listen for changes at the companies data model
  *
  * @author Robin Goerissen
  * @version 1.0.0
@@ -28,6 +28,9 @@ public class Events extends JPanel implements Observer {
 
     private DefaultTableModel tableModel;
 
+    /**
+     * Get Event JPanel object.
+     */
     public Events(){
         eventTable.setDefaultEditor(Object.class, null); // Disable editing the table
         addButton.setFocusable(false);
@@ -45,13 +48,12 @@ public class Events extends JPanel implements Observer {
      */
     public void setTableData(Object[] columns, Object[][] rows) {
         this.tableModel.setDataVector(rows, columns);
-        //resizeColumnWidth(companiesTable);
-        // Setze die MultiLineTableCellRenderer als Standard-Renderer für alle Spalten
-        for (int i = 0; i < this.tableModel.getColumnCount(); i++) {
-            //eventTable.getColumnModel().getColumn(i).setCellRenderer(new MultiLineTableCellRenderer());
-        }
     }
 
+    /**
+     * update the table in the view with the new data model
+     * @param obj Companies data model
+     */
     @Override
     public void update(Object obj) {
         if(obj == null)
@@ -64,14 +66,26 @@ public class Events extends JPanel implements Observer {
 
     }
 
+    /**
+     * Add an Action to click on the button addButton.
+     * @param l with the action that execute on click.
+     */
     public void setOpenAddDialogAction(ActionListener l){
         addButton.addActionListener(l);
     }
 
+    /**
+     * Add an Action to click on the button changeButton.
+     * @param l with the action that execute on click.
+     */
     public void setOpenChangeDialogAction(ActionListener l){
         changeButton.addActionListener(l);
     }
 
+    /**
+     * Add an Action to click on the button removeButton.
+     * @param l with the action that execute on click.
+     */
     public void setRemoveAction(ActionListener l){
         removeButton.addActionListener(l);
     }
@@ -80,24 +94,19 @@ public class Events extends JPanel implements Observer {
         return eventTable.getSelectedRow();
     }
 
-
     /**
-     * @deprecated Use Company model and selected column index
-     * Get the data of the selected row from table
-     * @return the row data
-     * @throws IndexOutOfBoundsException if no row was selected
+     * Add an Action to click on the button importButton.
+     * @param l with the action that execute on click.
      */
-    @Deprecated
-    public Vector getSelectedItemRow() throws IndexOutOfBoundsException{
-        Vector<Vector> rows = tableModel.getDataVector(); // Get all rows
-        return rows.get(eventTable.getSelectedRow()); // Get selected row of rows data set
-    }
-
     public void setOpenImportAction(ActionListener l){
         csvImportButton.addActionListener(l);
     }
 
-    public void setSelectedItem(int col) {
-        eventTable.changeSelection(col, 0, false, false);
+    /**
+     * Set the selection to the given index.
+     * @param row to select.
+     */
+    public void setSelectedItem(int row) {
+        eventTable.changeSelection(row, 0, false, false);
     }
 }
