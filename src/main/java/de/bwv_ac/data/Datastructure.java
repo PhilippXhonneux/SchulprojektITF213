@@ -1,6 +1,7 @@
 package de.bwv_ac.data;
 
 import java.lang.reflect.Field;
+import java.time.LocalTime;
 
 /**
  * Basis Class for all Datastructur-objects
@@ -59,6 +60,15 @@ public abstract class Datastructure {
 					field.setDouble(this, Double.parseDouble(value));
 				} else if (field.getType() == String.class) {
 					field.set(this, value);
+				} else if(field.getType() == LocalTime.class)
+				{
+					// Parameter der Methode (falls vorhanden)
+					Class<?>[] parameterTypes = {String.class};
+
+					// Methode finden
+					Method method = this.getMethod("setTime", parameterTypes);
+
+					method.invoke(this, value);
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException e) {
