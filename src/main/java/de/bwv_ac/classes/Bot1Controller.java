@@ -20,9 +20,10 @@ import java.util.ArrayList;
  * @author Robin Goerissen
  * @version 1.0.0
  */
+@SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal"})
 public class Bot1Controller {
 
-    private static String delimiter = ";";
+    private static final String delimiter = ";";
 
     private Companies companies;
     private AddDialog addDialog;
@@ -38,14 +39,14 @@ public class Bot1Controller {
 
         addDialog = new AddDialog();
         addDialog.setTitle("Veranstaltung hinzufügen");
-        addDialog.setOkButtonText("Hinzugügen");
+        addDialog.setOkButtonText("Hinzufügen");
         addDialog.setCancelAction(onCancelActionAddDialog);
         addDialog.setOKAction(onAddAction);
 
         changeDialog = new AddDialog();
         changeDialog.setTitle("Veranstaltung bearbeiten");
         changeDialog.setOkButtonText("Ändern");
-        changeDialog.setCancelAction(onCancelActionCahngeDialog);
+        changeDialog.setCancelAction(onCancelActionChangeDialog);
         changeDialog.setOKAction(onChangeAction);
 
         eventPanel = new Events();
@@ -54,7 +55,7 @@ public class Bot1Controller {
         eventPanel.setOpenChangeDialogAction(onOpenChangeDialog);
         eventPanel.setOpenImportAction(onOpenImport);
 
-        //String[] cols = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Fühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
+        //String[] cols = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Frühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
         String[] cols = companies.getColumns();
         String[][] rows = companies.getArrays();
         //eventPanel.setTableData(cols, rows);
@@ -72,7 +73,7 @@ public class Bot1Controller {
             //System.out.println("dispose");
         }
     };
-    private ActionListener onCancelActionCahngeDialog = new ActionListener() {
+    private ActionListener onCancelActionChangeDialog = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             int rval = JOptionPane.showConfirmDialog(changeDialog, "Vorgang Abbrechen. Sind Sie sicher?");

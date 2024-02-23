@@ -12,13 +12,14 @@ import java.util.Scanner;
  * @author Philipp Goebel
  * @version 1.2.0
  */
+@SuppressWarnings({"FieldMayBeFinal"})
 public class CSVReader {
 
     private String path;
     private static String delimiter = ";";
 
-    public static void setDelimiter(String delimiter){
-        delimiter = delimiter;
+    public static void setDelimiter(String Delimiter){
+        delimiter = Delimiter;
     }
     public static <T extends Datastructure> ArrayList<T> read(String filePath, boolean skipFirstLine, Class<T> clazz) {
         ArrayList<T> content = new ArrayList<>();
