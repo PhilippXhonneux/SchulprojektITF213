@@ -37,7 +37,7 @@ public class CSVReader {
         return content;
     }
 
-    private static String[] getFirstLine(String filePath, String delimiter) throws FileNotFoundException
+    public static String[] getFirstLine(String filePath, String delimiter) throws FileNotFoundException
     {
         File file = new File(filePath);
         if(!file.exists())
