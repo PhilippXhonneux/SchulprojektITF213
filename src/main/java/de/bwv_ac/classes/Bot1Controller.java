@@ -57,7 +57,7 @@ public class Bot1Controller {
 
         //String[] cols = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Fühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
         String[] cols = companies.getColumns();
-        String[][] rows = companies.getCompaniesArray();
+        String[][] rows = companies.getArrays();
         //eventPanel.setTableData(cols, rows);
 
     }
@@ -98,7 +98,7 @@ public class Bot1Controller {
 
             Company c = new Company();
             c.FromCSVStringToObject(csv, delimiter);
-            companies.addCompany(c);
+            companies.add(c);
             JOptionPane.showMessageDialog(addDialog, "Erfolgreich gespeichert");
             addDialog.dispose();
         }
@@ -126,7 +126,7 @@ public class Bot1Controller {
             Company c = new Company();
             c.FromCSVStringToObject(csv, delimiter);
 
-            companies.changeCompany(changeDialog.getIndex(), c);
+            companies.change(changeDialog.getIndex(), c);
 
             JOptionPane.showMessageDialog(changeDialog, "Erfolgreich gespeichert");
             changeDialog.dispose();
@@ -154,7 +154,7 @@ public class Bot1Controller {
             }
             // TODO Get Data from Companies data model and load the company dataset in the change dialog
             //Vector row = eventPanel.getSelectedItemRow();
-            Company c = companies.getCompany(col);
+            Company c = companies.get(col);
 
             changeDialog.setIndex(col);
 
@@ -210,7 +210,7 @@ public class Bot1Controller {
                 //String[] columns = BotFiles.getFirstLine(f.getAbsolutePath(), ";"); // TODO: Get Delimiter, get columns from Companies class
                 ArrayList<Company> companiesA = CSVReader.read(f.getAbsolutePath(),true, Company.class);
                 String[] columns = CSVReader.getFirstLine(f.getAbsolutePath());
-                companies.addCompanies(companiesA, columns);
+                companies.add(companiesA, columns);
             } catch (FileNotFoundException ex) {
                 throw new RuntimeException(ex);
                 // TODO: Error handling

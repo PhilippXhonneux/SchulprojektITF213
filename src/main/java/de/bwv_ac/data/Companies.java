@@ -6,10 +6,14 @@ import de.bwv_ac.util.Subject;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Companies extends Subject {
+/**
+ *
+ * @author Robin Görissen, Philipp Xhonneux
+ */
+public class Companies extends Subject implements DataCollection<Company> {
 
     private ArrayList<Company> companies;
-    private String[] columns = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Fühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
+    private String[] columns = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Frühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
 
     /**
      * Create an observable object
@@ -21,38 +25,38 @@ public class Companies extends Subject {
         companies = new ArrayList<>();
     }
 
-    public void addCompany(Company company){
+    public void add(Company company){
         companies.add(company);
         notifyObservers();
     }
 
-    public void addCompanies(ArrayList<Company> companies, String[] columns){
+    public void add(Collection<Company> companies, String[] columns){
         for (Company company : companies){
-            addCompany(company);
+            add(company);
         }
         this.columns = columns;
         notifyObservers();
     }
 
-    public void removeCompany(Company company){
+    public void remove(Company company){
         companies.remove(company);
         notifyObservers();
     }
 
-    public Company getCompany(int index){
+    public Company get(int index){
         return companies.get(index);
     }
 
-    public String[] getCompanyArray(int index){
+    public String[] getArray(int index){
         Company company = companies.get(index);
         return company.ToCSVString(";").split(";");
     }
 
-    public String[][] getCompaniesArray(){
+    public String[][] getArrays(){
         String[][] companies = new String[this.companies.size()][];
 
         for (int i = 0; i< companies.length; i++){
-            companies[i] = getCompanyArray(i);
+            companies[i] = getArray(i);
         }
         return companies;
     }
@@ -69,7 +73,7 @@ public class Companies extends Subject {
     }
 
 
-    public void changeCompany(int index, Company c) {
+    public void change(int index, Company c) {
         companies.set(index, c);
         System.out.println(index);
         notifyObservers();
