@@ -63,7 +63,7 @@ public class Wishes extends Subject implements DataCollection<Wish> {
 
 	@Override
 	public void change(int index, Wish wish) {
-		this.wishes.set(index, c);
+		this.wishes.set(index, wish);
 		System.out.println(index);
 		notifyObservers();
 	}
@@ -99,7 +99,7 @@ public class Wishes extends Subject implements DataCollection<Wish> {
 		String[][] wishes = new String[this.wishes.size()][];
 
 		for (int i = 0; i< wishes.length; i++){
-			wishes[i] = getWishArray(i);
+			wishes[i] = getArray(i);
 		}
 		return wishes;
 	}
