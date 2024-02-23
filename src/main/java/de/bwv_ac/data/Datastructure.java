@@ -1,13 +1,14 @@
 package de.bwv_ac.data;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.time.LocalTime;
 
 /**
- * Basis Class for all Datastructur-objects
+ * Basis Class for all Datastructure-objects
  *
  * @author Philipp Xhonneux
- * @version 2.0.2
+ * @version 2.0.3
  */
 public abstract class Datastructure {
 
