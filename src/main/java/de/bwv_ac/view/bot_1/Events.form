@@ -14,17 +14,17 @@
         </properties>
         <border type="none"/>
         <children>
+          <component id="10fa3" class="javax.swing.JButton" binding="csvImportButton">
+            <constraints/>
+            <properties>
+              <text value="CSV-Import"/>
+            </properties>
+          </component>
           <component id="acea" class="javax.swing.JButton" binding="csvExportButton">
             <constraints/>
             <properties>
               <alignmentY value="0.5"/>
               <text value="CSV-Export"/>
-            </properties>
-          </component>
-          <component id="10fa3" class="javax.swing.JButton" binding="csvImportButton">
-            <constraints/>
-            <properties>
-              <text value="CSV-Import"/>
             </properties>
           </component>
           <component id="2bd88" class="javax.swing.JButton" binding="changeButton">
