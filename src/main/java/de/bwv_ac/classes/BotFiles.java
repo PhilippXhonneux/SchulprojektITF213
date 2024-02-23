@@ -1,6 +1,6 @@
 package de.bwv_ac.classes;
 
-import de.bwv_ac.data.Datastructur;
+import de.bwv_ac.data.Datastructure;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.io.*;
@@ -43,7 +43,7 @@ public class BotFiles
             throw new RuntimeException(e);
         }
     }
-    public static <T extends Datastructur> ArrayList<T> CSVReader(String filePath, boolean hasHeader, Class<T> clazz) throws FileNotFoundException
+    public static <T extends Datastructure> ArrayList<T> CSVReader(String filePath, boolean hasHeader, Class<T> clazz) throws FileNotFoundException
     {
         File file = new File(filePath);
         Scanner sc = new Scanner(file);

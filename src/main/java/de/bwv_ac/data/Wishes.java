@@ -6,7 +6,7 @@ package de.bwv_ac.data;
  * @author Philipp Goebel
  * @version 1.0.0
  */
-public class Wishes extends Datastructur{
+public class Wishes extends Datastructure {
     private String className;
     private String surname;
     private String name;

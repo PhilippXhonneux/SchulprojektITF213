@@ -6,7 +6,7 @@ package de.bwv_ac.data;
  * @author Philipp Xhonneux
  * @version 1.0.0
  */
-public class Company extends Datastructur {
+public class Company extends Datastructure {
 
 	/**
 	 * Identification number of the company

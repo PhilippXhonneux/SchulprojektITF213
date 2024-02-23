@@ -10,7 +10,7 @@ import java.util.Arrays;
  * @version 1.0.0
  */
 
-public class Timetable extends Datastructur {
+public class Timetable extends Datastructure {
     private Integer ID;
     private String company;
     private String room;
