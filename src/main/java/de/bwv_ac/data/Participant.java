@@ -6,7 +6,7 @@ package de.bwv_ac.data;
  * @author Philipp Goebel
  * @version 1.0.0
  */
-public class Participant extends Datastructur{
+public class Participant extends Datastructure {
     private Integer ID;
     private String organizer;
     private String participant;
