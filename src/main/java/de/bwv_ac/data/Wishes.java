@@ -14,6 +14,7 @@ import java.util.Collection;
  */
 public class Wishes extends Subject implements DataCollection<Wish> {
 
+	@SuppressWarnings("FieldMayBeFinal")
 	private ArrayList<Wish> wishes;
 
 	private String[] columns = new String[]{"Klasse","Vorname","Name","Wahl1","Wahl2","Wahl3","Wahl4","Wahl5","Wahl6"};

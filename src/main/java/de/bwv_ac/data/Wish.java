@@ -1,7 +1,7 @@
 package de.bwv_ac.data;
 
 /**
- * Datastructur for Wishes BOT2
+ * Datastructure for Wishes BOT2
  *
  * @author Philipp Goebel
  * @version 1.0.0

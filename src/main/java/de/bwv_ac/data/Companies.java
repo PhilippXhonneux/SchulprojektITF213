@@ -12,6 +12,7 @@ import java.util.Collection;
  */
 public class Companies extends Subject implements DataCollection<Company> {
 
+    @SuppressWarnings("FieldMayBeFinal")
     private ArrayList<Company> companies;
     private String[] columns = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Frühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
 
