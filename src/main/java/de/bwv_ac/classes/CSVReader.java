@@ -1,9 +1,10 @@
 package de.bwv_ac.classes;
 
 
+import de.bwv_ac.data.Datastructure;
+
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -19,8 +20,8 @@ public class CSVReader {
     public static void setDelimiter(String delimiter){
         delimiter = delimiter;
     }
-    public static List<String[]> read(String filePath, boolean skipFirstLine, Class clazz) {
-        List<String[]> content = new ArrayList<>();
+    public static <T extends Datastructure> ArrayList<T> read(String filePath, boolean skipFirstLine, Class<T> clazz) {
+        ArrayList<T> content = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             boolean skipped = false;
@@ -30,16 +31,23 @@ public class CSVReader {
                     skipped = true;
                     continue;
                 }
-                content.add(line.split(delimiter));
+                T temp = clazz.newInstance();
+
+                temp.FromCSVStringToObject(line, delimiter);
+                content.add(temp);
             }
-        } catch (IOException e) {
+        } catch (IOException e) { //TODO Error Handling
             e.printStackTrace();
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
 
         return content;
     }
 
-    public static String[] getFirstLine(String filePath, String delimiter) throws FileNotFoundException
+    public static String[] getFirstLine(String filePath) throws FileNotFoundException
     {
         File file = new File(filePath);
         if(!file.exists())
