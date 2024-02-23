@@ -53,6 +53,7 @@ public class Bot1Controller {
         eventPanel.setOpenAddDialogAction(onOpenAddDialog);
         eventPanel.setOpenChangeDialogAction(onOpenChangeDialog);
         eventPanel.setOpenImportAction(onOpenImport);
+        eventPanel.setRemoveAction(onRemove);
 
         //String[] cols = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Fühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
         String[] cols = companies.getColumns();
@@ -220,6 +221,31 @@ public class Bot1Controller {
         }
     };
 
+    private ActionListener onRemove = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int col = eventPanel.getSelectedItem();
+            if(col == -1){
+                JOptionPane.showMessageDialog(eventPanel, "Bitte wähle eine Zeile zum entfernen aus");
+                return;
+            }
+
+            Company c = companies.getCompany(col);
+
+            int retVal = JOptionPane.showConfirmDialog(eventPanel, "Sind Sie sich sicher das Event mit der ID: " + c.getID() + " zu entfernen?");
+
+            String message = null;
+            if(retVal == JOptionPane.OK_OPTION){
+                companies.removeCompany(c);
+                message = "Erfoglreich entfernt";
+            }else
+                message = "Vorgang Abbgebrochen";
+
+
+            JOptionPane.showMessageDialog(eventPanel, message);
+
+        }
+    };
     public Component getPanel() {
         return eventPanel;
     }
