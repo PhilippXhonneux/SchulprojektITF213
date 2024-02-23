@@ -141,8 +141,8 @@ public class Bot1Controller {
     private ActionListener onChangeAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int col = eventPanel.getSelectedItem();
-            if(col == -1){
+            int row = eventPanel.getSelectedItem();
+            if(row == -1){
                 JOptionPane.showMessageDialog(eventPanel, "Bitte wähle eine Zeile zum bearbeiten aus");
                 return;
             }
@@ -165,7 +165,7 @@ public class Bot1Controller {
             JOptionPane.showMessageDialog(changeDialog, "Erfolgreich gespeichert");
             changeDialog.dispose();
 
-            eventPanel.setSelectedItem(col);
+            eventPanel.setSelectedItem(row);
         }
     };
 
@@ -191,25 +191,17 @@ public class Bot1Controller {
     private ActionListener onOpenChangeDialog = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int col = eventPanel.getSelectedItem();
-            if(col == -1){
+            int row = eventPanel.getSelectedItem();
+            if(row == -1){
                 JOptionPane.showMessageDialog(eventPanel, "Bitte wähle eine Zeile zum bearbeiten aus");
                 return;
             }
-            // TODO Get Data from Companies data model and load the company dataset in the change dialog
-            //Vector row = eventPanel.getSelectedItemRow();
-            Company c = companies.get(col);
-
-            changeDialog.setIndex(col);
+            // Get company from data model and set the selected row to the dialog
+            Company c = companies.get(row);
+            changeDialog.setIndex(row);
 
             changeDialog.setCompany(c);
 
-            /*changeDialog.setId(Integer.parseInt((String) row.get(0)));
-            changeDialog.setCompanyName(String.valueOf(row.get(1)));
-            changeDialog.setEventName(String.valueOf(row.get(2)));
-            changeDialog.setMaxParticipant(Integer.parseInt((String) row.get(3)));
-            changeDialog.setMaxEvents(Integer.parseInt((String) row.get(4)));
-            changeDialog.setStartAt(String.valueOf(row.get(5)));*/
             changeDialog.pack();
             changeDialog.setVisible(true);
 
@@ -277,17 +269,17 @@ public class Bot1Controller {
     private ActionListener onRemove = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int col = eventPanel.getSelectedItem();
-            if(col == -1){
+            int row = eventPanel.getSelectedItem();
+            if(row == -1){
                 JOptionPane.showMessageDialog(eventPanel, "Bitte wähle eine Zeile zum entfernen aus");
                 return;
             }
 
-            Company c = companies.getCompany(col);
+            Company c = companies.getCompany(row);
 
             int retVal = JOptionPane.showConfirmDialog(eventPanel, "Sind Sie sich sicher das Event mit der ID: " + c.getID() + " zu entfernen?");
 
-            String message = null;
+            String message;
             if(retVal == JOptionPane.OK_OPTION){
                 companies.removeCompany(c);
                 message = "Erfoglreich entfernt";
