@@ -19,13 +19,10 @@ public class CSVReader {
     public static void setDelimiter(String delimiter){
         delimiter = delimiter;
     }
-    public CSVReader(String path) {
-        this.path = path;
-    }
-    public List<String[]> read(Class clazz) {
+    public static List<String[]> read(String filePath, Class clazz) {
         List<String[]> content = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 content.add(line.split(delimiter));
