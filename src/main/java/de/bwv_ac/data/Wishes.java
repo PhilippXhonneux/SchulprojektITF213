@@ -91,7 +91,7 @@ public class Wishes extends Subject {
 		String[][] wishes = new String[this.wishes.size()][];
 
 		for (int i = 0; i< wishes.length; i++){
-			wishes[i] = getWishesArray(i);
+			wishes[i] = getWishArray(i);
 		}
 		return wishes;
 	}
