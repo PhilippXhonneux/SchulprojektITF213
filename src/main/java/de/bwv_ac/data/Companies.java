@@ -9,7 +9,7 @@ import java.util.Collection;
 public class Companies extends Subject {
 
     private ArrayList<Company> companies;
-    private String[] columns;
+    private String[] columns = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Fühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
 
     /**
      * Create an observable object

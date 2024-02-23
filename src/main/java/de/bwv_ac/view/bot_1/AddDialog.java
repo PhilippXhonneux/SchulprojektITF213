@@ -83,4 +83,29 @@ public class AddDialog extends JDialog {
     public void setOkButtonText(String text){
         buttonOK.setText(text);
     }
+
+
+    public int getID(){
+        return Integer.parseInt(idSpinner.getValue() + "");
+    }
+    public String getCompanyName(){
+        return companyNameTextField.getText();
+    }
+
+    public String getEventName(){
+        return eventNameTextField.getText();
+    }
+
+    public int getMaxParticipants(){
+        return maxParticipantSlider.getValue();
+    }
+
+    public int getMaxEvent(){
+        return Integer.parseInt(maxEventsSpinner.getValue() + "");
+    }
+
+    public String gerStartTime(){
+        return startAtComboBox.getSelectedItem() + "";
+    }
+
 }
