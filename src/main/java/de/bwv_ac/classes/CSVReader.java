@@ -1,17 +1,24 @@
 package de.bwv_ac.classes;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-//Can read an CSV file
+
+/**
+ * @author Philipp Goebel
+ * @version 1.2.0
+ */
 public class CSVReader {
 
     private String path;
+    private static String delimiter = ";";
 
+    public static void setDelimiter(String delimiter){
+        delimiter = delimiter;
+    }
     public CSVReader(String path) {
         this.path = path;
     }
@@ -21,12 +28,20 @@ public class CSVReader {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
-                content.add(line.split(","));
+                content.add(line.split(delimiter));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return content;
+    }
+
+    private static String getFirstLine(String filePath, String delimiter) throws FileNotFoundException
+    {
+        File file = new File(filePath);
+        Scanner sc = new Scanner(file);
+        sc.useDelimiter(delimiter);
+        return sc.nextLine();
     }
 }
