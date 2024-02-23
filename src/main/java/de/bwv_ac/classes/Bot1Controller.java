@@ -25,6 +25,8 @@ import java.util.Vector;
  */
 public class Bot1Controller {
 
+    private static String delimiter = ";";
+
     private Companies companies;
     private AddDialog addDialog;
 
@@ -86,7 +88,21 @@ public class Bot1Controller {
     private ActionListener onAddAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            int id = addDialog.getID(); // TODO Proof
+            String companyName = addDialog.getCompanyName();
+            String eventName = addDialog.getEventName();
+            int maxParticipants = addDialog.getMaxParticipants();
+            int maxEvents = addDialog.getMaxEvent();
+            String startAt = addDialog.gerStartTime();
 
+            String csv = id + delimiter + companyName + delimiter + eventName + delimiter;
+            csv += maxParticipants + delimiter + maxEvents + delimiter + startAt;
+
+            Company c = new Company();
+            c.FromCSVStringToObject(csv, delimiter);
+            companies.addCompany(c);
+            JOptionPane.showMessageDialog(addDialog, "Erfolgreich gespeichert");
+            addDialog.dispose();
         }
     };
 

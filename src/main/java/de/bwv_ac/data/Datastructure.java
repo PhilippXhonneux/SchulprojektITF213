@@ -61,7 +61,8 @@ public abstract class Datastructure {
 					field.setDouble(this, Double.parseDouble(value));
 				} else if (field.getType() == String.class) {
 					field.set(this, value);
-				} else if(field.getType() == LocalTime.class)
+					//TODO TimeTable
+				} /*else if(field.getType() == LocalTime.class)
 				{
 					// Parameter der Methode (falls vorhanden)
 					Class<?>[] parameterTypes = {String.class};
@@ -70,7 +71,7 @@ public abstract class Datastructure {
 					Method method = this.getMethod("setTime", parameterTypes);
 
 					method.invoke(this, value);
-				}
+				}*/
 			}
 		} catch (IllegalAccessException | IllegalArgumentException e) {
 			e.printStackTrace();

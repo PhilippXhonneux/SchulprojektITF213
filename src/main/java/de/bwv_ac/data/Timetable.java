@@ -1,89 +1,142 @@
 package de.bwv_ac.data;
 
-import java.time.LocalTime;
-import java.util.Arrays;
+import java.lang.annotation.ElementType;
+import java.util.ArrayList;
 
 /**
  * Datastructur for Stundenplan BOT3
  *
  * @author Philipp Goebel, Philipp Xhonneux
- * @version 1.1.0
+ * @version 3.0.0
  */
 
-//TODO Klasse überarbeiten da Ergebnis generiert wird und somit nicht teil der Datastructure ist
-
-public class Timetable extends Datastructure {
+public class Timetable {
+    /**
+     * Id of the {@link Company}
+     */
     private Integer ID;
+    /**
+     * Name of the {@link Company}
+     */
     private String company;
-    private String room;
-    private LocalTime[] time;
+    /**
+     * {@link ArrayList} of {@link Event}'s the {@link Company} is holding
+     */
+    private ArrayList<Event> events = new ArrayList<>();
+
+    /**
+     * Subclass for representing Events
+     *
+     * @author Philipp Xhonneux
+     * @version 1.0.0
+     */
+    @SuppressWarnings("InnerClassMayBeStatic")
+    private class Event{
+        /**
+         * Room the {@link Event} is hold in.
+         */
+        public String room;
+        /**
+         * Timeslot the {@link Event} is in.
+         * May only be the {@link String}'s "A","B",..., "E"
+         */
+        public String timeSlot;
+
+        /**
+         * Builds a {@link Event}
+         * @param room the {@link Event} is hold in.
+         * @param timeSlot the {@link Event} is in.
+         */
+        public Event(String room, String timeSlot)
+        {
+            this.room = room;
+            this.timeSlot = timeSlot;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if(obj.getClass() != this.getClass())
+                return false;
+
+            Event event = (Event) obj;
+
+			return event.room.equals(this.room) && event.timeSlot.equals(this.timeSlot);
+		}
+    }
 
 
-    public static final LocalTime[] TIME_A = {LocalTime.of(8, 45), LocalTime.of(9, 30)};
-    public static final LocalTime[] TIME_B = {LocalTime.of(9, 50), LocalTime.of(10, 30)};
-    public static final LocalTime[] TIME_C = {LocalTime.of(10, 35), LocalTime.of(11, 20)};
-    public static final LocalTime[] TIME_D = {LocalTime.of(11, 40), LocalTime.of(12, 25)};
-    public static final LocalTime[] TIME_E = {LocalTime.of(12, 25), LocalTime.of(13, 10)};
-
+    /**
+     * Gets the ID of the {@link Company}.
+     * @return ID
+     */
     public Integer getID() {
         return ID;
     }
 
+    /**
+     * Sets the ID of the {@link Company}.
+     * @param ID of the {@link Company}.
+     */
     public void setID(Integer ID) {
         this.ID = ID;
     }
 
+    /**
+     * Gets the name of the {@link Company}
+     * @return Name of the {@link  Company}
+     */
     public String getCompany() {
         return company;
     }
 
+    /**
+     * Sets the name of the {@link Company}
+     * @param company  the name of the {@link Company}
+     */
     public void setCompany(String company) {
         this.company = company;
     }
 
-    public String getRoom() {
-        return room;
-    }
+    /**
+     * Adds an Event for the {@link Company}
+     * @param room of the {@link Event}
+     * @param timeSlot of the {@link Event}, will be set in uppercase
+     * @throws IllegalArgumentException if the timeslot is already used for the {@link Company}
+     */
+    public void addEvent(String room, String timeSlot) throws IllegalStateException
+    {
 
-    public void setRoom(String room) {
-        this.room = room;
-    }
+        for (Event event : events)
+        {
+            if(event.timeSlot.equals(timeSlot.toUpperCase()))
+                throw new IllegalStateException("Timeslot " + timeSlot.toUpperCase() + "is already in use.");
+        }
 
-    public LocalTime[] getTime() {
-        return time;
+        events.add(new Event(room, timeSlot.toUpperCase()));
     }
 
     /**
-     * Set the time base on the given timeslot in the string.
-     * Leagel Arguments are "A","B","C","D" or "E"
-     *
-     * @author Philipp Xhonneux
-     *
-     * @param timeSlot
-     * @throws IllegalArgumentException
+     * Removes the {@link Event}
+     * @param room the {@link Event} is hold in.
+     * @param timeSlot the {@link Event} is hold in.
      */
-    public void setTime(String timeSlot) throws IllegalArgumentException
+    public void removeEvent(String room, String timeSlot)
     {
-        timeSlot = timeSlot.toUpperCase();
+        Event event = new Event(room, timeSlot);
+        events.remove(event);
+    }
 
-        switch (timeSlot) {
-            case "A":
-                this.time = TIME_A;
-                break;
-            case "B":
-                this.time = TIME_B;
-                break;
-            case "C":
-                this.time = TIME_C;
-                break;
-            case "D":
-                this.time = TIME_D;
-                break;
-            case "E":
-                this.time = TIME_E;
-                break;
-            default:
-                throw new IllegalArgumentException("String must contain one of the timeslots A,B,C,D or E.");
-        }
+    /**
+     * Gets a {@link String}[] containing the room and timeslot of the {@link Event}
+     * @param index of the {@link Event}
+     * @return {@link String}[] containing the room and timeslot of the {@link Event}
+     */
+    public String[] getEvent(int index)
+    {
+        String[] event = new String[2];
+        event[0] = events.get(index).room;
+        event[1] = events.get(index).timeSlot;
+
+        return event;
     }
 }
