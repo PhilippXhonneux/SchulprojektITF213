@@ -6,8 +6,8 @@ import java.util.Arrays;
 /**
  * Datastructur for Stundenplan BOT3
  *
- * @author Philipp Goebel, Philipp Xhonneux
- * @version 1.1.0
+ * @author Philipp Goebel
+ * @version 1.0.0
  */
 
 //TODO Klasse überarbeiten da Ergebnis generiert wird und somit nicht teil der Datastructure ist
@@ -53,46 +53,25 @@ public class Timetable extends Datastructure {
         return time;
     }
 
-    @Deprecated
-    public void setTime(LocalTime[] time) {
-        if (!Arrays.equals(time, TIME_A) && !Arrays.equals(time, TIME_B) && !Arrays.equals(time, TIME_C)
-                && !Arrays.equals(time, TIME_D) && !Arrays.equals(time, TIME_E)) {
-            throw new IllegalArgumentException("Invalid time slot. Time must be one of the predefined time slots A to E.");
-        }
-        this.time = time;
-    }
-
-    /**
-     * Set the time base on the given timeslot in the string.
-     * Leagel Arguments are "A","B","C","D" or "E"
-     *
-     * @author Philipp Xhonneux
-     *
-     * @param timeSlot
-     * @throws IllegalArgumentException
-     */
-    public void setTime(String timeSlot) throws IllegalArgumentException
-    {
-        timeSlot = timeSlot.toUpperCase();
-
-        switch (timeSlot) {
-            case "A":
-                this.time = TIME_A;
-                break;
-            case "B":
-                this.time = TIME_B;
-                break;
-            case "C":
-                this.time = TIME_C;
-                break;
-            case "D":
-                this.time = TIME_D;
-                break;
-            case "E":
-                this.time = TIME_E;
-                break;
-            default:
-                throw new IllegalArgumentException("String must contain one of the timeslots A,B,C,D or E.");
-        }
+    public void setTime(Enum times) {
+       switch (times.toString()) {
+           case "A":
+               this.time = TIME_A;
+               break;
+           case "B":
+               this.time = TIME_B;
+               break;
+           case "C":
+               this.time = TIME_C;
+               break;
+           case "D":
+               this.time = TIME_D;
+               break;
+           case "E":
+               this.time = TIME_E;
+               break;
+           default:
+               throw new IllegalArgumentException("Invalid time");
+       }
     }
 }
