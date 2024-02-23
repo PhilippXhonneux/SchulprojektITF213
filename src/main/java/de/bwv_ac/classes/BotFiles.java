@@ -62,7 +62,7 @@ public class BotFiles
                 String line = sc.nextLine();
 
                 T temp = clazz.newInstance();
-                temp.FromCSVStringToObject(line, delimiter);
+                output.add(temp);
             }
 
         }
