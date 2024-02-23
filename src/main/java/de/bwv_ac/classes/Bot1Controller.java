@@ -23,57 +23,77 @@ import java.util.ArrayList;
 @SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal"})
 public class Bot1Controller {
 
-    private static final String delimiter = ";";
+    private static final String delimiter = ";"; // TODO: get from other location
 
+    /**
+     * Observable companies data model
+     */
     private Companies companies;
+
+    /**
+     * A JDialog view to add data
+     */
     private AddDialog addDialog;
 
+    /**
+     * A JDialog view to change data
+     */
     private AddDialog changeDialog;
 
+    /**
+     * The main JPanel for this controller
+     */
     private Events eventPanel;
 
+    /**
+     * Create a Bot1Controller object
+     * @param companies Data Model
+     */
     public Bot1Controller(Companies companies){
 
         this.companies = companies;
-
-
+        // Init add dialog panel
         addDialog = new AddDialog();
         addDialog.setTitle("Veranstaltung hinzufügen");
         addDialog.setOkButtonText("Hinzufügen");
         addDialog.setCancelAction(onCancelActionAddDialog);
         addDialog.setOKAction(onAddAction);
 
-        changeDialog = new AddDialog();
+        // Init change dialog
+        changeDialog = new AddDialog(); // Use a changed add dialog for it
         changeDialog.setTitle("Veranstaltung bearbeiten");
         changeDialog.setOkButtonText("Ändern");
         changeDialog.setCancelAction(onCancelActionChangeDialog);
         changeDialog.setOKAction(onChangeAction);
 
+        // Init the main JPanel for this controller
         eventPanel = new Events();
-        companies.addObserver(eventPanel);
+        companies.addObserver(eventPanel); // register the panel to the observable data model
         eventPanel.setOpenAddDialogAction(onOpenAddDialog);
         eventPanel.setOpenChangeDialogAction(onOpenChangeDialog);
         eventPanel.setOpenImportAction(onOpenImport);
         eventPanel.setRemoveAction(onRemove);
 
-        //String[] cols = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Frühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
-        String[] cols = companies.getColumns();
-        String[][] rows = companies.getArrays();
-        //eventPanel.setTableData(cols, rows);
-
     }
 
+    /**
+     * Handle User Action<br>
+     * By closing the window they ask for conformation.<br>
+     */
     private ActionListener onCancelActionAddDialog = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //addDialog.setVisible(false);
             int rval = JOptionPane.showConfirmDialog(addDialog, "Vorgang Abbrechen. Sind Sie sicher?");
             if(rval == JOptionPane.OK_OPTION){
                 addDialog.dispose();
             }
-            //System.out.println("dispose");
         }
     };
+
+    /**
+     * Handle User Action<br>
+     * Open the change dialog
+     */
     private ActionListener onCancelActionChangeDialog = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -84,6 +104,12 @@ public class Bot1Controller {
         }
     };
 
+    /**
+     * Handle User Action<br>
+     * Get data from the add dialog<br>
+     * and add them to the companies data model.<br>
+     * show a message and dispose the add dialog if the action was successful.
+     */
     private ActionListener onAddAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -105,6 +131,13 @@ public class Bot1Controller {
         }
     };
 
+    /**
+     * Handle User Action<br>
+     * Get data from the change dialog,<br>
+     * search the company in data model and change them.<br>
+     * show a message if no row is selected and return<br>
+     * show a message and dispose the change dialog if the action was successful.
+     */
     private ActionListener onChangeAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -136,6 +169,10 @@ public class Bot1Controller {
         }
     };
 
+    /**
+     * Handle User Action<br>
+     * Show the add dialog
+     */
     private ActionListener onOpenAddDialog = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -145,6 +182,12 @@ public class Bot1Controller {
         }
     };
 
+    /**
+     * Handle User Action<br>
+     * Get selected row index and search for it in the companies data model.<br>
+     * Add the company data to the change dialog and show the dialog<br>
+     * Show a message and return if they found no selected row
+     */
     private ActionListener onOpenChangeDialog = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -173,6 +216,13 @@ public class Bot1Controller {
         }
     };
 
+    /**
+     * Handle User Action<br>
+     * Configure and show a JFileChooser.<br>
+     * After selecting a file to import,<br>
+     * read the first line and the body separately<br>
+     * and import them to the companies data model
+     */
     private ActionListener onOpenImport = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -207,8 +257,6 @@ public class Bot1Controller {
             File f = chooser.getSelectedFile();
 
             try {
-                //ArrayList<Company> companiesA = BotFiles.CSVReader(f.getAbsolutePath(), true, Company.class);
-                //String[] columns = BotFiles.getFirstLine(f.getAbsolutePath(), ";"); // TODO: Get Delimiter, get columns from Companies class
                 ArrayList<Company> companiesA = CSVReader.read(f.getAbsolutePath(),true, Company.class);
                 String[] columns = CSVReader.getFirstLine(f.getAbsolutePath());
                 companies.add(companiesA, columns);
@@ -217,11 +265,15 @@ public class Bot1Controller {
                 // TODO: Error handling
             }
 
-            System.out.println(f.getAbsolutePath());
-
         }
     };
 
+    /**
+     * Handle User Action<br>
+     * Get the selected row index and search for it in the companies model.<br>
+     * Show a confirmation message and delete if they choose OK.<br>
+     * Show a result message.
+     */
     private ActionListener onRemove = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -247,6 +299,11 @@ public class Bot1Controller {
 
         }
     };
+
+    /**
+     * Get the panel for bot 1
+     * @return a JPanel
+     */
     public Component getPanel() {
         return eventPanel;
     }
