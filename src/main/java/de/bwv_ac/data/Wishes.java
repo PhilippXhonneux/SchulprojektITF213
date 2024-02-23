@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author Philipp Xhonneux
+ * Wish Handler
  *
+ * @author Philipp Xhonneux
  * @version 0.2.0
  */
 public class Wishes extends Subject {
@@ -27,19 +28,36 @@ public class Wishes extends Subject {
 		super(c);
 	}
 
-	public void addWish(Wish wish) throws ExecutionControl.NotImplementedException
+	/**
+	 * Adds a Wish and calls {@link Subject}.notifyObservers().
+	 * @param wish
+	 */
+	public void addWish(Wish wish)
 	{
-		throw new ExecutionControl.NotImplementedException("");
+		this.wishes.add(wish);
+		this.notifyObservers();
 	}
 
-	public void addWishes(Collection<Wishes> wishes, String[] columns) throws ExecutionControl.NotImplementedException
+	/**
+	 * Adds a Wishes and sets the columns. Afterward calls {@link Subject}.notifyObservers().
+	 * @param wishes
+	 * @param columns
+	 */
+	public void addWishes(Collection<Wish> wishes, String[] columns)
 	{
-		throw new ExecutionControl.NotImplementedException("");
+		this.wishes.addAll(wishes);
+		this.columns = columns;
+		this.notifyObservers();
 	}
 
-	public void removeWish(Wish wish) throws ExecutionControl.NotImplementedException
+	/**
+	 * Removes the wish and calls {@link Subject}.notifyObservers().
+	 * @param wish
+	 */
+	public void removeWish(Wish wish)
 	{
-		throw new ExecutionControl.NotImplementedException("");
+		this.wishes.remove(wish);
+		this.notifyObservers();
 	}
 
 	public Wish getWish(int index) throws ExecutionControl.NotImplementedException
