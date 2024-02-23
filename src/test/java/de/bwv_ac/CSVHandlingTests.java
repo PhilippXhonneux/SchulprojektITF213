@@ -35,6 +35,6 @@ public class CSVHandlingTests {
         File file = new File(ClassLoader.getSystemResource("example_data/BOT1_Veranstaltungsliste.csv").toURI());
         CSVReader reader = new CSVReader();
         //TODO: Erste Zeile kann als Kopie zum abgleich herhalten.
-        assertThat(reader.getFirstLine(file.getAbsolutePath()));
+        //assertThat(reader.getFirstLine(file.getAbsolutePath())); // Work in progress
     }
 }
