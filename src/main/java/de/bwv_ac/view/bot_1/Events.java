@@ -60,7 +60,7 @@ public class Events extends JPanel implements Observer {
         //String[] cols = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Fühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
         String[] cols = companies.getColumns();
 
-        setTableData(cols, companies.getCompaniesArray());
+        setTableData(cols, companies.getArrays());
 
     }
 
