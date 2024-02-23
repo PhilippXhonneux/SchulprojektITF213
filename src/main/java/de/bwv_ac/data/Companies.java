@@ -69,7 +69,9 @@ public class Companies extends Subject {
     }
 
 
-
-
-
+    public void changeCompany(int index, Company c) {
+        companies.set(index, c);
+        System.out.println(index);
+        notifyObservers();
+    }
 }
