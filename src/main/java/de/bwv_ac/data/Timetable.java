@@ -4,11 +4,13 @@ import java.time.LocalTime;
 import java.util.Arrays;
 
 /**
- * Datastructur for Stundenplan BOT2
+ * Datastructur for Stundenplan BOT3
  *
  * @author Philipp Goebel, Philipp Xhonneux
  * @version 1.1.0
  */
+
+//TODO Klasse überarbeiten da Ergebnis generiert wird und somit nicht teil der Datastructure ist
 
 public class Timetable extends Datastructure {
     private Integer ID;
