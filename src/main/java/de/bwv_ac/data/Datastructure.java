@@ -1,14 +1,13 @@
 package de.bwv_ac.data;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.time.LocalTime;
+
 
 /**
  * Basis Class for all Datastructure-objects
  *
  * @author Philipp Xhonneux
- * @version 2.0.3
+ * @version 2.0.4
  */
 public abstract class Datastructure {
 
@@ -29,7 +28,7 @@ public abstract class Datastructure {
 						.append(delimeter);
 			}
 			// Entferne das letzte Komma
-			if (result.length() > 0) {
+			if (!result.isEmpty()) {
 				result.setLength(result.length() - 1);
 			}
 		} catch (IllegalAccessException e) {
@@ -62,16 +61,7 @@ public abstract class Datastructure {
 				} else if (field.getType() == String.class) {
 					field.set(this, value);
 					//TODO TimeTable
-				} /*else if(field.getType() == LocalTime.class)
-				{
-					// Parameter der Methode (falls vorhanden)
-					Class<?>[] parameterTypes = {String.class};
-
-					// Methode finden
-					Method method = this.getMethod("setTime", parameterTypes);
-
-					method.invoke(this, value);
-				}*/
+				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException e) {
 			e.printStackTrace();
