@@ -7,8 +7,9 @@ import java.util.Collection;
  * @author Robin Goerissen
  * @version 1.0.0
  */
+@SuppressWarnings({"FieldMayBeFinal"})
 public abstract class Subject {
-    //	choosen collection
+    //	chosen collection
     private Collection<Observer> observers;
 
     /**

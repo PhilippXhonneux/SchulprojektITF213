@@ -1,7 +1,7 @@
 package de.bwv_ac.data;
 
 /**
- * Datastructur for companies
+ * Datastructure for companies
  *
  * @author Philipp Xhonneux
  * @version 1.0.0

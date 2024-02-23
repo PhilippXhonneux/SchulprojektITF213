@@ -8,6 +8,7 @@ import java.io.IOException;
  * @author Philipp Goebel
  * @version 1.1.0
  */
+@SuppressWarnings({"FieldMayBeFinal"})
 public class CSVWriter {
     private String path;
 
@@ -15,8 +16,8 @@ public class CSVWriter {
         this.path = path;
     }
     private static String delimiter = ";";
-    public static void setDelimiter(String delimiter){
-        delimiter = delimiter;
+    public static void setDelimiter(String Delimiter){
+        delimiter = Delimiter;
     }
     public void write(String[] content) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) {

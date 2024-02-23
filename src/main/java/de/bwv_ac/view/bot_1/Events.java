@@ -6,7 +6,6 @@ import de.bwv_ac.util.Observer;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
@@ -16,6 +15,7 @@ import java.util.Vector;
  * @author Robin Goerissen
  * @version 1.0.0
  */
+@SuppressWarnings({"FieldMayBeFinal"})
 public class Events extends JPanel implements Observer {
     private JPanel contentPane;
     private JButton csvExportButton;
@@ -57,7 +57,7 @@ public class Events extends JPanel implements Observer {
         if(obj == null)
             return;
         Companies companies = (Companies) obj;
-        //String[] cols = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Fühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
+        //String[] cols = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Frühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
         String[] cols = companies.getColumns();
 
         setTableData(cols, companies.getArrays());
@@ -80,13 +80,14 @@ public class Events extends JPanel implements Observer {
         return eventTable.getSelectedRow();
     }
 
-    @Deprecated
+
     /**
      * @deprecated Use Company model and selected column index
      * Get the data of the selected row from table
      * @return the row data
      * @throws IndexOutOfBoundsException if no row was selected
      */
+    @Deprecated
     public Vector getSelectedItemRow() throws IndexOutOfBoundsException{
         Vector<Vector> rows = tableModel.getDataVector(); // Get all rows
         return rows.get(eventTable.getSelectedRow()); // Get selected row of rows data set

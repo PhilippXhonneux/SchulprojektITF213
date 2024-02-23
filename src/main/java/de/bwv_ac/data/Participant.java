@@ -1,7 +1,7 @@
 package de.bwv_ac.data;
 
 /**
- * Datastructur for Teilnehmer je Veranstaltung BOT2
+ * Datastructure for Teilnehmer je Veranstaltung BOT2
  *
  * @author Philipp Goebel
  * @version 1.0.0
