@@ -6,7 +6,7 @@ import jdk.jshell.spi.ExecutionControl;
  * Datastructure for Wishes BOT2
  *
  * @author Philipp Goebel, Philipp Xhonneux
- * @version 1.0.2
+ * @version 1.1.0
  */
 public class Wish extends Datastructure {
     /**
@@ -196,17 +196,22 @@ public class Wish extends Datastructure {
         this.extraWish = extraWish;
     }
 
-    //ToDo implement method to set and get the selection and extraWish by index 1-6. To make them easy accessible in a for loop.
-
     /**
      * Gets the selection based on the index.
      * @param index of the selection. Can only be 0-5
      * @return {@link Company#ID}
-     * @throws ExecutionControl.NotImplementedException
      * @throws IllegalArgumentException
      */
-    public Integer getSelection(int index) throws ExecutionControl.NotImplementedException, IllegalArgumentException
+    public Integer getSelection(int index) throws IllegalArgumentException
     {
-        throw new ExecutionControl.NotImplementedException("");
+        return switch (index) {
+            case 0 -> getSelection1();
+            case 1 -> getSelection2();
+            case 2 -> getSelection3();
+            case 3 -> getSelection4();
+            case 4 -> getSelection5();
+            case 5 -> getExtraWish();
+            default -> throw new IllegalArgumentException("The index given must be between 0 and 5.");
+        };
     }
 }
