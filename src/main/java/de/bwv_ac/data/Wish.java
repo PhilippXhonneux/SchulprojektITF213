@@ -1,10 +1,12 @@
 package de.bwv_ac.data;
 
+import jdk.jshell.spi.ExecutionControl;
+
 /**
  * Datastructure for Wishes BOT2
  *
- * @author Philipp Goebel
- * @version 1.0.1
+ * @author Philipp Goebel, Philipp Xhonneux
+ * @version 1.0.2
  */
 public class Wish extends Datastructure {
     /**
@@ -195,4 +197,16 @@ public class Wish extends Datastructure {
     }
 
     //ToDo implement method to set and get the selection and extraWish by index 1-6. To make them easy accessible in a for loop.
+
+    /**
+     * Gets the selection based on the index.
+     * @param index of the selection. Can only be 0-5
+     * @return {@link Company#ID}
+     * @throws ExecutionControl.NotImplementedException
+     * @throws IllegalArgumentException
+     */
+    public Integer getSelection(int index) throws ExecutionControl.NotImplementedException, IllegalArgumentException
+    {
+        throw new ExecutionControl.NotImplementedException("");
+    }
 }
