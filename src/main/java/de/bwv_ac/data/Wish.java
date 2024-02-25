@@ -1,12 +1,10 @@
 package de.bwv_ac.data;
 
-import jdk.jshell.spi.ExecutionControl;
-
 /**
  * Datastructure for Wishes BOT2
  *
  * @author Philipp Goebel, Philipp Xhonneux
- * @version 1.1.0
+ * @version 2.0.0
  */
 public class Wish extends Datastructure {
     /**
@@ -23,34 +21,34 @@ public class Wish extends Datastructure {
     private String name;
     /**
      * First choice of company of the student.
-     * Contains the {@link Company#ID}.
+     * Contains the {@link Company#getID()}.
      */
-    private Integer selection1;
+    private int selection1;
     /**
      * Second choice of company of the student.
-     * Contains the {@link Company#ID}.
+     * Contains the {@link Company#getID()}.
      */
-    private Integer selection2;
+    private int selection2;
     /**
      * Third choice of company of the student.
-     * Contains the {@link Company#ID}.
+     * Contains the {@link Company#getID()}.
      */
-    private Integer selection3;
+    private int selection3;
     /**
      * Fourth choice of company of the student.
-     * Contains the {@link Company#ID}.
+     * Contains the {@link Company#getID()}.
      */
-    private Integer selection4;
+    private int selection4;
     /**
      * Fifth choice of company of the student.
-     * Contains the {@link Company#ID}.
+     * Contains the {@link Company#getID()}.
      */
-    private Integer selection5;
+    private int selection5;
     /**
      * Sixth choice of company of the student.
-     * Contains the {@link Company#ID}.
+     * Contains the {@link Company#getID()}.
      */
-    private Integer extraWish;
+    private int extraWish;
 
     /**
      * Get the name of the class the student is in.
@@ -101,117 +99,76 @@ public class Wish extends Datastructure {
     }
 
     /**
-     * Gets the first choice of the student
-     * @return {@link Company#ID}
-     */
-    public Integer getSelection1() {
-        return selection1;
-    }
-
-    /**
-     * Sets the first choice of the student
-     * @param selection1 {@link Company#ID}
-     */
-    public void setSelection1(Integer selection1) {
-        this.selection1 = selection1;
-    }
-
-    /**
-     * Gets the second choice of the student
-     * @return {@link Company#ID}
-     */
-    public Integer getSelection2() {
-        return selection2;
-    }
-
-    /**
-     * Sets the second choice of the student
-     * @param selection2 {@link Company#ID}
-     */
-    public void setSelection2(Integer selection2) {
-        this.selection2 = selection2;
-    }
-
-    /**
-     * Gets the third choice of the student
-     * @return {@link Company#ID}
-     */
-    public Integer getSelection3() {
-        return selection3;
-    }
-
-    /**
-     * Sets the third choice of the student
-     * @param selection3 {@link Company#ID}
-     */
-    public void setSelection3(Integer selection3) {
-        this.selection3 = selection3;
-    }
-
-    /**
-     * Gets the fourth choice of the student
-     * @return {@link Company#ID}
-     */
-    public Integer getSelection4() {
-        return selection4;
-    }
-
-    /**
-     * Sets the first choice of the student
-     * @param selection4 {@link Company#ID}
-     */
-    public void setSelection4(Integer selection4) {
-        this.selection4 = selection4;
-    }
-
-    /**
-     * Gets the fifth choice of the student
-     * @return {@link Company#ID}
-     */
-    public Integer getSelection5() {
-        return selection5;
-    }
-
-    /**
-     * Sets the fifth choice of the student
-     * @param selection5 {@link Company#ID}
-     */
-    public void setSelection5(Integer selection5) {
-        this.selection5 = selection5;
-    }
-
-    /**
-     * Gets the sixth choice of the student
-     * @return {@link Company#ID}
-     */
-    public Integer getExtraWish() {
-        return extraWish;
-    }
-
-    /**
-     * Sets the sixth choice of the student
-     * @param extraWish {@link Company#ID}
-     */
-    public void setExtraWish(Integer extraWish) {
-        this.extraWish = extraWish;
-    }
-
-    /**
      * Gets the selection based on the index.
      * @param index of the selection. Can only be 0-5
-     * @return {@link Company#ID}
+     * @return {@link Company#getID()}
      * @throws IllegalArgumentException
      */
-    public Integer getSelection(int index) throws IllegalArgumentException
+    public int getSelection(int index) throws IllegalArgumentException
     {
         return switch (index) {
-            case 0 -> getSelection1();
-            case 1 -> getSelection2();
-            case 2 -> getSelection3();
-            case 3 -> getSelection4();
-            case 4 -> getSelection5();
-            case 5 -> getExtraWish();
+            case 0 -> this.selection1;
+            case 1 -> this.selection2;
+            case 2 -> this.selection3;
+            case 3 -> this.selection4;
+            case 4 -> this.selection5;
+            case 5 -> this.extraWish;
             default -> throw new IllegalArgumentException("The index given must be between 0 and 5.");
         };
+    }
+
+    /**
+     * Gets the selection based on the {@link Selection}.
+     * @param index of the selection.
+     * @return {@link Company#getID()}
+     * @throws IllegalArgumentException
+     */
+    public int getSelection(Selection selection) throws IllegalArgumentException
+    {
+        return getSelection(selection.ordinal());
+    }
+
+    /**
+     * Sets the selection based on the index.
+     * @param index of the selection. Can only be 0-5
+     * @throws IllegalArgumentException
+     */
+    public void setSelection(int index, int wish) throws IllegalArgumentException
+    {
+        switch (index) {
+            case 0 -> this.selection1 = wish;
+            case 1 -> this.selection2 = wish;
+            case 2 -> this.selection3 = wish;
+            case 3 -> this.selection4 = wish;
+            case 4 -> this.selection5 = wish;
+            case 5 -> this.extraWish  = wish;
+            default -> throw new IllegalArgumentException("The index given must be between 0 and 5.");
+        };
+    }
+
+    /**
+     * Sets the selection based on the {@link Selection}.
+     * @param index of the selection.
+     * @param wish {@link Company#getID()}
+     * @throws IllegalArgumentException
+     */
+    public void setSelection(Selection selection, int wish) throws IllegalArgumentException
+    {
+        setSelection(selection.ordinal(), wish);
+    }
+
+    public enum Selection
+    {
+        Wish1 (0),
+        Wish2 (1),
+        Wish3(2),
+        Wish4(3),
+        Wish5(4),
+        extraWish(5);
+        public final int index;
+        private Selection(int index)
+        {
+            this.index = index;
+        }
     }
 }
