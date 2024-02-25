@@ -66,32 +66,32 @@ public class Timetable {
 
 
     /**
-     * Gets the {@link Company#ID}.
-     * @return {@link Company#ID}
+     * Gets the {@link Company#getID()}.
+     * @return {@link Company#getID()}
      */
     public Integer getID() {
         return ID;
     }
 
     /**
-     * Sets the {@link Company#ID}.
-     * @param ID {@link Company#ID}.
+     * Sets the {@link Company#getID()}.
+     * @param ID {@link Company#getID()}.
      */
     public void setID(Integer ID) {
         this.ID = ID;
     }
 
     /**
-     * Gets the {@link Company#name}
-     * @return {@link  Company#name}
+     * Gets the {@link Company#getName()}
+     * @return {@link  Company#getName()}
      */
     public String getCompany() {
         return company;
     }
 
     /**
-     * Sets the {@link  Company#name}
-     * @param company  {@link  Company#name}
+     * Sets the {@link  Company#getName()}
+     * @param company  {@link  Company#getName()}
      */
     public void setCompany(String company) {
         this.company = company;

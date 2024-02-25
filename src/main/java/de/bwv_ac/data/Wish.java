@@ -119,7 +119,7 @@ public class Wish extends Datastructure {
 
     /**
      * Gets the selection based on the {@link Selection}.
-     * @param index of the selection.
+     * @param selection of the selection.
      * @return {@link Company#getID()}
      * @throws IllegalArgumentException
      */
@@ -148,7 +148,7 @@ public class Wish extends Datastructure {
 
     /**
      * Sets the selection based on the {@link Selection}.
-     * @param index of the selection.
+     * @param selection of the selection.
      * @param wish {@link Company#getID()}
      * @throws IllegalArgumentException
      */
