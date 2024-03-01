@@ -6,10 +6,10 @@ import java.util.ArrayList;
  * Datastructures for Stundenplan BOT3
  *
  * @author Philipp Goebel, Philipp Xhonneux
- * @version 3.0.1
+ * @version 3.1.0
  */
 
-public class Timetable {
+public class Timetable extends Datastructure {
     /**
      * Identification number of the {@link Company}
      */
@@ -28,7 +28,7 @@ public class Timetable {
      * Subclass for representing Events
      *
      * @author Philipp Xhonneux
-     * @version 1.0.0
+     * @version 1.1.0
      */
     @SuppressWarnings("InnerClassMayBeStatic")
     private class Event{
@@ -50,7 +50,18 @@ public class Timetable {
         public Event(String room, String timeSlot)
         {
             this.room = room;
-            this.timeSlot = timeSlot;
+            this.timeSlot = timeSlot.toUpperCase();
+        }
+
+        /**
+         * Builds a {@link Event}
+         * @param room the {@link Event} is hold in.
+         * @param timeSlot the {@link Event} is in.
+         */
+        public Event(String room, TimeSlot timeSlot)
+        {
+            this.room = room;
+            this.timeSlot = timeSlot.label;
         }
 
         @Override
@@ -62,6 +73,22 @@ public class Timetable {
 
 			return event.room.equals(this.room) && event.timeSlot.equals(this.timeSlot);
 		}
+    }
+
+    /**
+     * Enum containing all TimeSlots
+     * @author Philipp Xhonneux
+     * @version 1.0.0
+     */
+    public enum TimeSlot{
+
+        A("A"),
+        B("B"),
+        C("C"),
+        D("D"),
+        E("E");
+        private final String label;
+        private TimeSlot(String label){this.label = label;}
     }
 
 
@@ -103,14 +130,23 @@ public class Timetable {
      * @param timeSlot {@link Event#timeSlot}, will be set in uppercase
      * @throws IllegalArgumentException if the timeslot is already used for the {@link Company}
      */
-    public void addEvent(String room, String timeSlot) throws IllegalStateException
-    {
-        for (Event event : events)
-        {
-            if(event.timeSlot.equals(timeSlot.toUpperCase()))
+    public void addEvent(String room, String timeSlot) throws IllegalStateException {
+        for (Event event : events) {
+            if (event.timeSlot.equals(timeSlot.toUpperCase()))
                 throw new IllegalStateException("Timeslot " + timeSlot.toUpperCase() + "is already in use.");
         }
-        events.add(new Event(room, timeSlot.toUpperCase()));
+     events.add(new Event(room, timeSlot.toUpperCase()));
+    }
+
+    /**
+     * Adds an Event for the {@link Company}
+     * @param room {@link Event#room}
+     * @param timeSlot {@link Event#timeSlot}, will be set in uppercase
+     * @throws IllegalArgumentException if the timeslot is already used for the {@link Company}
+     */
+    public void addEvent(String room, TimeSlot timeSlot) throws IllegalStateException
+    {
+        addEvent(room, timeSlot.label);
     }
 
     /**
@@ -122,6 +158,16 @@ public class Timetable {
     {
         Event event = new Event(room, timeSlot);
         events.remove(event);
+    }
+
+    /**
+     * Removes the {@link Event}
+     * @param room {@link Event#room}
+     * @param timeSlot {@link Event#timeSlot}
+     */
+    public void removeEvent(String room, TimeSlot timeSlot)
+    {
+        removeEvent(room, timeSlot.label);
     }
 
     /**
