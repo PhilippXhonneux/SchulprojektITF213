@@ -17,7 +17,7 @@ public abstract class Datastructure {
 	 * @param delimeter the saparator used for the CSV-Format
 	 * @return the string
 	 */
-	public final String ToCSVString(String delimeter) {
+	public String ToCSVString(String delimeter) {
 		StringBuilder result = new StringBuilder();
 		Class<?> clazz = getClass();
 
@@ -44,7 +44,7 @@ public abstract class Datastructure {
 	 * @param csvString that contains the values
 	 * @param delimeter for the CSV-Format
 	 */
-	public final void FromCSVStringToObject(String csvString, String delimeter) {
+	public void FromCSVStringToObject(String csvString, String delimeter) {
 		String[] values = csvString.split(delimeter);
 		Class<?> clazz = getClass();
 
