@@ -10,9 +10,18 @@ import java.util.Collection;
  */
 public class Rooms implements DataCollection<Room>{
 
+	/**
+	 * List of {@link Room}
+	 */
 	private ArrayList<Room> rooms = new ArrayList<Room>();
 
-	private String[] columns = {};
+	/**
+	 * {@link String}[] containing the names of columns.
+	 * Either the standard names or the names of the CSV-File.
+	 * Names from the CSV-File will be set
+	 * when using the {@link #add(Collection, String[])} method.
+	 */
+	private String[] columns = {"Raumbezeichnung", "Raumkapazität"};
 
 	/**
 	 * Adds a {@link Datastructure} to the inner {@link Collection}<{@link Datastructure}>
