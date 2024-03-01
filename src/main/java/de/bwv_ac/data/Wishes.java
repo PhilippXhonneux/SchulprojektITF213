@@ -12,6 +12,7 @@ import java.util.Collection;
  * @author Philipp Xhonneux
  * @version 1.0.2
  */
+@SuppressWarnings("ALL")
 public class Wishes extends Subject implements DataCollection<Wish> {
 
 	/**

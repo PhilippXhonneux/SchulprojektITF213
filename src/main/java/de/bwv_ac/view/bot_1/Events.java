@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
  * @author Robin Goerissen
  * @version 1.0.0
  */
-@SuppressWarnings({"FieldMayBeFinal"})
+@SuppressWarnings("ALL")
 public class Events extends JPanel implements Observer {
     private JPanel contentPane;
     private JButton csvExportButton;
@@ -26,6 +26,7 @@ public class Events extends JPanel implements Observer {
     private JButton addButton;
     private JButton removeButton;
 
+    @SuppressWarnings("CanBeFinal")
     private DefaultTableModel tableModel;
 
     /**

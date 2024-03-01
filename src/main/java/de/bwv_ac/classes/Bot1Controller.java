@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * @author Robin Goerissen
  * @version 1.0.0
  */
-@SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal"})
+@SuppressWarnings("ALL")
 public class Bot1Controller {
 
     private static final String delimiter = ";"; // TODO: get from other location

@@ -6,6 +6,7 @@ package de.bwv_ac.data;
  * @author Philipp Goebel, Philipp Xhonneux
  * @version 2.0.0
  */
+@SuppressWarnings("JavadocDeclaration")
 public class Wish extends Datastructure {
     /**
      * Name of the class the student is in.
@@ -143,7 +144,7 @@ public class Wish extends Datastructure {
             case 4 -> this.selection5 = wish;
             case 5 -> this.extraWish  = wish;
             default -> throw new IllegalArgumentException("The index given must be between 0 and 5.");
-        };
+        }
     }
 
     /**
@@ -166,6 +167,7 @@ public class Wish extends Datastructure {
         Wish5(4),
         extraWish(5);
         public final int index;
+        @SuppressWarnings("UnnecessaryModifier")
         private Selection(int index)
         {
             this.index = index;

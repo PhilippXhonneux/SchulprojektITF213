@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * @version 3.1.0
  */
 
+@SuppressWarnings({"ALL", "JavadocDeclaration"})
 public class Timetable extends Datastructure {
     /**
      * Identification number of the {@link Company}
@@ -88,6 +89,7 @@ public class Timetable extends Datastructure {
         D("D"),
         E("E");
         private final String label;
+        @SuppressWarnings("UnnecessaryModifier")
         private TimeSlot(String label){this.label = label;}
     }
 
@@ -174,7 +176,7 @@ public class Timetable extends Datastructure {
      * Gets a {@link String}[] containing the {@link Event#room} and {@link Event#timeSlot} of the {@link Event}
      * @param index of the {@link Event}
      * @return {@link String}[] containing the {@link Event#room} and {@link Event#timeSlot} of the {@link Event}
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if index is out of bound
      */
     public String[] getEvent(int index) throws IllegalArgumentException
     {

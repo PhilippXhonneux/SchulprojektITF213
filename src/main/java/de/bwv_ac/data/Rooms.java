@@ -8,12 +8,14 @@ import java.util.Collection;
  * @author Philipp Xhonneux
  * @version 1.0.0
  */
+@SuppressWarnings("ALL")
 public class Rooms implements DataCollection<Room>{
 
 	/**
 	 * List of {@link Room}
 	 */
-	private ArrayList<Room> rooms = new ArrayList<Room>();
+	@SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+	private ArrayList<Room> rooms = new ArrayList<>();
 
 	/**
 	 * {@link String}[] containing the names of columns.

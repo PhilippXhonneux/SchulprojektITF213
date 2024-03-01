@@ -1,6 +1,7 @@
 package de.bwv_ac.data;
 
 //ToDo Add JavaDocs
+@SuppressWarnings("ALL")
 public class Assignment {
     private String className;
     private String surname;

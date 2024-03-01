@@ -11,12 +11,13 @@ import java.util.Collection;
  * @author Robin Görissen, Philipp Xhonneux
  * @version 1.1.0
  */
+@SuppressWarnings("ALL")
 public class Companies extends Subject implements DataCollection<Company> {
 
     /**
      * {@link ArrayList} of {@link Company}
      */
-    @SuppressWarnings("FieldMayBeFinal")
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private ArrayList<Company> companies;
     /**
      * {@link String}[] containing the names of columns.
