@@ -128,9 +128,13 @@ public class Timetable {
      * Gets a {@link String}[] containing the {@link Event#room} and {@link Event#timeSlot} of the {@link Event}
      * @param index of the {@link Event}
      * @return {@link String}[] containing the {@link Event#room} and {@link Event#timeSlot} of the {@link Event}
+     * @throws IllegalArgumentException
      */
-    public String[] getEvent(int index)
+    public String[] getEvent(int index) throws IllegalArgumentException
     {
+        if(index >= events.size())
+            throw new IllegalArgumentException("Index is not in bound.");
+
         String[] event = new String[2];
         event[0] = events.get(index).room;
         event[1] = events.get(index).timeSlot;
