@@ -187,4 +187,58 @@ public class Timetable extends Datastructure {
 
         return event;
     }
+
+    @Override
+    public void FromCSVStringToObject(String csvString, String delimeter) {
+        String[] values = csvString.split(delimeter);
+
+        if(values.length < 2)
+            throw new IllegalArgumentException("The CSV-String is in the wrong format.");
+
+
+        this.ID = Integer.parseInt(values[0]);
+        this.company = values[1];
+
+        try {
+            this.addEvent(values[2], TimeSlot.A.label);
+            this.addEvent(values[3], TimeSlot.B.label);
+            this.addEvent(values[4], TimeSlot.C.label);
+            this.addEvent(values[5], TimeSlot.D.label);
+            this.addEvent(values[6], TimeSlot.E.label);
+        }catch (Exception ignored){}
+    }
+
+    @Override
+    public String ToCSVString(String delimeter){
+        String re = getID().toString() + delimeter + getCompany() + delimeter;
+        String[] events = {"","","","",""};
+
+        for(Event event : this.events)
+        {
+            switch (event.timeSlot)
+            {
+                case "A":
+                    events[0] = event.room;
+                    break;
+                case "B":
+                    events[1] = event.room;
+                    break;
+                case "C":
+                    events[2] = event.room;
+                    break;
+                case "D":
+                    events[3] = event.room;
+                    break;
+                case "E":
+                    events[4] = event.room;
+                    break;
+            }
+        }
+
+        for (String roomname : events){
+            re += roomname + delimeter;
+        }
+
+        return re;
+    }
 }
