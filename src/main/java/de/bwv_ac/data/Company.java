@@ -71,7 +71,10 @@ public class Company extends Datastructure {
 	 *
 	 * @param name {@link Company#name}
 	 */
-	public void setName(String name) {
+	public void setName(String name)
+	{
+		if(name.length() == 0)
+			throw new IllegalArgumentException("Company Name must be valid.");
 		this.name = name;
 	}
 
@@ -89,7 +92,8 @@ public class Company extends Datastructure {
 	 *
 	 * @param specialty {@link Company#specialty}
 	 */
-	public void setSpecialty(String specialty) {
+	public void setSpecialty(String specialty)
+	{
 		this.specialty = specialty;
 	}
 
@@ -150,7 +154,10 @@ public class Company extends Datastructure {
 	 *
 	 * @param time {@link Company#time}
 	 */
-	public void setTime(String time) {
+	public void setTime(String time)
+	{
+		if(time.length() != 1)
+			throw new IllegalArgumentException("The time can only be one Character from A-, See the timetables");
 		this.time = time;
 	}
 }
