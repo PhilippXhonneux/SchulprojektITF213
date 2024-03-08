@@ -4,7 +4,7 @@ package de.bwv_ac.data;
  * Datastructure for companies
  *
  * @author Philipp Xhonneux
- * @version 1.0.0
+ * @version 1.1.1
  */
 public class Company extends Datastructure {
 
@@ -30,12 +30,14 @@ public class Company extends Datastructure {
 	private int maxEvents;
 
 	/**
-	 * The earliest time for an event
+	 * The earliest timeslot for an event.
+	 * Timeslot is represented with a {@link String}.
+	 * {@link String}'s may be "A","B", ... ,"E"
 	 */
 	private String time;
 
 	/**
-	 * Gets the Identification number of the company.
+	 * Gets the {@link Company#ID}.
 	 *
 	 * @return the id
 	 */
@@ -44,10 +46,10 @@ public class Company extends Datastructure {
 	}
 
 	/**
-	 * Sets id.
+	 * Sets {@link Company#ID}.
 	 *
-	 * @param ID the id
-	 * @throws IllegalArgumentException the illegal argument exception
+	 * @param ID the Identification number
+	 * @throws IllegalArgumentException if ID is less or equal to 0.
 	 */
 	public void setID(int ID) throws IllegalArgumentException {
 		if(ID <= 0)
@@ -56,54 +58,58 @@ public class Company extends Datastructure {
 	}
 
 	/**
-	 * Gets the formal name of the company.
+	 * Gets the {@link Company#name}.
 	 *
-	 * @return the name
+	 * @return {@link Company#name}
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * Sets name.
+	 * Sets {@link Company#name}.
 	 *
-	 * @param name the name
+	 * @param name {@link Company#name}
 	 */
-	public void setName(String name) {
+	public void setName(String name)
+	{
+		if(name.length() == 0)
+			throw new IllegalArgumentException("Company Name must be valid.");
 		this.name = name;
 	}
 
 	/**
-	 * Gets specialty.
+	 * Gets {@link Company#specialty}
 	 *
-	 * @return the specialty
+	 * @return {@link Company#specialty}
 	 */
 	public String getSpecialty() {
 		return specialty;
 	}
 
 	/**
-	 * Sets specialty.
+	 * Sets {@link Company#specialty}.
 	 *
-	 * @param specialty the specialty
+	 * @param specialty {@link Company#specialty}
 	 */
-	public void setSpecialty(String specialty) {
+	public void setSpecialty(String specialty)
+	{
 		this.specialty = specialty;
 	}
 
 	/**
-	 * Gets the max number of students that can visit one event.
+	 * Gets {@link Company#maxParticipants}
 	 *
-	 * @return the max
+	 * @return {@link Company#specialty}
 	 */
 	public int getMaxParticipants() {
 		return maxParticipants;
 	}
 
 	/**
-	 * Sets the max number of students that can visit one event.
+	 * Sets {@link Company#maxParticipants}
 	 *
-	 * @param maxParticipants the max
+	 * @param maxParticipants {@link Company#maxParticipants}
 	 * @throws IllegalArgumentException the illegal argument exception
 	 */
 	public void setMaxParticipants(int maxParticipants) throws IllegalArgumentException {
@@ -114,41 +120,44 @@ public class Company extends Datastructure {
 	}
 
 	/**
-	 * Gets the min number of max event that can handle from the company.
+	 * Gets {@link Company#maxEvents}
 	 *
-	 * @return the max
+	 * @return {@link Company#maxEvents}
 	 */
 	public int getMaxEvents() {
 		return maxEvents;
 	}
 
 	/**
-	 * Sets the max number of events that can handle from the company.
+	 * Sets {@link Company#maxEvents}
 	 *
-	 * @param maxEvents the max
+	 * @param maxEvents {@link Company#maxEvents}
 	 * @throws IllegalArgumentException the illegal argument exception
 	 */
 	public void setMaxEvents(int maxEvents) throws IllegalArgumentException{
 		if(maxEvents < 0 )
-			throw new IllegalArgumentException("The min number of students can't be negative.");
+			throw new IllegalArgumentException("The min number of events can't be negative.");
 		this.maxEvents = maxEvents;
 	}
 
 	/**
-	 * Gets the earliest time for an event.
+	 * Gets {@link Company#time}
 	 *
-	 * @return the time
+	 * @return {@link Company#time}
 	 */
 	public String getTime() {
 		return time;
 	}
 
 	/**
-	 * Sets the earliest time for an event.
+	 * Sets {@link Company#time}
 	 *
-	 * @param time the time
+	 * @param time {@link Company#time}
 	 */
-	public void setTime(String time) {
+	public void setTime(String time)
+	{
+		if(time.length() != 1)
+			throw new IllegalArgumentException("The time can only be one Character from A-, See the timetables");
 		this.time = time;
 	}
 }

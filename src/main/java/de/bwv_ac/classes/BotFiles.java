@@ -37,15 +37,11 @@ public class BotFiles
 
             writer.close(); // Schließt den Writer
         }
-        catch (IOException e)
+        catch (IOException | ExecutionControl.NotImplementedException e)
         {
             throw new RuntimeException(e);
         }
-        catch (ExecutionControl.NotImplementedException e)
-        {
-            throw new RuntimeException(e);
-        }
-    }
+	}
 
     @Deprecated
     public static <T extends Datastructure> ArrayList<T> CSVReader(String filePath, boolean hasHeader, Class<T> clazz) throws FileNotFoundException

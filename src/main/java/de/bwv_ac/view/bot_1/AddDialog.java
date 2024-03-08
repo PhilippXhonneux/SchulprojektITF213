@@ -15,6 +15,7 @@ public class AddDialog extends JDialog {
     private JTextArea eventNameTextField;
     private JSpinner maxEventsSpinner;
     private JSlider maxParticipantSlider;
+    @SuppressWarnings("rawtypes")
     private JComboBox startAtComboBox;
     private int index;
 

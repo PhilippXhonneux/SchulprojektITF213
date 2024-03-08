@@ -39,13 +39,11 @@ public class CSVReader {
             }
         } catch (IOException e) { //TODO Error Handling
             e.printStackTrace();
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
 
-        return content;
+		return content;
     }
 
     public static String[] getFirstLine(String filePath) throws FileNotFoundException

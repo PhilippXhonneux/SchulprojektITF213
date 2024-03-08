@@ -2,39 +2,65 @@ package de.bwv_ac;
 
 import de.bwv_ac.classes.CSVReader;
 import de.bwv_ac.classes.CSVWriter;
+import de.bwv_ac.data.Datastructure;
 import de.bwv_ac.data.Wish;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
+import java.util.ArrayList;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class CSVHandlingTests {
 
+    String tempFilePath = "src/test/resources/example_data/test.csv";
+    File tempFile = new File(tempFilePath);
+    FileWriter writer;
+    CSVWriter csvWriter = new CSVWriter(tempFilePath);
+
     @BeforeEach
     public void setUp() {
-        CSVWriter.setDelimiter(";");
+        try {
+            writer = new FileWriter(tempFile);
+            writer.write("25;Wirtschaftsrecht FH-Aachen;;20;5;A\n");
+            writer.close();
+        } catch (IOException e) {
+            fail("Exception occurred while writing the file: " + e.getMessage());
+        }
+        tempFile.deleteOnExit();//<-- Funktioniert nicht.
     }
 
     @Test
-    public void testReadContent() throws IOException, URISyntaxException {
-        File file = new File(ClassLoader.getSystemResource("example_data/BOT1_Veranstaltungsliste.csv").toURI());
-        CSVReader reader = new CSVReader();
-        //TODO: Der Test sollte genauer sein
-        assertFalse(reader.read(file.getAbsolutePath(), true, Wish.class).isEmpty());
+    public void testWrite() {
+        String[] content = {"Test", "bla bla", "test test"};
+        csvWriter.write(content);
+
+        try (BufferedReader br = new BufferedReader(new FileReader(tempFile))) {
+            String line = br.readLine();
+            assertEquals("Test;bla bla;test test", line);
+        } catch (IOException e) {
+            fail("Exception occurred while reading the file: " + e.getMessage());
+        }
     }
 
     @Test
-    public void testGetFirstLine() throws IOException, URISyntaxException {
-        File file = new File(ClassLoader.getSystemResource("example_data/BOT1_Veranstaltungsliste.csv").toURI());
-        CSVReader reader = new CSVReader();
-        //TODO: Erste Zeile kann als Kopie zum abgleich herhalten.
-        //assertThat(reader.getFirstLine(file.getAbsolutePath())); // Work in progress
+    public void testRead() {
+        ArrayList<Wish> wishes = CSVReader.read(tempFilePath, false, Wish.class);
+        assertEquals(1, wishes.size());
+        assertEquals("25", wishes.get(0));
     }
+    @Test
+    public void testGetFirstLine() throws FileNotFoundException {
+        String[] firstLine = CSVReader.getFirstLine(tempFilePath);
+        assertEquals("25", firstLine[0]);
+        assertEquals("Wirtschaftsrecht FH-Aachen", firstLine[1]);
+        assertEquals("", firstLine[2]);
+        assertEquals("20", firstLine[3]);
+        assertEquals("5", firstLine[4]);
+        assertEquals("A", firstLine[5]);
+    }
+
 }

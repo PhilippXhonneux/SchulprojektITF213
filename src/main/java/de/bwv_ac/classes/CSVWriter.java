@@ -8,7 +8,7 @@ import java.io.IOException;
  * @author Philipp Goebel
  * @version 1.1.0
  */
-@SuppressWarnings({"FieldMayBeFinal"})
+@SuppressWarnings("ALL")
 public class CSVWriter {
     private String path;
 

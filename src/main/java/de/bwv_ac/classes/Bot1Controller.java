@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * @author Robin Goerissen
  * @version 1.0.0
  */
-@SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal"})
+@SuppressWarnings("ALL")
 public class Bot1Controller {
 
     private static final String delimiter = ";"; // TODO: get from other location
@@ -338,13 +338,13 @@ public class Bot1Controller {
                 return;
             }
 
-            Company c = companies.getCompany(row);
+            Company c = companies.get(row);
 
             int retVal = JOptionPane.showConfirmDialog(eventPanel, "Sind Sie sich sicher das Event mit der ID: " + c.getID() + " zu entfernen?");
 
             String message;
             if(retVal == JOptionPane.OK_OPTION){
-                companies.removeCompany(c);
+                companies.remove(c);
                 message = "Erfoglreich entfernt";
             }else
                 message = "Vorgang Abbgebrochen";
