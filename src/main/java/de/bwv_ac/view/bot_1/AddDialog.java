@@ -115,6 +115,10 @@ public class AddDialog extends JDialog {
         this.index = index;
     }
 
+    /**
+     * Get the selected index if index is set
+     * @return index or null
+     */
     public int getIndex(){
         return index;
     }

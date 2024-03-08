@@ -9,7 +9,7 @@ package de.bwv_ac.data;
 public class Room extends Datastructure{
 
 	private String Roomname;
-	private  Integer capacity;
+	private Integer capacity;
 
 	/**
 	 * Gets roomname.
@@ -25,7 +25,10 @@ public class Room extends Datastructure{
 	 *
 	 * @param roomname the roomname
 	 */
-	public void setRoomname(String roomname) {
+	public void setRoomname(String roomname)
+	{
+		if (roomname == "" || roomname == null)
+			throw new IllegalArgumentException("Roomname cannot be empty or null!");
 		Roomname = roomname;
 	}
 

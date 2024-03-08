@@ -222,7 +222,8 @@ public class Bot1Controller {
             chooser.setDialogTitle("Wähle eine Kommaseparierte Liste im .CSV format aus");
             chooser.setApproveButtonText("Auswählen");
             chooser.setMultiSelectionEnabled(false);
-            javax.swing.filechooser.FileFilter filter = new FileFilter() {
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            FileFilter filter = new FileFilter() {
                 @Override
                 public boolean accept(File f) {
                     String name = f.getName();
@@ -256,6 +257,68 @@ public class Bot1Controller {
                 throw new RuntimeException(ex);
                 // TODO: Error handling
             }
+
+        }
+    };
+
+    /**
+     * Handle User Action<br>
+     * Configure and show a JFileChooser.<br>
+     * After selecting a file to import,<br>
+     */
+    private ActionListener onOpenExport = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Wähle einen Pfad oder eine Datei im .CSV format aus zum Exportieren aus.");
+            chooser.setApproveButtonText("Auswählen");
+            chooser.setMultiSelectionEnabled(false);
+            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+            FileFilter filter = new FileFilter() {
+                @Override
+                public boolean accept(File f) {
+                    String name = f.getName();
+
+                    if(f.isDirectory())
+                        return true;
+
+                    return name.endsWith(".csv");
+                }
+
+                @Override
+                public String getDescription() {
+                    return "CSV Datei / *.csv";
+                }
+            };
+            chooser.setFileFilter(filter);
+
+            int rval = chooser.showOpenDialog(eventPanel);
+
+            if(rval != JFileChooser.APPROVE_OPTION){
+                return;
+            }
+
+            File f = chooser.getSelectedFile();
+
+            File exportFile = null;
+
+            if(f.isDirectory()){
+                String name = null;
+                while(name == null){
+                    name = JOptionPane.showInputDialog(eventPanel, "Bitte gebe einen für die Datei an. (Ohne Endung)", "Name der Datei zum exportieren.",  JOptionPane.PLAIN_MESSAGE);
+                }
+
+            }else{
+                exportFile = f;
+            }
+            try {
+                f.mkdirs(); // If the path does not exist, it will be created
+            }catch (SecurityException exception){
+                JOptionPane.showMessageDialog(eventPanel, "Es gab einen Fehler mit der Berechtigung für den Pfad!", "Fehler", JOptionPane.ERROR_MESSAGE);
+            }
+
+
+
 
         }
     };
