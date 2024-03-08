@@ -6,6 +6,7 @@ import de.bwv_ac.util.Subject;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  *
@@ -122,5 +123,15 @@ public class Assignments extends Subject implements DataCollection<Assignment> {
 	@Override
 	public String[] getColumns() {
 		return this.columns;
+	}
+
+	/**
+	 * Returns an iterator over elements of type {@code T}.
+	 *
+	 * @return an Iterator.
+	 */
+	@Override
+	public Iterator<Assignment> iterator() {
+		return this.assignments.iterator();
 	}
 }

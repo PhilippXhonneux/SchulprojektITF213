@@ -5,6 +5,7 @@ import de.bwv_ac.util.Subject;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * {@link Wish} Handler
@@ -129,4 +130,13 @@ public class Wishes extends Subject implements DataCollection<Wish> {
 	}
 
 
+	/**
+	 * Returns an iterator over elements of type {@code T}.
+	 *
+	 * @return an Iterator.
+	 */
+	@Override
+	public Iterator<Wish> iterator() {
+		return this.wishes.iterator();
+	}
 }

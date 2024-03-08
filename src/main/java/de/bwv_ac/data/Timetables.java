@@ -5,6 +5,7 @@ import de.bwv_ac.util.Subject;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 
 /**
@@ -175,5 +176,15 @@ public class Timetables extends Subject implements DataCollection<Timetable> {
 	@Override
 	public String[] getColumns() {
 		return columns;
+	}
+
+	/**
+	 * Returns an iterator over elements of type {@code T}.
+	 *
+	 * @return an Iterator.
+	 */
+	@Override
+	public Iterator<Timetable> iterator() {
+		return this.timetables.iterator();
 	}
 }

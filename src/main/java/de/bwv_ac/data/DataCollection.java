@@ -9,7 +9,7 @@ import java.util.Collection;
  * @author Philipp Xhonneux
  * @version 1.0.0
  */
-public interface DataCollection<T extends Datastructure> {
+public interface DataCollection<T extends Datastructure> extends Iterable<T> {
 
     /**
      * Adds a {@link Datastructure} to the inner {@link Collection}<{@link Datastructure}>
