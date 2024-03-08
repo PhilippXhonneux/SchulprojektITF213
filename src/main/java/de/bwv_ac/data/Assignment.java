@@ -2,7 +2,7 @@ package de.bwv_ac.data;
 
 //ToDo Add JavaDocs
 @SuppressWarnings("ALL")
-public class Assignment {
+public class Assignment extends Datastructure {
     private String className;
     private String surname;
     private String name;

@@ -16,31 +16,29 @@ import static org.junit.Assert.*;
 
 public class CSVHandlingTests {
 
-    String tempFilePath = "test.csv";
+    String tempFilePath = "src/test/resources/example_data/test.csv";
+    File tempFile = new File(tempFilePath);
+    FileWriter writer;
+    CSVWriter csvWriter = new CSVWriter(tempFilePath);
+
     @BeforeEach
     public void setUp() {
-        CSVWriter.setDelimiter(";");
-        try (FileWriter writer = new FileWriter(tempFilePath)) {
+        try {
+            writer = new FileWriter(tempFile);
             writer.write("25;Wirtschaftsrecht FH-Aachen;;20;5;A\n");
+            writer.close();
         } catch (IOException e) {
-            fail("Failed to write to temporary file");
+            fail("Exception occurred while writing the file: " + e.getMessage());
         }
-    }
-    @AfterEach
-    public void tearDown() {
-        File tempFile = new File(tempFilePath);
-        if (tempFile.exists() && !tempFile.delete()) {
-            fail("Failed to delete temporary file");
-        }
+        tempFile.deleteOnExit();//<-- Funktioniert nicht.
     }
 
     @Test
     public void testWrite() {
-        CSVWriter csvWriter = new CSVWriter(tempFilePath);
         String[] content = {"Test", "bla bla", "test test"};
         csvWriter.write(content);
 
-        try (BufferedReader br = new BufferedReader(new FileReader(tempFilePath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(tempFile))) {
             String line = br.readLine();
             assertEquals("Test;bla bla;test test", line);
         } catch (IOException e) {
@@ -50,19 +48,19 @@ public class CSVHandlingTests {
 
     @Test
     public void testRead() {
-
-        ArrayList<Datastructure> content = CSVReader.read(tempFilePath, false, Datastructure.class);
-        //assertEquals(1, content.size());
-        assertEquals("25;Wirtschaftsrecht FH-Aachen;;20;5;A", content.get(0));
+        ArrayList<Wish> wishes = CSVReader.read(tempFilePath, false, Wish.class);
+        assertEquals(1, wishes.size());
+        assertEquals("25", wishes.get(0));
     }
-
     @Test
-    public void testGetFirstLine() {
-        try {
-            String[] firstLine = CSVReader.getFirstLine(tempFilePath);
-            assertArrayEquals(new String[]{"25;Wirtschaftsrecht FH-Aachen;;20;5;A\n"}, firstLine);
-        } catch (IOException e) {
-            fail("Failed to read from temporary file");
-        }
+    public void testGetFirstLine() throws FileNotFoundException {
+        String[] firstLine = CSVReader.getFirstLine(tempFilePath);
+        assertEquals("25", firstLine[0]);
+        assertEquals("Wirtschaftsrecht FH-Aachen", firstLine[1]);
+        assertEquals("", firstLine[2]);
+        assertEquals("20", firstLine[3]);
+        assertEquals("5", firstLine[4]);
+        assertEquals("A", firstLine[5]);
     }
+
 }
