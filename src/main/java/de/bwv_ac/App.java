@@ -1,6 +1,6 @@
 package de.bwv_ac;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import de.bwv_ac.classes.Bot1Controller;
 import de.bwv_ac.data.Companies;
 
@@ -17,9 +17,9 @@ public class App
     public static void main(String[] args )
     {
         try {
-            //UIManager.setLookAndFeel( new FlatLightLaf() ); // Light mode
+            UIManager.setLookAndFeel( new FlatLightLaf() ); // Light mode
             //UIManager.setLookAndFeel( new FlatDarkLaf() ); // Dark mode
-            UIManager.setLookAndFeel( new FlatDarculaLaf() ); // Dracula mode
+            //UIManager.setLookAndFeel( new FlatDarculaLaf() ); // Dracula mode
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
@@ -43,7 +43,7 @@ public class App
 
         //window.add(spPane);
 
-        tabbedPane.addTab("Test", null, new JPanel(), ":D");
+        tabbedPane.addTab("Schülerwünsche", null, new JPanel(), ":D");
         window.add(tabbedPane);
 
 
