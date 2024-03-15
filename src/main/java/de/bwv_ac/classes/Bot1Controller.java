@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
@@ -73,6 +74,7 @@ public class Bot1Controller {
         eventPanel.setOpenChangeDialogAction(onOpenChangeDialog);
         eventPanel.setOpenImportAction(onOpenImport);
         eventPanel.setRemoveAction(onRemove);
+        eventPanel.setOnExportAction(onOpenExport);
 
     }
 
@@ -307,18 +309,40 @@ public class Bot1Controller {
                 while(name == null){
                     name = JOptionPane.showInputDialog(eventPanel, "Bitte gebe einen für die Datei an. (Ohne Endung)", "Name der Datei zum exportieren.",  JOptionPane.PLAIN_MESSAGE);
                 }
+                try {
+                    f.mkdirs(); // If the path does not exist, it will be created
+                }catch (SecurityException exception){
+                    JOptionPane.showMessageDialog(eventPanel, "Es gab einen Fehler mit der Berechtigung für den Pfad!", "Fehler", JOptionPane.ERROR_MESSAGE);
+                }
 
             }else{
                 exportFile = f;
             }
-            try {
-                f.mkdirs(); // If the path does not exist, it will be created
-            }catch (SecurityException exception){
-                JOptionPane.showMessageDialog(eventPanel, "Es gab einen Fehler mit der Berechtigung für den Pfad!", "Fehler", JOptionPane.ERROR_MESSAGE);
+
+
+            if(exportFile.exists()){
+                int retVal = JOptionPane.showConfirmDialog(eventPanel, "Wollen Sie die Datei wirklich überschreiben?","Datei Existiert bereits", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+
+                if(retVal == JOptionPane.CANCEL_OPTION){
+                    JOptionPane.showMessageDialog(eventPanel, "Vorgang wurde abgebrochen.", "Abgebrochen", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
             }
+            StringBuilder sb = new StringBuilder();
+            sb.append("Nr.;Unternehmen;Fachrichtung;Max. Teilnehmer;Max. Veranstaltungen;Fruehester Zeitpunkt\n");
+            for (Company company : companies){
+                sb.append(company.ToCSVString(delimiter)).append("\n");
+            }
+            String csvOut = sb.toString();
 
 
-
+            try(FileWriter writer = new FileWriter(exportFile)){
+                writer.write(csvOut);
+                writer.flush();
+                JOptionPane.showMessageDialog(eventPanel, "Erfolgreich exportiert:\n" + f.getAbsolutePath(), "Erfolgreich exportiert", JOptionPane.INFORMATION_MESSAGE);
+            }catch (Exception exception){
+                JOptionPane.showMessageDialog(eventPanel, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
         }
     };

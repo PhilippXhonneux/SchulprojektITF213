@@ -103,6 +103,8 @@ public class Events extends JPanel implements Observer {
         csvImportButton.addActionListener(l);
     }
 
+    public void setOnExportAction(ActionListener l) { csvExportButton.addActionListener(l);}
+
     /**
      * Set the selection to the given index.
      * @param row to select.
