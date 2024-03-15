@@ -46,6 +46,15 @@ public class App
         tabbedPane.addTab("Schülerwünsche", null, new JPanel(), ":D");
         window.add(tabbedPane);
 
+        tabbedPane.addTab("Zeitslots", null, new JPanel(), ":D");
+        window.add(tabbedPane);
+
+        tabbedPane.addTab("Zuordnung", null, new JPanel(), ":D");
+        window.add(tabbedPane);
+
+        tabbedPane.addTab("Anwesenheitsliste", null, new JPanel(), ":D");
+        window.add(tabbedPane);
+
 
         //window.add(b1c.getPanel(), BorderLayout.EAST);
         window.pack();
