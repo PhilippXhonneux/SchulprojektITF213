@@ -32,7 +32,6 @@ public class PPEvent extends JPanel implements Observer {
      */
     public void setTableData(Object[] columns, Object[][] rows) {
         this.tableModel.setDataVector(rows, columns);
-        System.out.println(Arrays.toString(columns));
     }
 
     @Override
