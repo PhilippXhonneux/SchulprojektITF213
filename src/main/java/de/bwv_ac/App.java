@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import de.bwv_ac.classes.Bot1Controller;
 import de.bwv_ac.classes.Bot2Controller;
 import de.bwv_ac.data.Companies;
+import de.bwv_ac.data.PPerEvents;
 import de.bwv_ac.data.Wishes;
 
 import javax.swing.*;
@@ -29,8 +30,9 @@ public class App
         Companies companies = new Companies(new ArrayList<>());
         Bot1Controller b1c = new Bot1Controller(companies);
 
-        Wishes wishes = new Wishes(new ArrayList<>());
-        Bot2Controller b2c = new Bot2Controller(wishes);
+        PPerEvents pPerEvents = new PPerEvents(new ArrayList<>());
+        Wishes wishes = new Wishes(new ArrayList<>(), pPerEvents);
+        Bot2Controller b2c = new Bot2Controller(wishes, pPerEvents);
 
 
         JFrame window = new JFrame("SchoolBot - o - Mat");
@@ -48,10 +50,10 @@ public class App
 
         //window.add(spPane);
 
-        tabbedPane.addTab("2. Schülerwünsche", null, b2c.getPanel(), ":F");
+        tabbedPane.addTab("2. Schülerwünsche", null, b2c.getPanel(), "");
         window.add(tabbedPane);
 
-        tabbedPane.addTab("3. Teilnehmer pro Veranstaltung", null, new JPanel(), ":D");
+        tabbedPane.addTab("3. Teilnehmer pro Veranstaltung", null, b2c.getPanel2(), "");
         window.add(tabbedPane);
 
         tabbedPane.addTab("4. Zeitslots", null, new JPanel(), ":D");

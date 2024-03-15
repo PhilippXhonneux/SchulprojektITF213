@@ -16,6 +16,7 @@ import java.util.Iterator;
 @SuppressWarnings("ALL")
 public class Wishes extends Subject implements DataCollection<Wish> {
 
+	private final PPerEvents pPerEvents;
 	/**
 	 * List of {@link Wish} wich are taken into account when planning the {@link Timetable}'s
 	 */
@@ -36,8 +37,9 @@ public class Wishes extends Subject implements DataCollection<Wish> {
 	 *
 	 * @param c A {@link Collection} of {@link Observer} that you want like an {@link ArrayList}
 	 */
-	public Wishes(Collection<Observer> c) {
+	public Wishes(Collection<Observer> c, PPerEvents pPerEvents) {
 		super(c);
+		this.pPerEvents = pPerEvents;
 		wishes  = new ArrayList<>();
 	}
 
@@ -138,5 +140,11 @@ public class Wishes extends Subject implements DataCollection<Wish> {
 	@Override
 	public Iterator<Wish> iterator() {
 		return this.wishes.iterator();
+	}
+
+	@Override
+	public void notifyObservers() {
+		super.notifyObservers();
+		pPerEvents.update(this);
 	}
 }

@@ -1,7 +1,7 @@
 package de.bwv_ac.classes;
 
-import de.bwv_ac.data.Wish;
-import de.bwv_ac.data.Wishes;
+import de.bwv_ac.data.*;
+import de.bwv_ac.view.bot_2.PPEvent.PPEvent;
 import de.bwv_ac.view.bot_2.WishList;
 
 import javax.swing.*;
@@ -24,10 +24,23 @@ public class Bot2Controller {
      */
     private final WishList wishList;
 
-    public Bot2Controller(Wishes wishes){
+    /**
+     * Data class
+     */
+    private final PPerEvents pPerEvents;
+
+    /**
+     * GUI object
+     */
+    private final PPEvent ppEvent;
+
+    public Bot2Controller(Wishes wishes, PPerEvents pPerEvents){
         this.wishes = wishes;
+        this.pPerEvents = pPerEvents;
+        ppEvent = new PPEvent();
         wishList = new WishList();
         wishes.addObserver(wishList);
+        pPerEvents.addObserver(ppEvent);
         wishList.setActionListener("import", onImportAction);
 
         wishes.notifyObservers();
@@ -39,6 +52,14 @@ public class Bot2Controller {
      */
     public Component getPanel() {
         return wishList;
+    }
+
+    /**
+     * Get the participants per event panel
+     * @return
+     */
+    public Component getPanel2() {
+        return ppEvent;
     }
 
     /**
