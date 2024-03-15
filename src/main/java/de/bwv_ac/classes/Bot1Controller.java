@@ -75,6 +75,7 @@ public class Bot1Controller {
         eventPanel.setOpenImportAction(onOpenImport);
         eventPanel.setRemoveAction(onRemove);
         eventPanel.setOnExportAction(onOpenExport);
+        companies.notifyObservers();
 
     }
 

@@ -2,7 +2,9 @@ package de.bwv_ac;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import de.bwv_ac.classes.Bot1Controller;
+import de.bwv_ac.classes.Bot2Controller;
 import de.bwv_ac.data.Companies;
+import de.bwv_ac.data.Wishes;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -27,6 +29,9 @@ public class App
         Companies companies = new Companies(new ArrayList<>());
         Bot1Controller b1c = new Bot1Controller(companies);
 
+        Wishes wishes = new Wishes(new ArrayList<>());
+        Bot2Controller b2c = new Bot2Controller(wishes);
+
 
         JFrame window = new JFrame("SchoolBot - o - Mat");
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -35,7 +40,7 @@ public class App
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        tabbedPane.addTab("Unternehmen und Veranstaltungen", null, b1c.getPanel(), "");
+        tabbedPane.addTab("1. Unternehmen und Veranstaltungen", null, b1c.getPanel(), "");
 
         //JSplitPane spPane = new JSplitPane();
 
@@ -43,16 +48,19 @@ public class App
 
         //window.add(spPane);
 
-        tabbedPane.addTab("Schülerwünsche", null, new JPanel(), ":D");
+        tabbedPane.addTab("2. Schülerwünsche", null, b2c.getPanel(), ":F");
         window.add(tabbedPane);
 
-        tabbedPane.addTab("Zeitslots", null, new JPanel(), ":D");
+        tabbedPane.addTab("3. Teilnehmer pro Veranstaltung", null, new JPanel(), ":D");
         window.add(tabbedPane);
 
-        tabbedPane.addTab("Zuordnung", null, new JPanel(), ":D");
+        tabbedPane.addTab("4. Zeitslots", null, new JPanel(), ":D");
         window.add(tabbedPane);
 
-        tabbedPane.addTab("Anwesenheitsliste", null, new JPanel(), ":D");
+        tabbedPane.addTab("5. Zuordnung", null, new JPanel(), ":D");
+        window.add(tabbedPane);
+
+        tabbedPane.addTab("6. Anwesenheitsliste Drucken", null, new JPanel(), ":D");
         window.add(tabbedPane);
 
 

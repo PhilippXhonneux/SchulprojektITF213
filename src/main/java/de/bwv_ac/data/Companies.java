@@ -28,7 +28,7 @@ public class Companies extends Subject implements DataCollection<Company> {
      * Names from the CSV-File will be set
      * when using the {@link #add(Collection, String[])} method.
      */
-    private String[] columns = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Frühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
+    private String[] columns = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Frühster Zeitpunkt"};
 
     /**
      * Create  an object of type {@link Companies}
