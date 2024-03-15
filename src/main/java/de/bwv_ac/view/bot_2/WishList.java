@@ -6,6 +6,7 @@ import de.bwv_ac.util.Observer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class WishList extends JPanel implements Observer {
@@ -21,6 +22,11 @@ public class WishList extends JPanel implements Observer {
 
     public WishList() {
 
+        wishTable.setDefaultEditor(Object.class, null); // Disable editing the table
+        hinzufuegenButton.setFocusable(false);
+        this.setLayout(new BorderLayout());
+        this.add(contentPanel);
+
         tableModel = new DefaultTableModel();
         wishTable.setModel(tableModel);
     }
@@ -29,11 +35,12 @@ public class WishList extends JPanel implements Observer {
     public void update(Object obj) {
         if(obj == null)
             return;
-        Wishes wishes = (Wishes) obj;
-        //String[] cols = new String[]{"ID", "Unternehmen", "Veranstaltung", "Max. Teilnehmer", "Max. Veranstaltung", "Frühster Zeitpunkt", "Teilnehmer", "Veranstaltungen",};
-        String[] cols = wishes.getColumns();
+        if(obj instanceof Wishes){
+            Wishes wishes = (Wishes) obj;
+            String[] cols = wishes.getColumns();
 
-        setTableData(cols, wishes.getArrays());
+            setTableData(cols, wishes.getArrays());
+        }
     }
 
     /**
