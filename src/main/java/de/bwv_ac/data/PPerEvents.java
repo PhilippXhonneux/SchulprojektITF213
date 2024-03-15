@@ -171,6 +171,7 @@ public class PPerEvents extends Subject implements DataCollection<PPerEvent> {
             sorted[c] = pPerEvent;
             c++;
         }
+        Arrays.sort(sorted);
 
         pPerEvents.clear();
         for (PPerEvent pPerEvent : sorted){
