@@ -17,6 +17,7 @@ import java.util.Iterator;
 public class Wishes extends Subject implements DataCollection<Wish> {
 
 	private final PPerEvents pPerEvents;
+	private final Companies companies;
 	/**
 	 * List of {@link Wish} wich are taken into account when planning the {@link Timetable}'s
 	 */
@@ -37,10 +38,11 @@ public class Wishes extends Subject implements DataCollection<Wish> {
 	 *
 	 * @param c A {@link Collection} of {@link Observer} that you want like an {@link ArrayList}
 	 */
-	public Wishes(Collection<Observer> c, PPerEvents pPerEvents) {
+	public Wishes(Collection<Observer> c, PPerEvents pPerEvents, Companies companies) {
 		super(c);
 		this.pPerEvents = pPerEvents;
 		wishes  = new ArrayList<>();
+		this.companies = companies;
 	}
 
 	/**
@@ -145,6 +147,6 @@ public class Wishes extends Subject implements DataCollection<Wish> {
 	@Override
 	public void notifyObservers() {
 		super.notifyObservers();
-		pPerEvents.update(this);
+		pPerEvents.update(this, companies);
 	}
 }

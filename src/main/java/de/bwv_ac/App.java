@@ -31,7 +31,7 @@ public class App
         Bot1Controller b1c = new Bot1Controller(companies);
 
         PPerEvents pPerEvents = new PPerEvents(new ArrayList<>());
-        Wishes wishes = new Wishes(new ArrayList<>(), pPerEvents);
+        Wishes wishes = new Wishes(new ArrayList<>(), pPerEvents, companies);
         Bot2Controller b2c = new Bot2Controller(wishes, pPerEvents);
 
 

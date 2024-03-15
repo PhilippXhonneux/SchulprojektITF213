@@ -178,4 +178,12 @@ public class Companies extends Subject implements DataCollection<Company> {
     public Spliterator<Company> spliterator() {
         return DataCollection.super.spliterator();
     }
+
+    public Company getByID(int id) {
+        for (Company company : companies){
+            if(company.getID() == id)
+                return company;
+        }
+        return null;
+    }
 }

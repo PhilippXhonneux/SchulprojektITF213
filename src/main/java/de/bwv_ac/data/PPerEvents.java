@@ -2,11 +2,8 @@ package de.bwv_ac.data;
 
 import de.bwv_ac.util.Observer;
 import de.bwv_ac.util.Subject;
-import de.bwv_ac.view.bot_2.PPEvent.PPEvent;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 
 public class PPerEvents extends Subject implements DataCollection<PPerEvent> {
 
@@ -131,20 +128,64 @@ public class PPerEvents extends Subject implements DataCollection<PPerEvent> {
         return pPerEvents.iterator();
     }
 
-    public void update(Wishes wishes) {
+    public void update(Wishes wishes, Companies companies) {
 
         if(wishes == null)
             return;
 
-        //TODO: algorithm
+        // TODO Create commentary
+        for (Wish wish : wishes){
+            ArrayList<Integer> wishesA = new ArrayList<>();
+            int wish1 = wish.getSelection(Wish.Selection.Wish1);
+            int wish2 = wish.getSelection(Wish.Selection.Wish2);
+            int wish3 = wish.getSelection(Wish.Selection.Wish3);
+            int wish4 = wish.getSelection(Wish.Selection.Wish4);
+            int wish5 = wish.getSelection(Wish.Selection.Wish5);
+            int extraWish = wish.getSelection(Wish.Selection.extraWish);
 
-        PPerEvent test = new PPerEvent();
-        test.setID(0);
-        test.setEvent("Test");
-        test.setCount(25);
-        add(test);
-        //System.out.println("Algorithm" + wishes.get(0).toString()); // work only if wishes is not null
+            wishesA.add(wish1);
+            wishesA.add(wish2);
+            wishesA.add(wish3);
+            wishesA.add(wish4);
+            wishesA.add(wish5);
+            wishesA.add(extraWish);
+            for (int wishI : wishesA){
+                if(wishI == 0)
+                    continue;
+                if(getById(wishI) != null){
+                    getById(wishI).setCount(getById(wishI).getCount()+1);
+                }else {
+                    PPerEvent pPerEvent = new PPerEvent();
+                    pPerEvent.setID(wishI);
+                    pPerEvent.setEvent(companies.getByID(wishI).getName());
+                    pPerEvent.setCount(1);
+                    pPerEvents.add(pPerEvent);
+                }
+            }
+        }
+
+
+        PPerEvent[] sorted = new PPerEvent[pPerEvents.size()];
+        int c = 0;
+        for (PPerEvent pPerEvent : pPerEvents){
+            sorted[c] = pPerEvent;
+            c++;
+        }
+
+        pPerEvents.clear();
+        for (PPerEvent pPerEvent : sorted){
+            pPerEvents.add(pPerEvent);
+        }
 
         notifyObservers();
     }
+
+    public PPerEvent getById(int id) {
+        for (PPerEvent pPerEvent : pPerEvents){
+            if(pPerEvent.getID() == id)
+                return pPerEvent;
+        }
+        return null;
+    }
+
 }
