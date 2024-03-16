@@ -8,6 +8,7 @@ import de.bwv_ac.data.PPerEvents;
 import de.bwv_ac.data.Wishes;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -56,18 +57,24 @@ public class App
         tabbedPane.addTab("3. Teilnehmer pro Veranstaltung", null, b2c.getPanel2(), "");
         window.add(tabbedPane);
 
-        tabbedPane.addTab("4. Zeitslots", null, new JPanel(), ":D");
+        tabbedPane.addTab("4. Räume & Kapazitäten", null, new JPanel(), ":D");
         window.add(tabbedPane);
 
-        tabbedPane.addTab("5. Zuordnung", null, new JPanel(), ":D");
+        tabbedPane.addTab("5. Zeitslots", null, new JPanel(), ":D");
         window.add(tabbedPane);
 
-        tabbedPane.addTab("6. Anwesenheitsliste Drucken", null, new JPanel(), ":D");
+        tabbedPane.addTab("6. Zuordnung", null, new JPanel(), ":D");
+        window.add(tabbedPane);
+
+        tabbedPane.addTab("7. Anwesenheitsliste Drucken", null, new JPanel(), ":D");
         window.add(tabbedPane);
 
 
         //window.add(b1c.getPanel(), BorderLayout.EAST);
         window.pack();
+        window.setMinimumSize(new Dimension(500, 300));
+        window.setSize(new Dimension(1200, 480));
+        window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
 }
