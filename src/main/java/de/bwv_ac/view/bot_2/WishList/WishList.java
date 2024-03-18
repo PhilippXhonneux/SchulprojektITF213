@@ -1,4 +1,4 @@
-package de.bwv_ac.view.bot_2;
+package de.bwv_ac.view.bot_2.WishList;
 
 import de.bwv_ac.data.Companies;
 import de.bwv_ac.data.Wishes;
@@ -53,23 +53,32 @@ public class WishList extends JPanel implements Observer {
         this.tableModel.setDataVector(rows, columns);
     }
 
-    public void setActionListener(String btn, ActionListener l){
+    public int getSelectedItem() {
+        return  wishTable.getSelectedRow();
+    }
+
+    public enum Buttons {
+        IMPORT, EXPORT, ADD, EDIT, DELETE
+    }
+    public void setActionListener(Buttons btn, ActionListener l){
         switch (btn){
-            case "import":
+            case IMPORT:
                 importButton.addActionListener(l);
                 break;
-            case "export":
+            case EXPORT:
                 exportButton.addActionListener(l);
                 break;
-            case "add":
+            case ADD:
                 hinzufuegenButton.addActionListener(l);
                 break;
-            case "edit":
+            case EDIT:
                 bearbeitenButton.addActionListener(l);
                 break;
-            case "delete":
+            case DELETE:
                 entfernenButton.addActionListener(l);
                 break;
         }
     }
+
+
 }

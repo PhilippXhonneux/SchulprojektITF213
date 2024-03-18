@@ -44,7 +44,7 @@ public abstract class Datastructure {
 	 * @param csvString that contains the values
 	 * @param delimeter for the CSV-Format
 	 */
-	public void FromCSVStringToObject(String csvString, String delimeter) {
+	public void FromCSVStringToObject(String csvString, String delimeter) throws Exception {
 		String[] values = csvString.split(delimeter);
 		Class<?> clazz = getClass();
 
@@ -56,16 +56,21 @@ public abstract class Datastructure {
 				Field field = fields[i];
 				field.setAccessible(true); // Zugriff auf private Felder erlauben
 				String value = values[i].trim();
-				if (field.getType() == int.class) {
-					field.setInt(this, Integer.parseInt(value));
-				} else if (field.getType() == double.class) {
-					field.setDouble(this, Double.parseDouble(value));
-				} else if (field.getType() == String.class) {
-					field.set(this, value);
+				try {
+					if (field.getType() == int.class) {
+						field.setInt(this, Integer.parseInt(value));
+					} else if (field.getType() == double.class) {
+						field.setDouble(this, Double.parseDouble(value));
+					} else if (field.getType() == String.class) {
+						field.set(this, value);
+					}
+				}catch (NumberFormatException e){
+					throw new IllegalArgumentException();
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			throw new Exception();
 		}
 	}
 

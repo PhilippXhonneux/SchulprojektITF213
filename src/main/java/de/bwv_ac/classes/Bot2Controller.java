@@ -2,7 +2,8 @@ package de.bwv_ac.classes;
 
 import de.bwv_ac.data.*;
 import de.bwv_ac.view.bot_2.PPEvent.PPEvent;
-import de.bwv_ac.view.bot_2.WishList;
+import de.bwv_ac.view.bot_2.WishList.WishListDialog;
+import de.bwv_ac.view.bot_2.WishList.WishList;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -30,18 +31,50 @@ public class Bot2Controller {
     private final PPerEvents pPerEvents;
 
     /**
-     * GUI object
+     * Data class
      */
     private final PPEvent ppEvent;
+    /**
+     * GUI object
+     */
+    private final Companies companies;
+    private final WishListDialog wishListAddDialog;
+    private final WishListDialog wishListChangeDialog;
 
-    public Bot2Controller(Wishes wishes, PPerEvents pPerEvents){
-        this.wishes = wishes;
-        this.pPerEvents = pPerEvents;
-        ppEvent = new PPEvent();
+    public Bot2Controller(Wishes wishes, PPerEvents pPerEvents, Companies companies){
+
+        // Init data model
         wishList = new WishList();
-        wishes.addObserver(wishList);
+        this.pPerEvents = pPerEvents;
+        this.companies = companies;
+
+        // Init add dialog panel
+        wishListAddDialog = new WishListDialog();
+        wishListAddDialog.setTitle("Wünsche hinzufügen");
+        wishListAddDialog.setOkButtonText("Hinzufügen");
+        wishListAddDialog.setActionListener(WishListDialog.Buttons.CANCEL_BUTTON, onCancelAddDialog);
+
+        // Init change dialog panel
+        wishListChangeDialog = new WishListDialog();
+        wishListChangeDialog.setTitle("Wünsche bearbeiten");
+        wishListChangeDialog.setOkButtonText("Ändern");
+        wishListChangeDialog.setActionListener(WishListDialog.Buttons.CANCEL_BUTTON, onCancelChangeDialog);
+
+
+        // Init Second main panel
+        ppEvent = new PPEvent();
         pPerEvents.addObserver(ppEvent);
-        wishList.setActionListener("import", onImportAction);
+
+        // Init the main JPanel for this controller
+        this.wishes = wishes;
+        wishes.addObserver(wishList);
+
+        wishList.setActionListener(WishList.Buttons.IMPORT, onImportAction);
+        wishList.setActionListener(WishList.Buttons.ADD, onOpenAddDialog);
+        wishList.setActionListener(WishList.Buttons.EDIT, onOpenChangeDialog);
+        //wishList.setActionListener(WishList.Buttons.DELETE, );
+        //wishList.setActionListener(WishList.Buttons.EXPORT, );
+
 
         wishes.notifyObservers();
     }
@@ -69,7 +102,7 @@ public class Bot2Controller {
      * read the first line and the body separately<br>
      * and import them to the wishes data model
      */
-    ActionListener onImportAction = new ActionListener() {
+    private final ActionListener onImportAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             JFileChooser chooser = new JFileChooser();
@@ -108,16 +141,71 @@ public class Bot2Controller {
                 String[] columns = CSVReader.getFirstLine(f.getAbsolutePath());
                 wishes.add(wish, columns);
             } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-                // TODO: Error handling
+                //throw new RuntimeException(ex);
+            }catch (Exception ex) {
+                JOptionPane.showMessageDialog(wishList, "Fehlerhaftes dateiformat!", "Error", JOptionPane.ERROR_MESSAGE);
+                //throw new RuntimeException(ex);
             }
         }
     };
 
-    ActionListener onExportListener = new ActionListener() {
+    private final ActionListener onExportListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
 
         }
     };
+
+    /**
+     * Handle User Action<br>
+     * By closing the window they ask for conformation.<br>
+     */
+    private final ActionListener onCancelAddDialog = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int rval = JOptionPane.showConfirmDialog(wishListAddDialog, "Vorgang Abbrechen. Sind Sie sicher?");
+            if(rval == JOptionPane.OK_OPTION){
+                wishListAddDialog.dispose();
+            }
+        }
+    };
+
+
+    private final ActionListener onOpenAddDialog =  new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            wishListAddDialog.pack();
+            wishListAddDialog.setVisible(true);
+        }
+    };
+    private final ActionListener onCancelChangeDialog = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int rval = JOptionPane.showConfirmDialog(wishListChangeDialog, "Vorgang Abbrechen. Sind Sie sicher?");
+            if(rval == JOptionPane.OK_OPTION){
+                wishListChangeDialog.dispose();
+            }
+        }
+    };
+
+    private final ActionListener onOpenChangeDialog =  new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int row = wishList.getSelectedItem();
+            if(row == -1){
+                JOptionPane.showMessageDialog(wishList, "Bitte wähle eine Zeile zum bearbeiten aus");
+                return;
+            }
+            // Get company from data model and set the selected row to the dialog
+            Wish c = wishes.get(row);
+
+            // create getter and fill coboboxes with eventlist
+
+
+
+            wishListChangeDialog.pack();
+            wishListChangeDialog.setVisible(true);
+        }
+    };
+
 }

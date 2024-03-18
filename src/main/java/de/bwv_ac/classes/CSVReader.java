@@ -21,7 +21,7 @@ public class CSVReader {
     public static void setDelimiter(String Delimiter){
         delimiter = Delimiter;
     }
-    public static <T extends Datastructure> ArrayList<T> read(String filePath, boolean skipFirstLine, Class<T> clazz) {
+    public static <T extends Datastructure> ArrayList<T> read(String filePath, boolean skipFirstLine, Class<T> clazz) throws Exception {
         ArrayList<T> content = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -33,8 +33,12 @@ public class CSVReader {
                     continue;
                 }
                 T temp = clazz.newInstance();
+                try{
+                    temp.FromCSVStringToObject(line, delimiter);
 
-                temp.FromCSVStringToObject(line, delimiter);
+                }catch (NumberFormatException e){
+                    throw new Exception();
+                }
                 content.add(temp);
             }
         } catch (IOException e) { //TODO Error Handling

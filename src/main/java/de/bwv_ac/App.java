@@ -33,7 +33,7 @@ public class App
 
         PPerEvents pPerEvents = new PPerEvents(new ArrayList<>());
         Wishes wishes = new Wishes(new ArrayList<>(), pPerEvents, companies);
-        Bot2Controller b2c = new Bot2Controller(wishes, pPerEvents);
+        Bot2Controller b2c = new Bot2Controller(wishes, pPerEvents, companies);
 
 
         JFrame window = new JFrame("SchoolBot - o - Mat");

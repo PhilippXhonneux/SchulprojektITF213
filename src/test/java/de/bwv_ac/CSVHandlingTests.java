@@ -47,7 +47,7 @@ public class CSVHandlingTests {
     }
 
     @Test
-    public void testRead() {
+    public void testRead() throws Exception {
         ArrayList<Wish> wishes = CSVReader.read(tempFilePath, false, Wish.class);
         assertEquals(1, wishes.size());
         assertEquals("25", wishes.get(0));

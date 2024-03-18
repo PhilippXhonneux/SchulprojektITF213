@@ -127,7 +127,13 @@ public class Bot1Controller {
             csv += maxParticipants + delimiter + maxEvents + delimiter + startAt;
 
             Company c = new Company();
-            c.FromCSVStringToObject(csv, delimiter);
+            try{
+                c.FromCSVStringToObject(csv, delimiter);
+
+            }catch (Exception ex){
+                //TODO handling
+                ex.printStackTrace();
+            }
             companies.add(c);
             JOptionPane.showMessageDialog(addDialog, "Erfolgreich gespeichert");
             addDialog.dispose();
@@ -161,7 +167,13 @@ public class Bot1Controller {
             csv += maxParticipants + delimiter + maxEvents + delimiter + startAt;
 
             Company c = new Company();
-            c.FromCSVStringToObject(csv, delimiter);
+            try {
+                c.FromCSVStringToObject(csv, delimiter);
+
+            }catch (Exception ex){
+                //TODO handling
+                ex.printStackTrace();
+            }
 
             companies.change(changeDialog.getIndex(), c);
 
@@ -259,6 +271,8 @@ public class Bot1Controller {
             } catch (FileNotFoundException ex) {
                 throw new RuntimeException(ex);
                 // TODO: Error handling
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
             }
 
         }
