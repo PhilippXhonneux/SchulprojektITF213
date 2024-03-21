@@ -269,9 +269,10 @@ public class Bot1Controller {
                 String[] columns = CSVReader.getFirstLine(f.getAbsolutePath());
                 companies.add(companiesA, columns);
             } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-                // TODO: Error handling
+                JOptionPane.showMessageDialog(eventPanel, "Datei nicht gefunden!", "Error", JOptionPane.ERROR_MESSAGE);
+                //throw new RuntimeException(ex);
             } catch (Exception ex) {
+                JOptionPane.showMessageDialog(eventPanel, "Fehlerhaftes dateiformat!", "Error", JOptionPane.ERROR_MESSAGE);
                 throw new RuntimeException(ex);
             }
 

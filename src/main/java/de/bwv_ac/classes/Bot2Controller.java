@@ -61,6 +61,16 @@ public class Bot2Controller {
         wishListChangeDialog.setActionListener(WishListDialog.Buttons.CANCEL_BUTTON, onCancelChangeDialog);
 
 
+        // Fille comboboxes of dialogs initial
+        String[] data = new String[companies.size()];
+        for (int i = 0; i < companies.size()-1;i++){
+            Company c = companies.get(i);
+            String line = c.getID() + " " + c.getName();
+            data[i] = line;
+        }
+        wishListAddDialog.fillComboBoxes(data);
+        wishListChangeDialog.fillComboBoxes(data);
+
         // Init Second main panel
         ppEvent = new PPEvent();
         pPerEvents.addObserver(ppEvent);
@@ -141,10 +151,9 @@ public class Bot2Controller {
                 String[] columns = CSVReader.getFirstLine(f.getAbsolutePath());
                 wishes.add(wish, columns);
             } catch (FileNotFoundException ex) {
-                //throw new RuntimeException(ex);
+                JOptionPane.showMessageDialog(wishList, "Datei nicht gefunden!", "Error", JOptionPane.ERROR_MESSAGE);
             }catch (Exception ex) {
                 JOptionPane.showMessageDialog(wishList, "Fehlerhaftes dateiformat!", "Error", JOptionPane.ERROR_MESSAGE);
-                //throw new RuntimeException(ex);
             }
         }
     };
@@ -174,6 +183,17 @@ public class Bot2Controller {
     private final ActionListener onOpenAddDialog =  new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            // Fille comboboxes of dialogs initial
+            int s = companies.size();
+            String[] data = new String[s+1];
+            data[0] = "";
+            for (int i = 1; i < s+1;i++){
+                Company c = companies.get(i-1);
+                String line = c.getID() + " " + c.getName();
+                data[i] = line;
+            }
+            wishListAddDialog.fillComboBoxes(data);
+
             wishListAddDialog.pack();
             wishListAddDialog.setVisible(true);
         }
@@ -197,15 +217,32 @@ public class Bot2Controller {
                 return;
             }
             // Get company from data model and set the selected row to the dialog
-            Wish c = wishes.get(row);
+            Wish w = wishes.get(row);
 
             // create getter and fill coboboxes with eventlist
 
+            // Fill comboboxes of the dialog with current data from the data class
+            String[] data = new String[companies.size()];
+            for (int i = 0; i < companies.size()-1;i++){
+                Company c = companies.get(i);
+                String line = c.getID() + " " + c.getName();
+                data[i] = line;
+            }
+            wishListChangeDialog.fillComboBoxes(data);
 
+            // change the selection from the comboboxes of the dialog with the data of the chosen row
+            for(int i = 0; i< 6; i++){
+                // -1 Because they start with 1 and this with 0
+                int wishI = w.getSelection(i)-1;
+                wishListChangeDialog.setComboBoxWahl(wishI, i);
+            }
 
+            // Show the dialog
             wishListChangeDialog.pack();
             wishListChangeDialog.setVisible(true);
         }
     };
+
+
 
 }

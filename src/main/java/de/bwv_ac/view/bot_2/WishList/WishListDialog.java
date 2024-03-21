@@ -47,6 +47,18 @@ public class WishListDialog extends JDialog {
         buttonOK.setText(text);
     }
 
+    public void setComboBoxWahl(int indexOfWish, int combobox) {
+        switch (combobox) {
+            case 0 -> this.comboBoxWahl1.setSelectedIndex(indexOfWish);
+            case 1 -> this.comboBoxWahl2.setSelectedIndex(indexOfWish);
+            case 2 -> this.comboBoxWahl3.setSelectedIndex(indexOfWish);
+            case 3 -> this.comboBoxWahl4.setSelectedIndex(indexOfWish);
+            case 4 -> this.comboBoxWahl5.setSelectedIndex(indexOfWish);
+            case 5 -> this.comboBoxWahl6.setSelectedIndex(indexOfWish);
+            default -> throw new IllegalArgumentException("The index given must be between 0 and 5.");
+        };
+    }
+
     /**
      * Available buttons in this gui
      */
@@ -134,13 +146,26 @@ public class WishListDialog extends JDialog {
      * @param data data to fill
      */
     public void fillComboBoxes(String[] data){
+        DefaultComboBoxModel<String> hehe = ((DefaultComboBoxModel<String>)comboBoxWahl1.getModel());
+        ((DefaultComboBoxModel<String>)comboBoxWahl1.getModel()).removeAllElements();
+        ((DefaultComboBoxModel<String>)comboBoxWahl2.getModel()).removeAllElements();
+        ((DefaultComboBoxModel<String>)comboBoxWahl3.getModel()).removeAllElements();
+        ((DefaultComboBoxModel<String>)comboBoxWahl4.getModel()).removeAllElements();
+        ((DefaultComboBoxModel<String>)comboBoxWahl5.getModel()).removeAllElements();
+        ((DefaultComboBoxModel<String>)comboBoxWahl6.getModel()).removeAllElements();
         for (String line : data){
-            comboBoxWahl1.getModel().setSelectedItem(line);
-            comboBoxWahl2.getModel().setSelectedItem(line);
+            ((DefaultComboBoxModel<String>)comboBoxWahl1.getModel()).addElement(line);
+            ((DefaultComboBoxModel<String>)comboBoxWahl2.getModel()).addElement(line);
+            ((DefaultComboBoxModel<String>)comboBoxWahl3.getModel()).addElement(line);
+            ((DefaultComboBoxModel<String>)comboBoxWahl4.getModel()).addElement(line);
+            ((DefaultComboBoxModel<String>)comboBoxWahl5.getModel()).addElement(line);
+            ((DefaultComboBoxModel<String>)comboBoxWahl6.getModel()).addElement(line);
+            //comboBoxWahl1.getModel().setSelectedItem(line);
+            /*comboBoxWahl2.getModel().setSelectedItem(line);
             comboBoxWahl3.getModel().setSelectedItem(line);
             comboBoxWahl4.getModel().setSelectedItem(line);
             comboBoxWahl5.getModel().setSelectedItem(line);
-            comboBoxWahl6.getModel().setSelectedItem(line);
+            comboBoxWahl6.getModel().setSelectedItem(line);*/
         }
     }
 

@@ -186,4 +186,8 @@ public class Companies extends Subject implements DataCollection<Company> {
         }
         return null;
     }
+
+    public int size() {
+        return companies.size();
+    }
 }
