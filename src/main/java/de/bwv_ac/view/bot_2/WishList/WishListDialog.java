@@ -17,12 +17,12 @@ public class WishListDialog extends JDialog {
     private JTextField textFieldClass;
     private JTextField textFieldName;
     private JTextField textFieldSurname;
-    private JComboBox comboBoxWahl1;
-    private JComboBox comboBoxWahl2;
-    private JComboBox comboBoxWahl3;
-    private JComboBox comboBoxWahl4;
-    private JComboBox comboBoxWahl5;
-    private JComboBox comboBoxWahl6;
+    private JComboBox comboBoxWish1;
+    private JComboBox comboBoxWish2;
+    private JComboBox comboBoxWish3;
+    private JComboBox comboBoxWish4;
+    private JComboBox comboBoxWish5;
+    private JComboBox comboBoxWish6;
 
     /**
      * Create an object of PPEventDialog
@@ -47,14 +47,14 @@ public class WishListDialog extends JDialog {
         buttonOK.setText(text);
     }
 
-    public void setComboBoxWahl(int indexOfWish, int combobox) {
+    public void setComboBoxWish(int indexOfWish, int combobox) {
         switch (combobox) {
-            case 0 -> this.comboBoxWahl1.setSelectedIndex(indexOfWish);
-            case 1 -> this.comboBoxWahl2.setSelectedIndex(indexOfWish);
-            case 2 -> this.comboBoxWahl3.setSelectedIndex(indexOfWish);
-            case 3 -> this.comboBoxWahl4.setSelectedIndex(indexOfWish);
-            case 4 -> this.comboBoxWahl5.setSelectedIndex(indexOfWish);
-            case 5 -> this.comboBoxWahl6.setSelectedIndex(indexOfWish);
+            case 0 -> this.comboBoxWish1.setSelectedIndex(indexOfWish);
+            case 1 -> this.comboBoxWish2.setSelectedIndex(indexOfWish);
+            case 2 -> this.comboBoxWish3.setSelectedIndex(indexOfWish);
+            case 3 -> this.comboBoxWish4.setSelectedIndex(indexOfWish);
+            case 4 -> this.comboBoxWish5.setSelectedIndex(indexOfWish);
+            case 5 -> this.comboBoxWish6.setSelectedIndex(indexOfWish);
             default -> throw new IllegalArgumentException("The index given must be between 0 and 5.");
         };
     }
@@ -146,20 +146,20 @@ public class WishListDialog extends JDialog {
      * @param data data to fill
      */
     public void fillComboBoxes(String[] data){
-        DefaultComboBoxModel<String> hehe = ((DefaultComboBoxModel<String>)comboBoxWahl1.getModel());
-        ((DefaultComboBoxModel<String>)comboBoxWahl1.getModel()).removeAllElements();
-        ((DefaultComboBoxModel<String>)comboBoxWahl2.getModel()).removeAllElements();
-        ((DefaultComboBoxModel<String>)comboBoxWahl3.getModel()).removeAllElements();
-        ((DefaultComboBoxModel<String>)comboBoxWahl4.getModel()).removeAllElements();
-        ((DefaultComboBoxModel<String>)comboBoxWahl5.getModel()).removeAllElements();
-        ((DefaultComboBoxModel<String>)comboBoxWahl6.getModel()).removeAllElements();
+        DefaultComboBoxModel<String> hehe = ((DefaultComboBoxModel<String>) comboBoxWish1.getModel());
+        ((DefaultComboBoxModel<String>) comboBoxWish1.getModel()).removeAllElements();
+        ((DefaultComboBoxModel<String>) comboBoxWish2.getModel()).removeAllElements();
+        ((DefaultComboBoxModel<String>) comboBoxWish3.getModel()).removeAllElements();
+        ((DefaultComboBoxModel<String>) comboBoxWish4.getModel()).removeAllElements();
+        ((DefaultComboBoxModel<String>) comboBoxWish5.getModel()).removeAllElements();
+        ((DefaultComboBoxModel<String>) comboBoxWish6.getModel()).removeAllElements();
         for (String line : data){
-            ((DefaultComboBoxModel<String>)comboBoxWahl1.getModel()).addElement(line);
-            ((DefaultComboBoxModel<String>)comboBoxWahl2.getModel()).addElement(line);
-            ((DefaultComboBoxModel<String>)comboBoxWahl3.getModel()).addElement(line);
-            ((DefaultComboBoxModel<String>)comboBoxWahl4.getModel()).addElement(line);
-            ((DefaultComboBoxModel<String>)comboBoxWahl5.getModel()).addElement(line);
-            ((DefaultComboBoxModel<String>)comboBoxWahl6.getModel()).addElement(line);
+            ((DefaultComboBoxModel<String>) comboBoxWish1.getModel()).addElement(line);
+            ((DefaultComboBoxModel<String>) comboBoxWish2.getModel()).addElement(line);
+            ((DefaultComboBoxModel<String>) comboBoxWish3.getModel()).addElement(line);
+            ((DefaultComboBoxModel<String>) comboBoxWish4.getModel()).addElement(line);
+            ((DefaultComboBoxModel<String>) comboBoxWish5.getModel()).addElement(line);
+            ((DefaultComboBoxModel<String>) comboBoxWish6.getModel()).addElement(line);
             //comboBoxWahl1.getModel().setSelectedItem(line);
             /*comboBoxWahl2.getModel().setSelectedItem(line);
             comboBoxWahl3.getModel().setSelectedItem(line);
@@ -169,51 +169,55 @@ public class WishListDialog extends JDialog {
         }
     }
 
-    public Object[] getComboBoxWahl1() {
-        return new Object[]{comboBoxWahl1.getSelectedIndex(), comboBoxWahl1.getSelectedItem()};
+    /**
+     * Get the index and the String of the 1st wish
+     * @return [index:int, wish:String]
+     */
+    public Object[] getComboBoxWish1() {
+        return new Object[]{comboBoxWish1.getSelectedIndex(), comboBoxWish1.getSelectedItem()};
     }
 
-    public void setComboBoxWahl1(int index) {
-        this.comboBoxWahl1.setSelectedIndex(index);
+    public void setComboBoxWish1(int index) {
+        this.comboBoxWish1.setSelectedIndex(index);
     }
 
-    public Object[] getComboBoxWahl2() {
-        return new Object[]{comboBoxWahl2.getSelectedIndex(), comboBoxWahl2.getSelectedItem()};
+    public Object[] getComboBoxWish2() {
+        return new Object[]{comboBoxWish2.getSelectedIndex(), comboBoxWish2.getSelectedItem()};
     }
 
-    public void setComboBoxWahl2(int index) {
-        this.comboBoxWahl2.setSelectedIndex(index);
+    public void setComboBoxWish2(int index) {
+        this.comboBoxWish2.setSelectedIndex(index);
     }
 
-    public Object[] getComboBoxWahl3() {
-        return new Object[]{comboBoxWahl3.getSelectedIndex(), comboBoxWahl3.getSelectedItem()};
+    public Object[] getComboBoxWish3() {
+        return new Object[]{comboBoxWish3.getSelectedIndex(), comboBoxWish3.getSelectedItem()};
     }
 
-    public void setComboBoxWahl3(int index) {
-        this.comboBoxWahl3.setSelectedIndex(index);
+    public void setComboBoxWish3(int index) {
+        this.comboBoxWish3.setSelectedIndex(index);
     }
 
-    public Object[] getComboBoxWahl4() {
-        return new Object[]{comboBoxWahl4.getSelectedIndex(), comboBoxWahl4.getSelectedItem()};
+    public Object[] getComboBoxWish4() {
+        return new Object[]{comboBoxWish4.getSelectedIndex(), comboBoxWish4.getSelectedItem()};
     }
 
-    public void setComboBoxWahl4(int index) {
-        this.comboBoxWahl4.setSelectedIndex(index);
+    public void setComboBoxWish4(int index) {
+        this.comboBoxWish4.setSelectedIndex(index);
     }
 
-    public Object[] getComboBoxWahl5() {
-        return new Object[]{comboBoxWahl5.getSelectedIndex(), comboBoxWahl5.getSelectedItem()};
+    public Object[] getComboBoxWish5() {
+        return new Object[]{comboBoxWish5.getSelectedIndex(), comboBoxWish5.getSelectedItem()};
     }
 
-    public void setComboBoxWahl5(int index) {
-        this.comboBoxWahl5.setSelectedIndex(index);
+    public void setComboBoxWish5(int index) {
+        this.comboBoxWish5.setSelectedIndex(index);
     }
 
-    public Object[] getComboBoxWahl6() {
-        return new Object[]{comboBoxWahl6.getSelectedIndex(), comboBoxWahl6.getSelectedItem()};
+    public Object[] getComboBoxWish6() {
+        return new Object[]{comboBoxWish6.getSelectedIndex(), comboBoxWish6.getSelectedItem()};
     }
 
-    public void setComboBoxWahl6(int index) {
-        this.comboBoxWahl6.setSelectedIndex(index);
+    public void setComboBoxWish6(int index) {
+        this.comboBoxWish6.setSelectedIndex(index);
     }
 }

@@ -80,8 +80,9 @@ public class Bot2Controller {
         wishes.addObserver(wishList);
 
         wishList.setActionListener(WishList.Buttons.IMPORT, onImportAction);
-        wishList.setActionListener(WishList.Buttons.ADD, onOpenAddDialog);
-        wishList.setActionListener(WishList.Buttons.EDIT, onOpenChangeDialog);
+        wishList.setActionListener(WishList.Buttons.ON_ADD_OPEN, onOpenAddDialog);
+        wishList.setActionListener(WishList.Buttons.ON_EDIT_OPEN, onOpenChangeDialog);
+        wishListChangeDialog.setActionListener(WishListDialog.Buttons.OK_BUTTON, onChangeAction);
         //wishList.setActionListener(WishList.Buttons.DELETE, );
         //wishList.setActionListener(WishList.Buttons.EXPORT, );
 
@@ -216,7 +217,7 @@ public class Bot2Controller {
                 JOptionPane.showMessageDialog(wishList, "Bitte wähle eine Zeile zum bearbeiten aus");
                 return;
             }
-            // Get company from data model and set the selected row to the dialog
+            // Get wish from data model and set the selected row to the dialog
             Wish w = wishes.get(row);
 
             // create getter and fill coboboxes with eventlist
@@ -234,12 +235,47 @@ public class Bot2Controller {
             for(int i = 0; i< 6; i++){
                 // -1 Because they start with 1 and this with 0
                 int wishI = w.getSelection(i)-1;
-                wishListChangeDialog.setComboBoxWahl(wishI, i);
+                wishListChangeDialog.setComboBoxWish(wishI, i);
             }
 
             // Show the dialog
             wishListChangeDialog.pack();
             wishListChangeDialog.setVisible(true);
+        }
+    };
+
+    ActionListener onChangeAction = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Object[][] choosenWishes = new Object[6][];
+            choosenWishes[0] = wishListChangeDialog.getComboBoxWish1();
+            choosenWishes[1] = wishListChangeDialog.getComboBoxWish2();
+            choosenWishes[2] = wishListChangeDialog.getComboBoxWish3();
+            choosenWishes[3] = wishListChangeDialog.getComboBoxWish4();
+            choosenWishes[4] = wishListChangeDialog.getComboBoxWish5();
+            choosenWishes[5] = wishListChangeDialog.getComboBoxWish6();
+
+            int row = wishList.getSelectedItem();
+            if(row == -1){
+                JOptionPane.showMessageDialog(wishList, "Bitte wähle eine Zeile zum bearbeiten aus");
+                return;
+            }
+
+            // Get wish from data model and set the selected row to the dialog
+            Wish chosenWishO = wishes.get(row);
+
+            for(int i = 0; i< choosenWishes.length; i++){
+                int index = (int) choosenWishes[i][0]+1;
+                chosenWishO.setSelection(i,index);
+
+            }
+
+            wishes.change(row, chosenWishO);
+
+            JOptionPane.showMessageDialog(wishListChangeDialog, "Erfolgreich gespeichert");
+            wishListChangeDialog.dispose();
+
+            wishList.setSelectedItem(row);
         }
     };
 

@@ -128,10 +128,12 @@ public class PPerEvents extends Subject implements DataCollection<PPerEvent> {
         return pPerEvents.iterator();
     }
 
-    public void update(Wishes wishes, Companies companies) {
+    synchronized public void update(Wishes wishes, Companies companies) {
 
         if(wishes == null)
             return;
+
+        pPerEvents.clear();
 
         // TODO Create commentary
         for (Wish wish : wishes){

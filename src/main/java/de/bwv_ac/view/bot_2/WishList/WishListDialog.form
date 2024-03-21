@@ -133,7 +133,7 @@
                   <text value="Wahl1"/>
                 </properties>
               </component>
-              <component id="ff173" class="javax.swing.JComboBox" binding="comboBoxWahl1">
+              <component id="ff173" class="javax.swing.JComboBox" binding="comboBoxWish1">
                 <constraints/>
                 <properties/>
               </component>
@@ -152,7 +152,7 @@
                   <text value="Wahl2"/>
                 </properties>
               </component>
-              <component id="b694c" class="javax.swing.JComboBox" binding="comboBoxWahl2">
+              <component id="b694c" class="javax.swing.JComboBox" binding="comboBoxWish2">
                 <constraints/>
                 <properties/>
               </component>
@@ -171,7 +171,7 @@
                   <text value="Wahl3"/>
                 </properties>
               </component>
-              <component id="8714e" class="javax.swing.JComboBox" binding="comboBoxWahl3">
+              <component id="8714e" class="javax.swing.JComboBox" binding="comboBoxWish3">
                 <constraints/>
                 <properties/>
               </component>
@@ -190,7 +190,7 @@
                   <text value="Wahl4"/>
                 </properties>
               </component>
-              <component id="f83e9" class="javax.swing.JComboBox" binding="comboBoxWahl4">
+              <component id="f83e9" class="javax.swing.JComboBox" binding="comboBoxWish4">
                 <constraints/>
                 <properties/>
               </component>
@@ -209,7 +209,7 @@
                   <text value="Wahl5"/>
                 </properties>
               </component>
-              <component id="4a2ce" class="javax.swing.JComboBox" binding="comboBoxWahl5">
+              <component id="4a2ce" class="javax.swing.JComboBox" binding="comboBoxWish5">
                 <constraints/>
                 <properties/>
               </component>
@@ -228,7 +228,7 @@
                   <text value="Wahl6"/>
                 </properties>
               </component>
-              <component id="812b0" class="javax.swing.JComboBox" binding="comboBoxWahl6">
+              <component id="812b0" class="javax.swing.JComboBox" binding="comboBoxWish6">
                 <constraints/>
                 <properties/>
               </component>
