@@ -7,7 +7,7 @@ import java.util.Collection;
  * @param <T> extends {@link Datastructure}
  *
  * @author Philipp Xhonneux
- * @version 1.0.0
+ * @version 1.2.0
  */
 public interface DataCollection<T extends Datastructure> extends Iterable<T> {
 
@@ -63,5 +63,11 @@ public interface DataCollection<T extends Datastructure> extends Iterable<T> {
      * @return {@link String}[]
      */
     String[] getColumns();
+
+    /**
+     * Gives back the number of {@link Datastructure}'s.
+     * @return {@link int}
+     */
+    int size();
 
 }

@@ -5,6 +5,10 @@ import de.bwv_ac.util.Subject;
 
 import java.util.*;
 
+/**
+ * @author Robin Görißen , Philipp Xhonneux
+ * @version 1.1.0
+ */
 public class PPerEvents extends Subject implements DataCollection<PPerEvent> {
 
     private ArrayList<PPerEvent> pPerEvents;
@@ -116,6 +120,16 @@ public class PPerEvents extends Subject implements DataCollection<PPerEvent> {
     @Override
     public String[] getColumns() {
         return columns;
+    }
+
+    /**
+     * Gives back the number of {@link Datastructure}'s.
+     *
+     * @return {@link int}
+     */
+    @Override
+    public int size() {
+        return this.pPerEvents.size();
     }
 
     /**

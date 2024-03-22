@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 /**
  * {@link Room} Handler
  * @author Philipp Xhonneux
- * @version 1.0.0
+ * @version 1.1.0
  */
 @SuppressWarnings("ALL")
 public class Rooms implements DataCollection<Room>{
@@ -121,6 +121,16 @@ public class Rooms implements DataCollection<Room>{
 	@Override
 	public String[] getColumns() {
 		return this.columns;
+	}
+
+	/**
+	 * Gives back the number of {@link Datastructure}'s.
+	 *
+	 * @return {@link int}
+	 */
+	@Override
+	public int size() {
+		return this.rooms.size();
 	}
 
 	/**
