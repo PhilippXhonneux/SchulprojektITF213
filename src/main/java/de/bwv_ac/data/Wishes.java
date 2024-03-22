@@ -3,6 +3,7 @@ package de.bwv_ac.data;
 import de.bwv_ac.util.Observer;
 import de.bwv_ac.util.Subject;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -157,6 +158,18 @@ public class Wishes extends Subject implements DataCollection<Wish> {
 	@Override
 	public void notifyObservers() {
 		super.notifyObservers();
-		pPerEvents.update(this, companies);
+		try {
+			pPerEvents.update(this, companies);
+
+		}catch (IllegalArgumentException e){
+
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			wishes.clear();
+			notifyObservers();
+		}
+	}
+
+	public int indexOf(Wish wish) {
+		return wishes.indexOf(wish);
 	}
 }
