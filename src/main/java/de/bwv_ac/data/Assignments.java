@@ -11,7 +11,7 @@ import java.util.Iterator;
 /**
  *
  * @author Philipp Xhonneux
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class Assignments extends Subject implements DataCollection<Assignment> {
 
@@ -123,6 +123,16 @@ public class Assignments extends Subject implements DataCollection<Assignment> {
 	@Override
 	public String[] getColumns() {
 		return this.columns;
+	}
+
+	/**
+	 * Gives back the number of {@link Datastructure}'s.
+	 *
+	 * @return {@link int}
+	 */
+	@Override
+	public int size() {
+		return this.assignments.size();
 	}
 
 	/**

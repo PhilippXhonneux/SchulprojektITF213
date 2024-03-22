@@ -5,6 +5,10 @@ import de.bwv_ac.util.Subject;
 
 import java.util.*;
 
+/**
+ * @author Robin Görißen , Philipp Xhonneux
+ * @version 1.1.0
+ */
 public class PPerEvents extends Subject implements DataCollection<PPerEvent> {
 
     private ArrayList<PPerEvent> pPerEvents;
@@ -119,6 +123,16 @@ public class PPerEvents extends Subject implements DataCollection<PPerEvent> {
     }
 
     /**
+     * Gives back the number of {@link Datastructure}'s.
+     *
+     * @return {@link int}
+     */
+    @Override
+    public int size() {
+        return this.pPerEvents.size();
+    }
+
+    /**
      * Returns an iterator over elements of type {@code T}.
      *
      * @return an Iterator.
@@ -151,6 +165,7 @@ public class PPerEvents extends Subject implements DataCollection<PPerEvent> {
             wishesA.add(wish4);
             wishesA.add(wish5);
             wishesA.add(extraWish);
+            int c = 1;
             for (int wishI : wishesA){
                 if(wishI == 0)
                     continue;
@@ -159,9 +174,23 @@ public class PPerEvents extends Subject implements DataCollection<PPerEvent> {
                 }else {
                     PPerEvent pPerEvent = new PPerEvent();
                     pPerEvent.setID(wishI);
+                    if(companies.getByID(wishI) == null){
+                        int index = wishes.indexOf(wish);
+                        StringBuilder out = new StringBuilder();
+                        out.append("Das Event mit der ID ").append(wishI).append(" existiert nicht.\n")
+                                .append("Der ").append(c).append(".")
+
+                                .append(" Wunsch an der stelle ").append((index+1))
+                                .append(" des Schülers ").append( wish.getSurname()).append(", ")
+                                .append(wish.getName()).append(" ist dadurch betroffen!\n")
+                                .append("Die Liste kann nicht importiert werden und wird gelert!")
+                                .append("(Sie dient lediglich zur hilfe bei der Verbesserung der CSV oder der bearbeitung)");
+                        throw new IllegalArgumentException(out.toString());
+                    }
                     pPerEvent.setEvent(companies.getByID(wishI).getName());
                     pPerEvent.setCount(1);
                     pPerEvents.add(pPerEvent);
+                    c++;
                 }
             }
         }
