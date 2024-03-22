@@ -11,7 +11,7 @@ import java.util.Iterator;
  * {@link Wish} Handler
  *
  * @author Philipp Xhonneux
- * @version 1.0.2
+ * @version 1.1.0
  */
 @SuppressWarnings("ALL")
 public class Wishes extends Subject implements DataCollection<Wish> {
@@ -131,6 +131,16 @@ public class Wishes extends Subject implements DataCollection<Wish> {
 	public String[] getColumns()
 	{
 		return this.columns;
+	}
+
+	/**
+	 * Gives back the number of {@link Datastructure}'s.
+	 *
+	 * @return {@link int}
+	 */
+	@Override
+	public int size() {
+		return this.wishes.size();
 	}
 
 
