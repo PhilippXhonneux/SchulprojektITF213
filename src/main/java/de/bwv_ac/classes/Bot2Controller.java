@@ -83,7 +83,7 @@ public class Bot2Controller {
         wishList.setActionListener(WishList.Buttons.ON_ADD_OPEN, onOpenAddDialog);
         wishList.setActionListener(WishList.Buttons.ON_EDIT_OPEN, onOpenChangeDialog);
         wishListChangeDialog.setActionListener(WishListDialog.Buttons.OK_BUTTON, onChangeAction);
-        //wishList.setActionListener(WishList.Buttons.DELETE, );
+        wishList.setActionListener(WishList.Buttons.DELETE, onRemoveAction);
         //wishList.setActionListener(WishList.Buttons.EXPORT, );
 
 
@@ -155,6 +155,7 @@ public class Bot2Controller {
                 JOptionPane.showMessageDialog(wishList, "Datei nicht gefunden!", "Error", JOptionPane.ERROR_MESSAGE);
             }catch (Exception ex) {
                 JOptionPane.showMessageDialog(wishList, "Fehlerhaftes dateiformat!", "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
             }
         }
     };
@@ -276,6 +277,45 @@ public class Bot2Controller {
             wishListChangeDialog.dispose();
 
             wishList.setSelectedItem(row);
+        }
+    };
+
+    ActionListener onAddAction = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    };
+
+    /**
+     * Handle User Action<br>
+     * Get the selected row index and search for it in the companies model.<br>
+     * Show a confirmation message and delete if they choose OK.<br>
+     * Show a result message.
+     */
+    private ActionListener onRemoveAction = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int row = wishList.getSelectedItem();
+            if(row == -1){
+                JOptionPane.showMessageDialog(wishList, "Bitte wähle eine Zeile zum entfernen aus");
+                return;
+            }
+
+            Wish wish = wishes.get(row);
+
+            int retVal = JOptionPane.showConfirmDialog(wishList, "Sind Sie sich sicher, die Wünsche des Schülers " + wish.getSurname() +", " + wish.getName() + " zu entfernen?");
+
+            String message;
+            if(retVal == JOptionPane.OK_OPTION){
+                wishes.remove(wish);
+                message = "Erfoglreich entfernt";
+            }else
+                message = "Vorgang Abbgebrochen";
+
+
+            JOptionPane.showMessageDialog(wishList, message);
+
         }
     };
 
