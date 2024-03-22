@@ -125,8 +125,8 @@ public class WishListDialog extends JDialog {
         this.textFieldClass.setText(text);
     }
 
-    public JTextField getTextFieldName() {
-        return textFieldName;
+    public String getTextFieldName() {
+        return textFieldName.getText();
     }
 
     public void setTextFieldName(String text) {

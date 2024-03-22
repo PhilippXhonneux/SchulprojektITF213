@@ -83,6 +83,7 @@ public class Bot2Controller {
         wishList.setActionListener(WishList.Buttons.ON_ADD_OPEN, onOpenAddDialog);
         wishList.setActionListener(WishList.Buttons.ON_EDIT_OPEN, onOpenChangeDialog);
         wishListChangeDialog.setActionListener(WishListDialog.Buttons.OK_BUTTON, onChangeAction);
+        wishListAddDialog.setActionListener(WishListDialog.Buttons.OK_BUTTON, onAddAction);
         wishList.setActionListener(WishList.Buttons.DELETE, onRemoveAction);
         //wishList.setActionListener(WishList.Buttons.EXPORT, );
 
@@ -283,7 +284,45 @@ public class Bot2Controller {
     ActionListener onAddAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            Object[][] choosenWishes = new Object[6][];
+            choosenWishes[0] = wishListChangeDialog.getComboBoxWish1();
+            choosenWishes[1] = wishListChangeDialog.getComboBoxWish2();
+            choosenWishes[2] = wishListChangeDialog.getComboBoxWish3();
+            choosenWishes[3] = wishListChangeDialog.getComboBoxWish4();
+            choosenWishes[4] = wishListChangeDialog.getComboBoxWish5();
+            choosenWishes[5] = wishListChangeDialog.getComboBoxWish6();
+            for (Object[] wish : choosenWishes){
+                if(((int) wish[0] ) == -1 ){
+                    wish[0] = 0;
+                }
+            }
 
+            String klass = wishListAddDialog.getTextFieldClass();
+            String surname = wishListAddDialog.getTextFieldSurname();
+            String name = wishListAddDialog.getTextFieldName();
+
+            StringBuilder csv = new StringBuilder();
+            csv.append(klass+";").append(surname+";").append(name+";")
+                    .append(choosenWishes[0][0] + ";")
+                    .append(choosenWishes[1][0] + ";")
+                    .append(choosenWishes[2][0] + ";")
+                    .append(choosenWishes[3][0] + ";")
+                    .append(choosenWishes[4][0] + ";")
+                    .append(choosenWishes[5][0] + ";");
+
+
+            Wish wish = new Wish();
+            System.out.println(csv.toString());
+            try{
+                wish.FromCSVStringToObject(csv.toString(), delimiter);
+
+            }catch (Exception ex){
+                //TODO handling
+                ex.printStackTrace();
+            }
+            wishes.add(wish);
+            JOptionPane.showMessageDialog(wishListAddDialog, "Erfolgreich gespeichert");
+            wishListAddDialog.dispose();
         }
     };
 
