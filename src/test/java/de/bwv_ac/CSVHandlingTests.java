@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -30,14 +31,18 @@ public class CSVHandlingTests {
         } catch (IOException e) {
             fail("Exception occurred while writing the file: " + e.getMessage());
         }
-        tempFile.deleteOnExit();//<-- Funktioniert nicht.
+    }
+
+    @AfterEach
+    public void tearDown() throws IOException {
+        //writer.write("");
+        //writer.flush();
     }
 
     @Test
     public void testWrite() {
         String[] content = {"Test", "bla bla", "test test"};
         csvWriter.write(content);
-
         try (BufferedReader br = new BufferedReader(new FileReader(tempFile))) {
             String line = br.readLine();
             assertEquals("Test;bla bla;test test", line);
