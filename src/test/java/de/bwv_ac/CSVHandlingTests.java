@@ -34,10 +34,11 @@ public class CSVHandlingTests {
     }
 
     @AfterEach
-    public void tearDown() throws IOException {
-        //writer.write("");
-        //writer.flush();
+    public void tearDown() {
+        if (tempFile.exists()) {
+            tempFile.delete(); //Funktioniert nicht. Das leeren des Files auch nicht. Ist aber nötig.
     }
+}
 
     @Test
     public void testWrite() {
@@ -57,6 +58,7 @@ public class CSVHandlingTests {
         assertEquals(1, wishes.size());
         assertEquals("25", wishes.get(0));
     }
+
     @Test
     public void testGetFirstLine() throws FileNotFoundException {
         String[] firstLine = CSVReader.getFirstLine(tempFilePath);
