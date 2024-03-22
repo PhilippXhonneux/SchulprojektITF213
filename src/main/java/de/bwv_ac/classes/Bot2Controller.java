@@ -285,12 +285,12 @@ public class Bot2Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             Object[][] choosenWishes = new Object[6][];
-            choosenWishes[0] = wishListChangeDialog.getComboBoxWish1();
-            choosenWishes[1] = wishListChangeDialog.getComboBoxWish2();
-            choosenWishes[2] = wishListChangeDialog.getComboBoxWish3();
-            choosenWishes[3] = wishListChangeDialog.getComboBoxWish4();
-            choosenWishes[4] = wishListChangeDialog.getComboBoxWish5();
-            choosenWishes[5] = wishListChangeDialog.getComboBoxWish6();
+            choosenWishes[0] = wishListAddDialog.getComboBoxWish1();
+            choosenWishes[1] = wishListAddDialog.getComboBoxWish2();
+            choosenWishes[2] = wishListAddDialog.getComboBoxWish3();
+            choosenWishes[3] = wishListAddDialog.getComboBoxWish4();
+            choosenWishes[4] = wishListAddDialog.getComboBoxWish5();
+            choosenWishes[5] = wishListAddDialog.getComboBoxWish6();
             for (Object[] wish : choosenWishes){
                 if(((int) wish[0] ) == -1 ){
                     wish[0] = 0;
