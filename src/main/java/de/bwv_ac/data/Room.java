@@ -9,7 +9,7 @@ package de.bwv_ac.data;
 public class Room extends Datastructure{
 
 	private String Roomname;
-	private Integer capacity;
+	private int capacity;
 
 	/**
 	 * Gets roomname.

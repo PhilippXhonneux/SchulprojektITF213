@@ -1,5 +1,8 @@
 package de.bwv_ac.data;
 
+import de.bwv_ac.util.Observer;
+import de.bwv_ac.util.Subject;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -12,7 +15,7 @@ import java.util.function.Consumer;
  * @version 1.1.0
  */
 @SuppressWarnings("ALL")
-public class Rooms implements DataCollection<Room>{
+public class Rooms extends Subject implements DataCollection<Room>{
 
 	/**
 	 * List of {@link Room}
@@ -27,6 +30,15 @@ public class Rooms implements DataCollection<Room>{
 	 * when using the {@link #add(Collection, String[])} method.
 	 */
 	private String[] columns = {"Raumbezeichnung", "Raumkapazität"};
+
+	/**
+	 * Create an observable object
+	 *
+	 * @param c A collection that you want like an ArrayList
+	 */
+	public Rooms(Collection<Observer> c) {
+		super(c);
+	}
 
 	/**
 	 * Adds a {@link Datastructure} to the inner {@link Collection}<{@link Datastructure}>
@@ -49,6 +61,7 @@ public class Rooms implements DataCollection<Room>{
 	public void add(Collection<Room> datastructures, String[] columns) {
 		this.rooms.addAll(datastructures);
 		this.columns = columns;
+		notifyObservers();
 	}
 
 	/**
@@ -59,6 +72,7 @@ public class Rooms implements DataCollection<Room>{
 	@Override
 	public void remove(Room datastructure) {
 		this.rooms.remove(datastructure);
+		notifyObservers();
 	}
 
 	/**
@@ -70,6 +84,7 @@ public class Rooms implements DataCollection<Room>{
 	@Override
 	public void change(int index, Room datastructure) {
 		this.rooms.set(index, datastructure);
+		notifyObservers();
 	}
 
 	/**
