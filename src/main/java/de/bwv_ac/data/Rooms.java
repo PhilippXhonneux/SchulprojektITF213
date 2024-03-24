@@ -3,10 +3,7 @@ package de.bwv_ac.data;
 import de.bwv_ac.util.Observer;
 import de.bwv_ac.util.Subject;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 
 /**
@@ -203,5 +200,10 @@ public class Rooms extends Subject implements DataCollection<Room>{
 	@Override
 	public Spliterator<Room> spliterator() {
 		return DataCollection.super.spliterator();
+	}
+
+
+	public List<Room> toList() {
+		return rooms;
 	}
 }

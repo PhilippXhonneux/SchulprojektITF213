@@ -11,6 +11,9 @@ public class Room extends Datastructure{
 	private String Roomname;
 	private int capacity;
 
+	private int usedCapacity;
+
+
 	/**
 	 * Gets roomname.
 	 *
@@ -51,4 +54,15 @@ public class Room extends Datastructure{
 			throw new IllegalArgumentException("Capacity must be at least 0.");
 		this.capacity = capacity;
 	}
+
+
+	public int getUsedCapacity() {
+		return usedCapacity;
+	}
+
+	public void setUsedCapacity(int usedCapacity) {
+		this.usedCapacity = usedCapacity;
+	}
+
+
 }

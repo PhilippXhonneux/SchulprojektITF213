@@ -1,10 +1,9 @@
 package de.bwv_ac.classes;
 
-import de.bwv_ac.data.Room;
-import de.bwv_ac.data.Rooms;
-import de.bwv_ac.data.Wish;
+import de.bwv_ac.data.*;
 import de.bwv_ac.view.bot_3.rooms.RoomCapacity;
 import de.bwv_ac.view.bot_3.rooms.RoomCapacityListDialog;
+import de.bwv_ac.view.bot_3.rooms.TimeTableList.TimeTableList;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -19,18 +18,33 @@ public class Bot3Controller {
 
     private final Rooms rooms;
     private final RoomCapacity roomList;
+    private final TimeTableList timeTableList;
+    private final Timetables timetables;
+    private final PPerEvents pPerEvents;
+    private final Companies companies;
 
-    public Bot3Controller(Rooms rooms){ //TODO romlist einbinden und dialog einbinden
+    public Bot3Controller(Rooms rooms, Timetables timetables, PPerEvents pPerEvents, Companies companies){
         this.rooms = rooms;
         this.roomList = new RoomCapacity();
         rooms.addObserver(roomList);
 
+        this.timetables = timetables;
+        this.timeTableList = new TimeTableList();
+        timetables.addObserver(timeTableList);
+
+        this.pPerEvents = pPerEvents;
+        this.companies = companies;
+
         roomList.setAction(RoomCapacity.Buttons.ON_IMPORT_OPEN, onImportOpen);
 
+        timeTableList.setAction(TimeTableList.Buttons.ON_GENERATE, onGenerateAction);
+
         rooms.notifyObservers();
+        timetables.notifyObservers();
+        timetables.notifyObservers();
     }
 
-    ActionListener onImportOpen = new ActionListener() {
+    private ActionListener onImportOpen = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             JFileChooser chooser = new JFileChooser();
@@ -79,7 +93,7 @@ public class Bot3Controller {
 
 
 
-    ActionListener onExportOpen = new ActionListener() {
+    private ActionListener onExportOpen = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -89,4 +103,22 @@ public class Bot3Controller {
     public Component getPanelRooms() {
         return roomList;
     }
+
+    public Component getPanelTimeTables() {
+        return timeTableList;
+    }
+
+    private ActionListener onGenerateAction = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Call generate:");
+            try {
+                //timetables.generate(pPerEvents, rooms);
+                timetables.gen(pPerEvents, rooms, companies);
+            }catch (Exception ex){
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(timeTableList, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    };
 }

@@ -4,10 +4,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import de.bwv_ac.classes.Bot1Controller;
 import de.bwv_ac.classes.Bot2Controller;
 import de.bwv_ac.classes.Bot3Controller;
-import de.bwv_ac.data.Companies;
-import de.bwv_ac.data.PPerEvents;
-import de.bwv_ac.data.Rooms;
-import de.bwv_ac.data.Wishes;
+import de.bwv_ac.data.*;
 import de.bwv_ac.view.bot_3.rooms.RoomCapacity;
 
 import javax.swing.*;
@@ -39,7 +36,9 @@ public class App
         Bot2Controller b2c = new Bot2Controller(wishes, pPerEvents, companies);
 
         Rooms rooms = new Rooms(new ArrayList<>());
-        Bot3Controller b3c = new Bot3Controller(rooms);
+        Timetables timetables = new Timetables(new ArrayList<>(), rooms, wishes);
+        Bot3Controller b3c = new Bot3Controller(rooms, timetables, pPerEvents, companies);
+
 
 
         JFrame window = new JFrame("SchoolBot - o - Mat");
@@ -66,7 +65,7 @@ public class App
         tabbedPane.addTab("4. Räume & Kapazitäten", null, b3c.getPanelRooms(), ":D");
         window.add(tabbedPane);
 
-        tabbedPane.addTab("5. Zeitslots", null, new JPanel(), ":D");
+        tabbedPane.addTab("5. Zeitslots", null, b3c.getPanelTimeTables(), ":D");
         window.add(tabbedPane);
 
         tabbedPane.addTab("6. Zuordnung", null, new JPanel(), ":D");

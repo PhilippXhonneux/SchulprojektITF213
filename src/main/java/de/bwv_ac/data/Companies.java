@@ -3,10 +3,7 @@ package de.bwv_ac.data;
 import de.bwv_ac.util.Observer;
 import de.bwv_ac.util.Subject;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 
 /**
@@ -189,5 +186,9 @@ public class Companies extends Subject implements DataCollection<Company> {
 
     public int size() {
         return companies.size();
+    }
+
+    public List<Company> toList() {
+        return companies;
     }
 }
