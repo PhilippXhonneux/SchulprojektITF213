@@ -1,9 +1,10 @@
 package de.bwv_ac.data.logics;
 
 import de.bwv_ac.data.Company;
+import de.bwv_ac.data.Datastructure;
 import de.bwv_ac.data.Room;
 
-public class MySlot {
+public class MySlot extends Datastructure {
 
     private Room room;
 
@@ -55,4 +56,22 @@ public class MySlot {
         return event == null;
     }
 
+    /**
+     *
+     * @deprecated use normal getter and setter instead
+     * @param csvString that contains the values
+     * @param delimeter for the CSV-Format
+     * @throws Exception
+     */
+    @Deprecated
+    @Override
+    public void FromCSVStringToObject(String csvString, String delimeter) throws Exception {
+        return;
+        //super.FromCSVStringToObject(csvString, delimeter);
+    }
+
+    @Override
+    public String ToCSVString(String delimeter) {
+        return super.ToCSVString(delimeter);
+    }
 }

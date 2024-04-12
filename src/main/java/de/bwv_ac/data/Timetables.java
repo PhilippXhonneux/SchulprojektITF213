@@ -1,6 +1,7 @@
 package de.bwv_ac.data;
 
 import de.bwv_ac.data.logics.MySlot;
+import de.bwv_ac.data.logics.ViewSlot;
 import de.bwv_ac.util.Observer;
 import de.bwv_ac.util.Subject;
 
@@ -13,13 +14,13 @@ import java.util.*;
  * @author Philipp Xhonneux
  * @version 1.1.0
  */
-public class Timetables extends Subject implements DataCollection<Timetable> {
+public class Timetables extends Subject implements DataCollection<ViewSlot> {
 
 	/**
 	 * List of {@link Timetable} for {@link Company}
 	 */
 	@SuppressWarnings("FieldMayBeFinal")
-	private ArrayList<Timetable> timetables = new ArrayList<>();
+	private ArrayList<ViewSlot> timetables = new ArrayList<>();
 
 	/**
 	 * {@link String}[] containing the names of columns.
@@ -28,7 +29,7 @@ public class Timetables extends Subject implements DataCollection<Timetable> {
 	 * when using the {@link #add(Collection, String[])} method.
 	 */
 	//private String[] columns = new String[]{"ID","Firma","Name","Veranstaltung1","Veranstaltung2","Veranstaltung3","Veranstaltung4","Veranstaltung5","Veranstaltung6"};
-	private String[] columns = new String[]{"ID","Firma","Name","Veranstaltung","A(08:45-09:30)","B(09:50-10:35)","C(10:35-11:20)","D(11:40-12:25)","E(12:25-13:10)"};
+	private String[] columns = new String[]{"ID","Unternehmen","Veranstaltung","A(08:45-09:30)","B(09:50-10:35)","C(10:35-11:20)","D(11:40-12:25)","E(12:25-13:10)"};
 
 	/**
 	 * Create an observable object
@@ -46,7 +47,7 @@ public class Timetables extends Subject implements DataCollection<Timetable> {
 	 * @param datastructure that should be added.
 	 */
 	@Override
-	public void add(Timetable datastructure) {
+	public void add(ViewSlot datastructure) {
 		this.timetables.add(datastructure);
 		notifyObservers();
 	}
@@ -59,7 +60,7 @@ public class Timetables extends Subject implements DataCollection<Timetable> {
 	 * @param columns        names of the columns.
 	 */
 	@Override
-	public void add(Collection<Timetable> datastructures, String[] columns) {
+	public void add(Collection<ViewSlot> datastructures, String[] columns) {
 		this.timetables.addAll(datastructures);
 		this.columns = columns;
 		notifyObservers();
@@ -71,7 +72,7 @@ public class Timetables extends Subject implements DataCollection<Timetable> {
 	 * @param datastructure that should be removed.
 	 */
 	@Override
-	public void remove(Timetable datastructure) {
+	public void remove(ViewSlot datastructure) {
 		this.timetables.remove(datastructure);
 		notifyObservers();
 	}
@@ -83,7 +84,7 @@ public class Timetables extends Subject implements DataCollection<Timetable> {
 	 * @param datastructure to be changed to.
 	 */
 	@Override
-	public void change(int index, Timetable datastructure) {
+	public void change(int index, ViewSlot datastructure) {
 		this.timetables.set(index, datastructure);
 		System.out.println(index);
 		notifyObservers();
@@ -96,7 +97,7 @@ public class Timetables extends Subject implements DataCollection<Timetable> {
 	 * @return {@link Timetable}
 	 */
 	@Override
-	public Timetable get(int index) {
+	public ViewSlot get(int index) {
 		return this.timetables.get(index);
 	}
 
@@ -108,48 +109,9 @@ public class Timetables extends Subject implements DataCollection<Timetable> {
 	 */
 	@Override
 	public String[] getArray(int index) {
-		Timetable tt = this.timetables.get(index);
-		String[] re = new String[9];
-		re[0] = tt.getID().toString();
-		re[1] = tt.getCompany();
+		ViewSlot slot = this.timetables.get(index);
 
-		try {
-			re[2] = tt.getEvent(0)[1] + " " + tt.getEvent(0)[0];
-		}catch(IllegalArgumentException e){
-			re[2] = "";
-		}
-		try {
-			re[3] = tt.getEvent(1)[1] + " " + tt.getEvent(1)[0];
-		}catch(IllegalArgumentException e){
-			re[3] = "";
-		}
-		try {
-			re[4] = tt.getEvent(2)[1] + " " + tt.getEvent(2)[0];
-		}catch(IllegalArgumentException e){
-			re[4] = "";
-		}
-		try {
-			re[5] = tt.getEvent(3)[1] + " " + tt.getEvent(3)[0];
-		}catch(IllegalArgumentException e){
-			re[5] = "";
-		}
-		try {
-			re[6] = tt.getEvent(4)[1] + " " + tt.getEvent(4)[0];
-		}catch(IllegalArgumentException e){
-			re[6] = "";
-		}
-		try {
-			re[7] = tt.getEvent(5)[1] + " " + tt.getEvent(5)[0];
-		}catch(IllegalArgumentException e){
-			re[7] = "";
-		}
-		try {
-			re[8] = tt.getEvent(6)[1] + " " + tt.getEvent(6)[0];
-		}catch(IllegalArgumentException e){
-			re[8] = "";
-		}
-
-		return re;
+		return slot.ToCSVString(";").split(";");
 
 	}
 
@@ -194,7 +156,7 @@ public class Timetables extends Subject implements DataCollection<Timetable> {
 	 * @return an Iterator.
 	 */
 	@Override
-	public Iterator<Timetable> iterator() {
+	public Iterator<ViewSlot> iterator() {
 		return this.timetables.iterator();
 	}
 
@@ -442,7 +404,7 @@ public class Timetables extends Subject implements DataCollection<Timetable> {
 		StringBuilder csvString = new StringBuilder();
 
 		// Add header row
-		csvString.append("Veranstaltung;A;B;C;D;E\n");  // Assuming desired fields
+		//csvString.append("Veranstaltung;A;B;C;D;E\n");  // Assuming desired fields
 
 		for(Company company : companies){
 			List<MySlot> eventSlots = getSlotsByEvent(company, timeslots);
@@ -467,13 +429,22 @@ public class Timetables extends Subject implements DataCollection<Timetable> {
 					csvString.append(";");
 					continue;
 				}
-				csvString.append(s.getRoom().getRoomname() + "("+s.getTimeSlot()+");");
+				//csvString.append(s.getRoom().getRoomname() + "("+s.getTimeSlot()+");");
+				String sa = (a!=null && a.getRoom() != null) ? a.getRoom().getRoomname() : "-";
+				String sb = (b!=null && b.getRoom() != null) ? b.getRoom().getRoomname() : "-";
+				String sc = (c!=null && c.getRoom() != null) ? c.getRoom().getRoomname() : "-";
+				String sd = (d!=null && d.getRoom() != null) ? d.getRoom().getRoomname() : "-";
+				String se = (e!=null && e.getRoom() != null) ? e.getRoom().getRoomname() : "-";
+				ViewSlot viewSlot = new ViewSlot(company.getID(), company.getName(),company.getSpecialty(), sa, sb, sc, sd, se);
+				System.out.println(viewSlot.ToCSVString(";"));
+
+
 			}
-			csvString.append("\n");
+			//csvString.append("\n");
 
 		}
 
-		System.out.println(csvString.toString());
+		//System.out.println(csvString.toString());
 	}
 
 	private MySlot contains(List<MySlot> slots, String slot){

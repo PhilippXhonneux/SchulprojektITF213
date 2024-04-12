@@ -3,6 +3,7 @@ package de.bwv_ac.view.bot_3.rooms.TimeTableList;
 import de.bwv_ac.data.Rooms;
 import de.bwv_ac.data.Timetable;
 import de.bwv_ac.data.Timetables;
+import de.bwv_ac.data.logics.ViewSlot;
 import de.bwv_ac.util.Observer;
 import de.bwv_ac.view.bot_3.rooms.RoomCapacity;
 
@@ -37,7 +38,7 @@ public class TimeTableList extends JPanel implements Observer {
     public void update(Object obj) {
         if(obj == null)
             return;
-        if(obj instanceof Timetables){
+        if(obj instanceof ViewSlot){
             Timetables timetables = (Timetables) obj;
             String[] cols = timetables.getColumns();
 
