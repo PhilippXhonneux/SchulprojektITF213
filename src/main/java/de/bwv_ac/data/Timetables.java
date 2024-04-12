@@ -14,13 +14,13 @@ import java.util.*;
  * @author Philipp Xhonneux
  * @version 1.1.0
  */
-public class Timetables extends Subject implements DataCollection<ViewSlot> {
+public class Timetables extends Subject implements DataCollection<MySlot> {
 
 	/**
 	 * List of {@link Timetable} for {@link Company}
 	 */
 	@SuppressWarnings("FieldMayBeFinal")
-	private ArrayList<ViewSlot> timetables = new ArrayList<>();
+	private ArrayList<MySlot> timetables = new ArrayList<>();
 
 	/**
 	 * {@link String}[] containing the names of columns.
@@ -47,7 +47,7 @@ public class Timetables extends Subject implements DataCollection<ViewSlot> {
 	 * @param datastructure that should be added.
 	 */
 	@Override
-	public void add(ViewSlot datastructure) {
+	public void add(MySlot datastructure) {
 		this.timetables.add(datastructure);
 		notifyObservers();
 	}
@@ -60,7 +60,7 @@ public class Timetables extends Subject implements DataCollection<ViewSlot> {
 	 * @param columns        names of the columns.
 	 */
 	@Override
-	public void add(Collection<ViewSlot> datastructures, String[] columns) {
+	public void add(Collection<MySlot> datastructures, String[] columns) {
 		this.timetables.addAll(datastructures);
 		this.columns = columns;
 		notifyObservers();
@@ -72,7 +72,7 @@ public class Timetables extends Subject implements DataCollection<ViewSlot> {
 	 * @param datastructure that should be removed.
 	 */
 	@Override
-	public void remove(ViewSlot datastructure) {
+	public void remove(MySlot datastructure) {
 		this.timetables.remove(datastructure);
 		notifyObservers();
 	}
@@ -84,7 +84,7 @@ public class Timetables extends Subject implements DataCollection<ViewSlot> {
 	 * @param datastructure to be changed to.
 	 */
 	@Override
-	public void change(int index, ViewSlot datastructure) {
+	public void change(int index, MySlot datastructure) {
 		this.timetables.set(index, datastructure);
 		System.out.println(index);
 		notifyObservers();
@@ -97,7 +97,7 @@ public class Timetables extends Subject implements DataCollection<ViewSlot> {
 	 * @return {@link Timetable}
 	 */
 	@Override
-	public ViewSlot get(int index) {
+	public MySlot get(int index) {
 		return this.timetables.get(index);
 	}
 
@@ -109,7 +109,7 @@ public class Timetables extends Subject implements DataCollection<ViewSlot> {
 	 */
 	@Override
 	public String[] getArray(int index) {
-		ViewSlot slot = this.timetables.get(index);
+		MySlot slot = this.timetables.get(index);
 
 		return slot.ToCSVString(";").split(";");
 
@@ -156,7 +156,7 @@ public class Timetables extends Subject implements DataCollection<ViewSlot> {
 	 * @return an Iterator.
 	 */
 	@Override
-	public Iterator<ViewSlot> iterator() {
+	public Iterator<MySlot> iterator() {
 		return this.timetables.iterator();
 	}
 
@@ -435,14 +435,18 @@ public class Timetables extends Subject implements DataCollection<ViewSlot> {
 				String sc = (c!=null && c.getRoom() != null) ? c.getRoom().getRoomname() : "-";
 				String sd = (d!=null && d.getRoom() != null) ? d.getRoom().getRoomname() : "-";
 				String se = (e!=null && e.getRoom() != null) ? e.getRoom().getRoomname() : "-";
-				ViewSlot viewSlot = new ViewSlot(company.getID(), company.getName(),company.getSpecialty(), sa, sb, sc, sd, se);
-				System.out.println(viewSlot.ToCSVString(";"));
+				 */
+				//ViewSlot viewSlot = new ViewSlot(company.getID(), company.getName(),company.getSpecialty(), sa, sb, sc, sd, se);
+				//System.out.println(viewSlot.ToCSVString(";"));
+
+				timetables.add(s);
 
 
 			}
 			//csvString.append("\n");
 
 		}
+		notifyObservers();
 
 		//System.out.println(csvString.toString());
 	}
