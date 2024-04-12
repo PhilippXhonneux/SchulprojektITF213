@@ -430,7 +430,7 @@ public class Timetables extends Subject implements DataCollection<MySlot> {
 					continue;
 				}
 				//csvString.append(s.getRoom().getRoomname() + "("+s.getTimeSlot()+");");
-				String sa = (a!=null && a.getRoom() != null) ? a.getRoom().getRoomname() : "-";
+				/*String sa = (a!=null && a.getRoom() != null) ? a.getRoom().getRoomname() : "-";
 				String sb = (b!=null && b.getRoom() != null) ? b.getRoom().getRoomname() : "-";
 				String sc = (c!=null && c.getRoom() != null) ? c.getRoom().getRoomname() : "-";
 				String sd = (d!=null && d.getRoom() != null) ? d.getRoom().getRoomname() : "-";
